@@ -1,0 +1,5 @@
+qiskit==1.3.2
+aer==0.3.0
+qiskit[visualization]
+jupyter
+
