@@ -11,10 +11,10 @@ Qiskit and Cirq as based on Python for installing the dependecies we highltly re
 #### On Windows
 0. Install python. This experiment was run in python 3.12.8
 1. Go to the project folder and and open a terminal 
-2. python -m venv venv 
+2. python -m venv .venv 
 3. cd quantum-programming-languages-expressiveness
-4. venv\Scripts\activate  
-5. Install the hosted/qiskit/requirements.txt
+4. .venv\Scripts\activate  
+5. Install: python hosted/qiskit/requirements.txt
 
 #### On Mac and Linux
 0. Install python. This experiment was run in python 3.12.8
