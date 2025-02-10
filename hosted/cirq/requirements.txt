@@ -1,1 +1,2 @@
 jupyter
+cirq==0.10.0
