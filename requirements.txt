@@ -1,0 +1,11 @@
+jupyter
+numpy
+pandas
+cirq==0.10.0
+qiskit==1.3.2
+#aer==0.3.0
+qiskit[visualization]
+qrisp==0.6
+qiskit-aer
+flask==2.2.0
+werkzeug==2.3.0
