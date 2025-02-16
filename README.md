@@ -36,3 +36,24 @@ Qiskit and Cirq as based on Python for installing the dependecies we highltly re
 ## Quipper
 
 ## Silq
+
+
+## ######################### create docker container ##################################
+00. ubicarse donde esta docker
+
+01. docker build -t my-quantum .
+
+02. docker run -p 8888:8888 -v "C:\Users\danny.valerio\Documents\Danny\Quamtum\expressiveness-repo\quantum-programming-languages-expressiveness":/workspace --name my-quantum-c my-quantum
+
+
+## # others
+docker start my-quantum-c // inicar
+docker stop my-quantum-c
+
+
+docker ps // ver estatus
+
+--docker exec -it my-quantum-c bash
+--jupyter notebook --ip=0.0.0.0 --no-browser --allow-root
+
+docker logs my-quantum-c
