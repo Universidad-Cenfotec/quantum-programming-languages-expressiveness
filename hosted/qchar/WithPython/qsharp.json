@@ -1,0 +1,11 @@
+{
+  "name": "QuantumProject",
+  "version": "1.0.0",
+  "operations": [
+      {
+          "name": "RandomNBits",
+          "namespace": "Source"
+      }
+  ],
+  "src": "src"
+}
