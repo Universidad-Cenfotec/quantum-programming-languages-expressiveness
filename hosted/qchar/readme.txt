@@ -1,0 +1,1 @@
+instalar extencion de python jupyter y Azure Quantum Development Kit (QDK)
