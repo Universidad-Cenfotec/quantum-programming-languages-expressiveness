@@ -11,6 +11,10 @@ COPY requirements.txt .
 RUN pip install --upgrade pip \
     && pip install -r requirements.txt
 
+# Instalamos paquetes adicionales para Q# y Azure Quantum
+RUN python -m pip install qsharp azure-quantum \
+    && python -m pip install ipykernel ipympl jupyterlab
+
 # Exponemos el puerto 8888 (para Jupyter Notebook)
 EXPOSE 8888
 
