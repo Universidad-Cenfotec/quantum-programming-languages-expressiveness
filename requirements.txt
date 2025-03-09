@@ -10,3 +10,6 @@ qiskit-aer
 flask==2.2.0
 werkzeug==2.3.0
 classiq
+#cloc
+#ace_tools
+#pygount
