@@ -1,0 +1,89 @@
+import re
+import pandas as pd
+import os
+from utils import Utils as utils
+class CyclomaticComplexityCalculator:
+    def __init__(self, scanner, metric_key="cc"):
+        """
+        Initialize the complexity calculator with a directory scanner.
+        
+        :param scanner: An instance of the DirectoryScanner class.
+        :param metric_key: The key in the JSON configuration that specifies complexity constructs.
+        """
+        self.scanner = scanner
+        self.metric_key = metric_key
+        self.constructs = self.scanner.config.get(self.metric_key, {}).get("constructs", {})
+        self.output_file = self.scanner.config.get(self.metric_key, {}).get("output", "")
+        self.cc_results = {}
+
+    def measure_complexity(self, file_path, language):
+        """Measures cyclomatic complexity for a specific file and language, ignoring comments."""
+        constructs = self.constructs.get(language, [])
+        comment_symbols = self.scanner.config.get(self.metric_key, {}).get("comment_symbols", {})
+        comment_symbol = comment_symbols.get(f".{language}", None)
+        if not constructs:
+            print(f"❌ No constructs defined for language: {language}")
+            return 0
+        complexity = 1
+        print("🚀 Language", language)
+        try:
+            with open(file_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    # Skip lines that are comments
+                    if comment_symbol and line.startswith(comment_symbol):
+                        continue
+                    
+                    for construct in constructs:
+                        if re.search(r"\b" + re.escape(construct) + r"\b", line):
+                            print("CONSTRUCT", construct)
+                            print("LINE:", line)
+                            complexity += 1
+        except Exception as e:
+            print(f"❌ Error reading file {file_path}: {e}")
+            return 0        
+        return complexity
+
+    def compute_complexity(self, scan_results):
+        """
+        Computes complexity for each file in the scan results.
+        
+        :param scan_results: Dictionary of directories and their associated files from the scanner.
+        """
+        for directory, files in scan_results.items():
+            self.cc_results[directory] = {}
+            for file, file_path in files.items():
+                if file_path:
+                    for language in self.constructs.keys():
+                        if file_path.endswith(f".{language}"):  # Assume language name matches file extension
+                            self.cc_results[directory][file] = self.measure_complexity(file_path, language)
+                            break
+                else:
+                    self.cc_results[directory][file] = 0
+
+    def save_results(self):
+        """
+        Saves the complexity results to a CSV file.
+        """
+        df = pd.DataFrame.from_dict(self.cc_results, orient='index')
+        os.makedirs(os.path.dirname(self.output_file), exist_ok=True)
+        df.to_csv(self.output_file, index=True)
+        print(f"✅ CSV file successfully saved: {self.output_file}")
+
+    def run(self):
+        """
+        Runs the process: scan directories, calculate complexity, and save results.
+        """
+        print("🚀 Starting complexity calculation...")
+        scan_results = self.scanner.scan_directories(self.metric_key)
+        self.compute_complexity(scan_results)
+        self.save_results()
+        print("🚀 Complexity calculation finished.")
+
+    def run_wrapper(self):
+        """
+        Wrapper method to run the CC analysis.
+        """
+        original_directory=utils.change_to_father_directory()  
+        self.run()
+        utils.change_to_directory(original_directory)
