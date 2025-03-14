@@ -52,8 +52,5 @@ marked_state = "101"
 counts, qc = run_grover(n, marked_state)
 print("\nResultados de las mediciones:")
 print(counts)
-
 plot_histogram(counts)
-
-
 qc.draw("mpl")

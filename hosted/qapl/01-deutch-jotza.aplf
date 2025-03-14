@@ -8,8 +8,7 @@
       }
 
       XOR ← {
-          n_qubits ← (2⍟1⌷⍴⍵)-1
-     
+          n_qubits ← (2⍟1⌷⍴⍵)-1     
           apply ← {
               ⍝ Recursive function that applies an XOR gate from all qubits into the ancilla.
               ⍝ Ancilla should be in the index 0.
@@ -49,20 +48,15 @@ _DJ_ ← {
          mid_state ← ((⍺)(⊂X))stage ⍵
          ⍺ {⍵:(((0 ⍺) (⊂SWAP)) stage mid_state) ⋄ mid_state} (⍺≠0)
      }
-
      ⍝ Preps the state according the ancilla qubit.
      ini ← ⍺ prep ⍵
      n_qubits ← (2⍟1⌷⍴ini)
-
      stg_ctrl ← (((⍳n_qubits)-1) ({H}¨⍳n_qubits))
-
      ⍝ Create the superposition for the oracle
      mid_state ← stg_ctrl stage ini
-
      ⍝ pass to the oracle
      oracle_state ← ⍺⍺ mid_state
      final_state ← stg_ctrl stage oracle_state
-
      ⍝ Unprep the state
      ⍺ prep final_state
  }

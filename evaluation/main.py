@@ -4,7 +4,7 @@ from directory_scanner import DirectoryScanner
 from complexity_cyclomatic import CyclomaticComplexityCalculator
 from utils import Utils as utils
 from complexity_lloc import LinesOfCodeCounter
-from metrics_analysis import MetricsAnalysis
+#from metrics_analysis import MetricsAnalysis
 
 def main():
     config_file = 'config.json'
