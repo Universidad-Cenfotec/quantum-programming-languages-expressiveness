@@ -8,7 +8,8 @@
             "hosted/qrisp",
             "standalone/qmod",
             "standalone/q#", 
-            "standalone/qasm"
+            "standalone/qasm",
+            "classic"
         ],
         "comment_symbols": {
         ".py": "#",
@@ -35,7 +36,7 @@
         },
         "output": "evaluation/results/cyclomatic_complexity.csv",
         "constructs": {
-            "python": ["if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or"],
+            "python": ["if", "elif", "for", "while", "except", "with", "assert", "and", "or"],
             "qmod": ["if", "else", "for", "while", "case", "and", "or"], 
             "q#": ["if", "elif", "for", "while", "try", "catch", "repeat", "until"],
             "APL": ["→", "⍴", "⊃", "⊂", "∇"],
@@ -52,7 +53,8 @@
             "hosted/qrisp",
             "standalone/qmod",
             "standalone/q#", 
-            "standalone/qasm"
+            "standalone/qasm",
+            "classic"
         ],
         "comment_symbols": {
         ".py": "#",
@@ -83,7 +85,8 @@
             "hosted/qrisp",
             "standalone/qmod", 
             "standalone/q#", 
-            "standalone/qasm"
+            "standalone/qasm",
+            "classic"
         ],
         "comment_symbols": {
         ".py": "#",

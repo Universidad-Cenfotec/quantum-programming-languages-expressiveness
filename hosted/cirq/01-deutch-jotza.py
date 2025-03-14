@@ -33,9 +33,9 @@ simulator = cirq.Simulator()
 for name, oracle in oracles.items():
     circuit = deutsch_jozsa(n, oracle)
     result = simulator.run(circuit, repetitions=1024)
-    counts = dict(result.histogram(key="result"))
-    results[name] = counts
-    print(f"{name} Oracle Results:", counts)
+    # counts = dict(result.histogram(key="result"))
+    # results[name] = counts
+    # print(f"{name} Oracle Results:", counts)
 
 print("Deutsch-Jozsa Circuit:")
 print(deutsch_jozsa(n, balanced_oracle(n)))

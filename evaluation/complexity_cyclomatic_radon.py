@@ -46,8 +46,10 @@ class CyclomaticComplexityAnalyzer:
                 code = f.read()
             # Analyze CC using radon
             functions = cc_visit(code)
-            total_cc = sum(func.complexity for func in functions)  # Sum CC of all functions in the file
-            
+            print(f"🔍 FUNCTIONS")
+            print(file_path)
+            print(functions)
+            total_cc = sum(func.complexity for func in functions)  # Sum CC of all functions in the file            
             return total_cc
         except Exception as e:
             print(f"❌ Error analyzing CC for {file_path}: {e}")
