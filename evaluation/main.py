@@ -1,11 +1,10 @@
 import json
-import os
 from complexity_cyclomatic_radon import CyclomaticComplexityAnalyzer
 from directory_scanner import DirectoryScanner
 from complexity_cyclomatic import CyclomaticComplexityCalculator
 from utils import Utils as utils
 from complexity_lloc import LinesOfCodeCounter
-
+from metrics_analysis import MetricsAnalysis
 
 def main():
     config_file = 'config.json'
@@ -19,7 +18,5 @@ def main():
     cc_analyzer.run_wrapper() 
     cc_calucator.run_wrapper()  
     
-
-
 if __name__ == "__main__":
     main()

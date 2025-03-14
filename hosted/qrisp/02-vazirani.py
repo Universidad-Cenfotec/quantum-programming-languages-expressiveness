@@ -7,8 +7,7 @@ def bernstein_vazirani_qrisp(n, s):
     qc.h(range(n + 1))
     for i, bit in enumerate(reversed(s)):
         if bit == "1":
-            qc.cx(i, n)
-    
+            qc.cx(i, n)    
     qc.barrier()
     qc.h(range(n))
     qc.barrier()
