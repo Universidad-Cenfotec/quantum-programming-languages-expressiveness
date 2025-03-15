@@ -20,7 +20,7 @@ class DirectoryScanner:
         try:
             with open(config_file, "r", encoding="utf-8") as f:
                 config = json.load(f)
-            print(f"✅ Configuration loaded from {config_file}")
+            #print(f"✅ Configuration loaded from {config_file}")
             return config
         except Exception as e:
             print(f"❌ Error loading config file: {e}")
@@ -45,18 +45,15 @@ class DirectoryScanner:
             parent_dir = os.path.basename(directory)
             if not os.path.exists(directory):
                 print(f"❌ Skipping non-existing directory: {directory}")
-                continue
-            
+                continue            
             results[parent_dir] = {}
             for file in files:                
-                file_found = False
-                
-                for ext in comment_symbols.keys():
-                    
+                file_found = False                
+                for ext in comment_symbols.keys():                    
                     file_paths = glob.glob(os.path.join(directory, "**", f"{file}*{ext}"), recursive=True)
                     if file_paths:
                         results[parent_dir][file] = file_paths[0]
-                        print(f"✅ Found {file_paths[0]}")
+                        #print(f"✅ Found {file_paths[0]}")
                         file_found = True
                         break
                 if not file_found:

@@ -70,9 +70,9 @@ class LinesOfCodeCounter:
                             break
                 else:
                     self.line_counts[parent_dir][file] = 0
-        self.save_results()
-        print("\n 🚀 Ending Running Line of code analysis...")
-
+        
+        self.save_results()   
+          
 
     def save_results(self):
         """
@@ -81,7 +81,10 @@ class LinesOfCodeCounter:
         df = pd.DataFrame.from_dict(self.line_counts, orient='index')
         os.makedirs(os.path.dirname(self.output_file), exist_ok=True)
         df.to_csv(self.output_file, index=True)
-        print(f"✅ CSV file successfully saved: {self.output_file}")
+        print("-----------------------------------------------------------")
+        print(df)
+        print("-----------------------------------------------------------")  
+        print(f"✅ CSV file successfully saved: {self.output_file} \n\n\n\n ")
 
 
     def run_wrapper(self):

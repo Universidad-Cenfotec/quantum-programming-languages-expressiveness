@@ -12,7 +12,6 @@ def simon_oracle(n, s):
     return qc.to_gate(label="Simon Oracle")
 
 def simon_algorithm(n, s):
-    # Implementación del algoritmo de Simon en Qiskit
     qc = QuantumCircuit(2 * n, n)
     qc.h(range(n))
     oracle = simon_oracle(n, s)
@@ -35,10 +34,4 @@ def solve_simon(n, s, shots=1024):
 n = 3
 s = "101" 
 counts, found_s, qc = solve_simon(n, s)
-print("\nResultados de las mediciones:")
-print(counts)
-print(f"\nEl valor secreto s encontrado es: {found_s}")
-
-plot_histogram(counts)
-
-qc.draw("mpl")
+print(qc.draw("text"))

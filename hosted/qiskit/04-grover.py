@@ -50,10 +50,4 @@ def run_grover(n, marked_state, shots=1024):
 n = 3
 marked_state = "101"
 counts, qc = run_grover(n, marked_state)
-print("\nResultados de las mediciones:")
-print(counts)
-
-plot_histogram(counts)
-
-
-qc.draw("mpl")
+print(qc.draw("text"))

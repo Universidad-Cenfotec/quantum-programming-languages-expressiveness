@@ -1,4 +1,5 @@
 import qrisp
+import numpy as np
 
 def grover_oracle_qrisp(n, marked_state):    
     oracle = qrisp.QuantumCircuit(n)
@@ -6,7 +7,7 @@ def grover_oracle_qrisp(n, marked_state):
         if bit == '0':
             oracle.x(i)
     oracle.h(n - 1)
-    oracle.mcx(list(range(n - 1)), n - 1)  # Control multi-qubit
+    oracle.mcx(list(range(n - 1)), n - 1)
     oracle.h(n - 1)
 
     for i, bit in enumerate(reversed(marked_state)):
@@ -14,8 +15,7 @@ def grover_oracle_qrisp(n, marked_state):
             oracle.x(i)
     return oracle.to_gate()
 
-def grover_diffusion_qrisp(n):
-    
+def grover_diffusion_qrisp(n):    
     diffusion = qrisp.QuantumCircuit(n)
     diffusion.h(range(n))
     diffusion.x(range(n))

@@ -7,7 +7,6 @@
 # if the outputs are all the same or balanced. If the outputs are all the same, 
 # the function is constant, and if the outputs are balanced, the function is balanced. 
 # The algorithm has a success probability of 100%.
-
 def constant_function(x):
     return 1
 

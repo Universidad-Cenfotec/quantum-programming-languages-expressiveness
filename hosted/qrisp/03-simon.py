@@ -1,7 +1,6 @@
 import qrisp
 
 def simon_oracle_qrisp(n, s):
-    # Simon Oracle para el algoritmo de Simon en QRISP
     qc = qrisp.QuantumCircuit(2 * n)
     for i, bit in enumerate(reversed(s)):
         if bit == '1':
@@ -9,10 +8,8 @@ def simon_oracle_qrisp(n, s):
     return qc.to_gate()  
 
 def simon_algorithm_qrisp(n, s):
-    # Implementación del algoritmo de Simon en QRISP
     qc = qrisp.QuantumCircuit(2 * n, n)
     qc.h(range(n))    
-    # Apply oracle
     oracle = simon_oracle_qrisp(n, s)
     qc.append(oracle, range(2 * n))
     qc.h(range(n))
