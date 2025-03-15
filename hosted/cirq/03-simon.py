@@ -21,16 +21,17 @@ def simon_algorithm_cirq(n, s):
     return circuit, qubits[:n]
 
 def solve_simon_cirq(n, s, shots=1024):
-    circuit, measure_qubits = simon_algorithm_cirq(n, s)
-    simulator = cirq.Simulator()
-    result = simulator.run(circuit, repetitions=shots)
-    measurements = result.measurements["result"] 
-    equations = np.array(measurements) % 2
-    s_solution = null_space(equations).T[0] % 2
-    s_str = ''.join(str(int(bit)) for bit in s_solution)
-    return measurements, s_str, circuit
+    circuit = simon_algorithm_cirq(n, s)
+    #simulator = cirq.Simulator()
+    #result = simulator.run(circuit, repetitions=shots)
+    #measurements = result.measurements["result"] 
+    #equations = np.array(measurements) % 2
+    #s_solution = null_space(equations).T[0] % 2
+    #s_str = ''.join(str(int(bit)) for bit in s_solution)
+    #return measurements, s_str, circuit
+    return circuit
 
 n = 3
 s = "101"
-counts, found_s, circuit = solve_simon_cirq(n, s)
+circuit = solve_simon_cirq(n, s)
 print(circuit)
