@@ -22,16 +22,17 @@ def simon_algorithm(n, s):
 
 def solve_simon(n, s, shots=1024):
     qc = simon_algorithm(n, s)
-    backend = Aer.get_backend('aer_simulator')
-    transpiled_qc = transpile(qc, backend)
-    result = backend.run(transpiled_qc, shots=shots).result()
-    counts = result.get_counts()
-    equations = np.array([list(map(int, key)) for key in counts.keys()])
-    s_solution = null_space(equations % 2).T[0] % 2
-    s_str = ''.join(str(int(bit)) for bit in s_solution)
-    return counts, s_str, qc
+    #backend = Aer.get_backend('aer_simulator')
+    #transpiled_qc = transpile(qc, backend)
+    #result = backend.run(transpiled_qc, shots=shots).result()
+    #counts = result.get_counts()
+    #equations = np.array([list(map(int, key)) for key in counts.keys()])
+    #s_solution = null_space(equations % 2).T[0] % 2
+    #s_str = ''.join(str(int(bit)) for bit in s_solution)
+    #return counts, s_str, qc
+    return qc
 
 n = 3
 s = "101" 
-counts, found_s, qc = solve_simon(n, s)
+qc = solve_simon(n, s)
 print(qc.draw("text"))

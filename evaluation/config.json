@@ -39,7 +39,7 @@
             "python": ["if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or"],           
             "qmod": ["if", "else", "repeat", "within", "apply", "lambda", "and", "or"],
             "q#": ["if", "elif", "for", "ApplyToEachA", "try", "catch", "repeat", "until"],
-            "APL": ["→", "⍣", "⍬", ",", "⍤", "∧", "∨", "∪", "⋄", "⎕SIGNAL", "⎕TRAP", "⎕ASSERT"],
+            "APL": ["→", "¨", "⍣", "⍬", ",", "⍤", "∧", "∨", "∪", "⋄", "⎕SIGNAL", "⎕TRAP", "⎕ASSERT"],
             "qasm": ["if", "else"] 
         }
     },
@@ -72,7 +72,7 @@
             "py": ["if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or"],           
             "qmod": ["if", "else", "repeat", "within", "apply", "lambda", "and", "or"],
             "qs": ["if", "elif", "for", "ApplyToEachA", "try", "catch", "repeat", "until"],
-            "aplf": ["→", "⍣", "⍬", ",", "⍤", "∧", "∨", "∪", "⋄", "⎕SIGNAL", "⎕TRAP", "⎕ASSERT"],
+            "aplf": ["→","¨", "⍣", "⍬", ",", "⍤", "∧", "∨", "∪", "⋄", "⎕SIGNAL", "⎕TRAP", "⎕ASSERT"],
             "qasm": ["if", "else"] 
         }
     },
