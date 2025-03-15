@@ -47,21 +47,7 @@ def run_grover(n, marked_state, shots=1024):
     formatted_counts = {format(key, f'0{n}b'): value for key, value in sorted(counts.items())}    
     return formatted_counts, circuit
 
-def plot_histogram(counts):
-    sorted_keys = sorted(counts.keys())
-    sorted_values = [counts[key] for key in sorted_keys]    
-    plt.bar(sorted_keys, sorted_values)
-    plt.xlabel("State (binary)")
-    plt.ylabel("Frequency")
-    plt.title("Grover results")
-    plt.xticks(rotation=90)
-    plt.show()
-
 n = 3
 marked_state = "101"
 counts, circuit = run_grover(n, marked_state)
-print("\nResultados de las mediciones:")
-print(counts)
-print("\nCircuito:")
 print(circuit)
-plot_histogram(counts)

@@ -35,13 +35,13 @@
         ".py": "#"
         },
         "output": "evaluation/results/cyclomatic_complexity.csv",
-        "constructs": {
-            "python": ["if", "elif", "for", "while", "except", "with", "assert", "and", "or"],
-            "qmod": ["if", "else", "for", "while", "case", "and", "or"], 
-            "q#": ["if", "elif", "for", "while", "try", "catch", "repeat", "until"],
-            "APL": ["→", "⍴", "⊃", "⊂", "∇"],
-            "qasm": ["if", "else", "for", "while"]
-    }
+         "constructs": {
+            "python": ["if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or"],           
+            "qmod": ["if", "else", "repeat", "within", "apply", "lambda", "and", "or"],
+            "q#": ["if", "elif", "for", "ApplyToEachA", "try", "catch", "repeat", "until"],
+            "APL": ["→", "⍣", "⍬", ",", "⍤", "∧", "∨", "∪", "⋄", "⎕SIGNAL", "⎕TRAP", "⎕ASSERT"],
+            "qasm": ["if", "else"] 
+        }
     },
 
     "ccc": {
@@ -69,12 +69,12 @@
         },
         "output": "evaluation/results/cyclomatic_complexity_calculator.csv",
         "constructs": {
-            "py": ["if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or"],
-            "qmod": ["if", "else", "for", "while", "case", "and", "or"], 
-            "qs": ["if", "elif", "for", "while", "try", "catch", "repeat", "until"],
-            "aplf": ["→", "⍴", "⊃", "⊂", "∇"],
-            "qasm": ["if", "else", "for", "while"]
-    }
+            "py": ["if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or"],           
+            "qmod": ["if", "else", "repeat", "within", "apply", "lambda", "and", "or"],
+            "qs": ["if", "elif", "for", "ApplyToEachA", "try", "catch", "repeat", "until"],
+            "aplf": ["→", "⍣", "⍬", ",", "⍤", "∧", "∨", "∪", "⋄", "⎕SIGNAL", "⎕TRAP", "⎕ASSERT"],
+            "qasm": ["if", "else"] 
+        }
     },
     "halstead": {
         "files": ["01-deutch-jotza", "02-vazirani", "03-simon", "04-grover"],

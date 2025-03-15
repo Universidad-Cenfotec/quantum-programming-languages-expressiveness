@@ -1,4 +1,5 @@
 import qrisp
+import numpy as np
 
 def grover_oracle_qrisp(n, marked_state):    
     oracle = qrisp.QuantumCircuit(n)
