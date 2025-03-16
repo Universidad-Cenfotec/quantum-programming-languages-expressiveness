@@ -53,22 +53,22 @@ namespace GroverAlgorithm {
         //Message($"Resolviendo Simon con {shots} ejecuciones...");
         let iterations = Round(PI() / 4.0 * Sqrt(IntAsDouble(2 ^ n)));
         //Message($"Conteo de resultados: {iterations}");
-        for _ in 1 .. shots {
-            let results=grover_algorithm(n, markedState, iterations);
-            mutable found = false;
-            for i in 0..Length(resultsCount) - 1 {
-                let (existingString, existingCount) = resultsCount[i];
-                if (existingString == results) {
-                    mutable newResultsCount = resultsCount;
-                    set newResultsCount w/= i <- (results, existingCount + 1);
-                    set resultsCount = newResultsCount;
-                    set found = true;                    
-                }
-            }
-            if (not found) {
-                set resultsCount += [(results, 1)];
-            }
-        }
+        // for _ in 1 .. shots {
+        let results=grover_algorithm(n, markedState, iterations);
+            //mutable found = false;
+            //for i in 0..Length(resultsCount) - 1 {
+            //    let (existingString, existingCount) = resultsCount[i];
+            //    if (existingString == results) {
+            //        mutable newResultsCount = resultsCount;
+            //        set newResultsCount w/= i <- (results, existingCount + 1);
+            //        set resultsCount = newResultsCount;
+            //        set found = true;                    
+            //    }
+            //}
+            //if (not found) {
+            //    set resultsCount += [(results, 1)];
+            //}
+        //}
         //Message($"Conteo de resultados: {resultsCount}");
     }
     @EntryPoint()
