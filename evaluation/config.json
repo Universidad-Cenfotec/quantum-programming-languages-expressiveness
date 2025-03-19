@@ -98,8 +98,34 @@
         ".aplf": "⍝",
         ".qasm": "//",
         ".qpl": "//"
+        },        
+        "output": "evaluation/results/halstead.csv",
+        "operators": {
+            "python": ["+", "-", "*", "/", "//", "%", "**",
+                "==", "!=", ">", "<", ">=", "<=",
+                "and", "or", "not",
+                "=", "+=", "-=", "*=", "/=", "//=", "%=", "**=",
+                "&", "|", "^", "~", "<<", ">>",
+                "is", "is not",
+                "in", "not in"],
+            "qiskit": [  ],           
+            "cirq": [  ],
+            "qrisp": [  ],
+            "quapl": [],
+            "qmod": [],
+            "q#": [],
+            "qasm": [],
+            "classic": []
         },
-        
-        "output": "evaluation/results/halstead.csv"
+        "operands": {
+            "qiskit": [],           
+            "cirq": [],
+            "qrisp": [],
+            "quapl": [],
+            "qmod": [],
+            "q#": [],
+            "qasm": [],
+            "classic": []
+        }
     }    
 }
