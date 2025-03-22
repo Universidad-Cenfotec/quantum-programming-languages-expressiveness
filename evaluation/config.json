@@ -109,11 +109,18 @@
                 "is", "is not",
                 "in", "not in"],
             "qiskit": [  ],           
-            "cirq": [  ],
+            "cirq":  [
+                "def", "return", "for", "in", "append", "range", "cirq.LineQubit", 
+                "cirq.Circuit", "cirq.X", "cirq.H", "cirq.measure", "cirq.CNOT", "=", "+", "*", ":", ",", "(", "[", ".","print"
+            ],
             "qrisp": [  ],
             "quapl": [],
             "qmod": [],
-            "q#": [],
+            "q#": [
+                "operation", "use", "let", "return", "for", "if", "else",   
+                "Adj", "Ctl", "@EntryPoint()",                             
+                "=", "..", "-", "+"
+            ]     ,
             "qasm": [],
             "classic": []
         },
@@ -124,6 +131,17 @@
             "quapl": [],
             "qmod": [],
             "q#": [],
+            "qasm": [],
+            "classic": []
+        },
+        "constraints_key": {
+            "qiskit": [],           
+            "cirq": ["import", "cirq"],
+            "qrisp": [],
+            "quapl": [],
+            "qmod": [],
+            "q#":["namespace", "open", "Microsoft", "Quantum", "Intrinsic", "Math", "Measurement", "Arrays", "Convert", "Diagnostics"],
+
             "qasm": [],
             "classic": []
         }
