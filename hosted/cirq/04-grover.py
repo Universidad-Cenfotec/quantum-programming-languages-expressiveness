@@ -38,16 +38,16 @@ def grover_algorithm(n, marked_state, iterations=1):
     circuit.append(cirq.measure(*qubits, key='result'))    
     return circuit, qubits
 
-def run_grover(n, marked_state, shots=1024):
+def run_grover(n, marked_state):
     iterations = int(np.pi / 4 * np.sqrt(2**n))
-    circuit, qubits = grover_algorithm(n, marked_state, iterations)    
-    simulator = cirq.Simulator()
-    result = simulator.run(circuit, repetitions=shots)
-    counts = result.histogram(key='result')
-    formatted_counts = {format(key, f'0{n}b'): value for key, value in sorted(counts.items())}    
-    return formatted_counts, circuit
+    circuit = grover_algorithm(n, marked_state, iterations)    
+    #simulator = cirq.Simulator()
+    #result = simulator.run(circuit, repetitions=shots)
+    #counts = result.histogram(key='result')
+    #formatted_counts = {format(key, f'0{n}b'): value for key, value in sorted(counts.items())}    
+    return circuit
 
 n = 3
 marked_state = "101"
-counts, circuit = run_grover(n, marked_state)
+circuit = run_grover(n, marked_state)
 print(circuit)

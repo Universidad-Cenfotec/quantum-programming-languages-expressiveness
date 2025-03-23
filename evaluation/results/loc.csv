@@ -1,9 +1,9 @@
 ,01-deutch-jotza,02-vazirani,03-simon,04-grover
-cirq,24,17,26,48
-qapl,35,3,0,57
-qiskit,23,15,26,48
+cirq,24,17,26,44
+qapl,35,11,19,44
+qiskit,23,15,26,44
 qrisp,21,15,19,39
 qmod,29,25,15,9
-q#,33,27,30,59
+q#,33,27,30,56
 qasm,14,17,12,30
 classic,16,14,28,13

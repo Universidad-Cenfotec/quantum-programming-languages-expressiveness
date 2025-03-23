@@ -73,9 +73,6 @@ namespace GroverAlgorithm {
     }
     @EntryPoint()
     operation Main() : Unit {
-        let n = 3;
-        let markedState = [true, false, true];
-        let shots = 1;
-        RunGrover(n, markedState, shots);      
+        RunGrover(3, [true, false, true], 1);      
     }
 }

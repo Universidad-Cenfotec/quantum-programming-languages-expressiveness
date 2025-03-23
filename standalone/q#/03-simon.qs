@@ -23,7 +23,7 @@ namespace SimonAlgorithm {
         return results;
     }
     
-    //operation SimonSolver(n : Int, s : Bool[], shots : Int) : Unit {
+    // operation SimonSolver(n : Int, s : Bool[], shots : Int) : Unit {
     //    mutable resultsCount : (Result[], Int)[] = [];
     //    Message($"Resolviendo Simon con {shots} ejecuciones...");        
     //    for _ in 1 .. shots {

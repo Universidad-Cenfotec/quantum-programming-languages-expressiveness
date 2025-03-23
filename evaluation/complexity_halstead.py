@@ -76,6 +76,10 @@ class HalsteadComplexity:
         # Filter out keywords and operators from operands
         operands_n = Counter(word for word in all_operands if word not in constraints_key and word not in operators)
         #print(operators_n,operands_n)
+        print('operators')
+        print("\n".join(f"'{key}':'{value}'" for key, value in operators_n.items()))
+        print('operands')
+        print("\n".join(f"'{key}':'{value}'" for key, value in operands_n.items()), "\n")
         return operators_n, operands_n
     
     def calculate_vocabulary(self, n1, n2):
