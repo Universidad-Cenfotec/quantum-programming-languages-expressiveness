@@ -41,7 +41,7 @@ class HalsteadComplexity:
             print(f"❌ Error loading config file: {e}")
             exit(1)
 
-    def extract_operators_operands(self, code, comment_symbol,operators,constraints_key):
+    def extract_operators_operands(self, code, comment_symbol,operators,constraints_key,arithmatic):
         """
         Extracts operators and operands from the code, ignoring lines with comments.
         
@@ -55,20 +55,27 @@ class HalsteadComplexity:
         )
 
         # Compile regex patterns for operators and operands
-        operators_pattern = re.compile(r'(' + '|'.join(map(re.escape, operators)) + r')')
-        operands_pattern = re.compile(r'\b([a-zA-Z_][a-zA-Z0-9_]*)\b')
-
-        # Count operators and operands
-        operators_n = Counter(operators_pattern.findall(filtered_code))
-
+        constraints_pattern = re.compile(r'\b(' + '|'.join(map(re.escape, constraints_key)) + r')\b')
+        operators_pattern = re.compile(r'\b(' + '|'.join(map(re.escape, operators)) + r')\b')
+        operands_pattern = re.compile(r'\b([a-zA-Z_][a-zA-Z0-9_]*(_[a-zA-Z0-9_]+)*)\b')
+        arithmatic_operators=re.compile(r'(' + '|'.join(map(re.escape, arithmatic)) + r')')
         # Remove operators from the filtered code
+        filtered_code = constraints_pattern.sub(' ', filtered_code)
+
+        # Count operators
+        operators_n = Counter(operators_pattern.findall(filtered_code))
         filtered_code = operators_pattern.sub(' ', filtered_code)
 
-        all_operands = operands_pattern.findall(filtered_code)
+        # Count operators
+        arithmatic_n = Counter(arithmatic_operators.findall(filtered_code))      
+        filtered_code = arithmatic_operators.sub(' ', filtered_code)
+
+        operators_n.update(arithmatic_n)
+        all_operands = [operand[0] for operand in operands_pattern.findall(filtered_code)]
 
         # Filter out keywords and operators from operands
         operands_n = Counter(word for word in all_operands if word not in constraints_key and word not in operators)
-        print(operators_n,operands_n)
+        #print(operators_n,operands_n)
         return operators_n, operands_n
     
     def calculate_vocabulary(self, n1, n2):
@@ -90,14 +97,28 @@ class HalsteadComplexity:
         """Calculates the effort of the code."""
         return difficulty * volume
 
-    def calculate_halstead_metrics(self,file_path, comment_symbol,operators,constraints_key):
+    def calculate_halstead_metrics(self,file_path, comment_symbol,operators,constraints_key,arithmatic):
         """Calculates Halstead metrics for a specific file."""
         try:
             with open(file_path, "r", encoding="utf-8") as file:
                 code = file.read()
             
-            operators, operands = self.extract_operators_operands(code, comment_symbol,operators,constraints_key)
+            operators, operands = self.extract_operators_operands(code, comment_symbol, operators, constraints_key,arithmatic)
             
+            # Append log to a CSV file
+            log_data = {
+                "File Path": [file_path],
+                "Operators": [dict(operators)],
+                "Operands": [dict(operands)]
+            }
+            log_df = pd.DataFrame(log_data)
+            log_file = "evaluation/results/halstead_log.csv"
+            
+            if os.path.exists(log_file):
+                existing_log = pd.read_csv(log_file)
+                log_df = pd.concat([existing_log, log_df], ignore_index=True)
+            
+            log_df.to_csv("evaluation/results/halstead_log.csv", index=False)
             # Calculate basic metrics
             n1 = len(operators)  # Number of unique operators
             n2 = len(operands)   # Number of unique operands
@@ -137,8 +158,10 @@ class HalsteadComplexity:
         :param scan_results: Dictionary of directories and their associated files from the scanner.
         """
         print("🔍 Processing files...")
+        log_file = "evaluation/results/halstead_log.csv"
+        if os.path.exists(log_file):
+            os.remove(log_file)
         for directory, files in scan_results.items():
-            print(directory)
             for file, file_path in files.items():
                 if file_path:
                     for ext, comment_symbol in self.comment_symbols.items():
@@ -146,9 +169,13 @@ class HalsteadComplexity:
                             # Extract operators and constraints_key
                             operators = self.operators.get(directory, [])
                             constraints_key = self.constraints_key.get(directory, [])
-                            print(directory)
+                            arithmatic = self.operators.get("arithmatic", [])
+                            first_word = file_path.split('/')[0]
+                            if first_word == "hosted" or first_word == "classic": 
+                                python_operators = self.operators.get("python", [])
+                                operators = python_operators + operators
                             # Calculate Halstead metrics and append to results
-                            file_metrics = self.calculate_halstead_metrics(file_path, comment_symbol, operators, constraints_key)
+                            file_metrics = self.calculate_halstead_metrics(file_path, comment_symbol, operators, constraints_key,arithmatic)
                             if not file_metrics.empty:
                                 file_metrics["Directory"] = directory
                                 file_metrics["File Name"] = file
