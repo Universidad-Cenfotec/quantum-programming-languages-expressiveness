@@ -1,0 +1,23 @@
+:Namespace SIMON 
+oracle ← {
+    ⍝ ⍵: vector state with auxiliar and estimation qubits
+    ⍝ ⍺: secret code as vector Example (1 0 1)
+    ops ← ((⍸⊃⍺) - 1),¨(((2⍟1⌷⍴⍵) ÷ 2) + ((⍸⊃⍺) - 1))  
+    applyCNOT ← {
+        (⍴⍺)=0: ⍵  
+        new_res ← (⊃⍺) (⊂#.quapl.gates.CNOT) #.quapl.circuit.stage ⍵
+        (1↓⍺) ∇ new_res 
+    }
+    ops applyCNOT  ⍵    
+}
+:EndNamespace
+
+_SIMON_ ← {
+    qubits_index ← (⍳((2⍟1⌷⍴(⊃1↑⍵)) ÷ 2))-1
+    mid_state ← ((qubits_index) ({#.quapl.gates.H}¨qubits_index))  #.quapl.circuit.stage (⊃1↑⍵)
+    mid_state ← (1↓⍵) ⍺⍺  mid_state
+    ((qubits_index) ({#.quapl.gates.H}¨qubits_index))  #.quapl.circuit.stage  mid_state
+}
+
+vs← #.quapl.circuit.thread_reg (#.quapl.circuit.reg 6)
+#.quapl.lib.oracles.SIMON.oracle _SIMON_ (vs (1 0 1))

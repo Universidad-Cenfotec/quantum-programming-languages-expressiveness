@@ -38,16 +38,16 @@ def grover_algorithm(n, marked_state, iterations=1):
     qc.measure(range(n), range(n))
     return qc
 
-def run_grover(n, marked_state, shots=1024):
+def run_grover(n, marked_state):
     iterations = int(np.pi / 4 * np.sqrt(2**n))
     qc = grover_algorithm(n, marked_state, iterations)
-    backend = Aer.get_backend('aer_simulator')
-    transpiled_qc = transpile(qc, backend)
-    result = backend.run(transpiled_qc, shots=shots).result()
-    counts = result.get_counts()
-    return counts, qc
+    #backend = Aer.get_backend('aer_simulator')
+    #transpiled_qc = transpile(qc, backend)
+    #result = backend.run(transpiled_qc, shots=shots).result()
+    #counts = result.get_counts()
+    return qc
 
 n = 3
 marked_state = "101"
-counts, qc = run_grover(n, marked_state)
+qc = run_grover(n, marked_state)
 print(qc.draw("text"))
