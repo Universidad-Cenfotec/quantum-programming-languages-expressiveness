@@ -101,28 +101,27 @@
         },        
         "output": "evaluation/results/halstead.csv",
         "operators": {
-            "python": ["+", "-", "*", "/", "//", "%", "**",
-                "==", "!=", ">", "<", ">=", "<=",
-                "and", "or", "not",
-                "=", "+=", "-=", "*=", "/=", "//=", "%=", "**=",
-                "&", "|", "^", "~", "<<", ">>",
-                "is", "is not",
-                "in", "not in"],
-            "qiskit": [  ],           
+            "arithmatic": ["+", "-", "*", "/", "//", "%", "**","=", "+=", "-=", "*=", "/=", "//=", "%=", "**=","^=","^","&"],
+            "python": ["==", "!=", ">", "<", ">=", "<=",
+                "and", "or", "not", "&", "|", "^", "~", "<<", ">>","_",
+                "for","if","else", "int","is", "is not", "in", "not in","np","pi","sqrt","def",
+                "enumerate", "append","print","return","list","format","all","len"],
+
+            "qiskit": ["x","h","cx","to_gate","measure","range","get_backend","transpile","QuantumCircuit","mcx","get_counts","draw","Aer"  ],           
             "cirq":  [
-                "def", "return", "for", "in", "append", "range", "cirq.LineQubit", 
-                "cirq.Circuit", "cirq.X", "cirq.H", "cirq.measure", "cirq.CNOT", "=", "+", "*", ":", ",", "(", "[", ".","print"
+                  "range", "cirq","LineQubit", "CX","on_each",
+                "Circuit", "X", "H", "measure", "CNOT", ":", ",", "(", "[", ".","Moment","TOFFOLI","Simulator"
             ],
-            "qrisp": [  ],
+            "qrisp": [ "x","h","cx","measure","len","pass","QuantumCircuit","QuantumVariable","qrisp","mcx","range","to_gate" ],
             "quapl": [],
-            "qmod": [],
+            "qmod": ["qnum","qbit","allocate","output","within","apply","qfunc","hadamard_transform","lambda","{","(","[",
+            "repeat", "IDENTITY","CX","H","min","|","phase_oracle","len","if","else","floor","int"],
             "q#": [
-                "operation", "use", "let", "return", "for", "if", "else",   
-                "Adj", "Ctl", "@EntryPoint()",                             
-                "=", "..", "-", "+"
-            ]     ,
-            "qasm": [],
-            "classic": []
+                "operation", "use", "let", "return", "for", "if", "else","Bool", "Result","[","{","(" ,"Unit",
+                "Adj", "Ctl", "@EntryPoint()",  "..","Message","Controlled X","ApplyToEachA","ResetAll","MeasureEachZ","X","H","CNOT", "Length","Int",
+                "Most","Qubit","in","mutable","Sqrt","Round","PI","IntAsDouble", "is","not"]  ,
+            "qasm": ["qreg","creg","h","cx","[","->","ccx","measure"],
+            "classic": ["zip","str","range","sum"]
         },
         "operands": {
             "qiskit": [],           
@@ -135,14 +134,18 @@
             "classic": []
         },
         "constraints_key": {
-            "qiskit": [],           
-            "cirq": ["import", "cirq"],
-            "qrisp": [],
+            "qiskit": ["from qiskit import QuantumCircuit","from qiskit import QuantumCircuit, transpile","from qiskit_aer import Aer","from qiskit.visualization import plot_histogram",
+            "import numpy as np","from scipy.linalg import null_space"],           
+            "cirq": ["import cirq","import numpy as np","import matplotlib.pyplot as plt",
+                    "from scipy.linalg import null_space"],
+            "qrisp": ["import qrisp","import numpy as np"],
             "quapl": [],
             "qmod": [],
-            "q#":["namespace", "open", "Microsoft", "Quantum", "Intrinsic", "Math", "Measurement", "Arrays", "Convert", "Diagnostics"],
+            "q#":["namespace vazirani","namespace DeutschJozsa","namespace SimonAlgorithm","namespace GroverAlgorithm",
+             "open Microsoft.Quantum.Intrinsic", "open Microsoft.Quantum.Measurement","open Microsoft.Quantum.Canon","open Microsoft.Quantum.Math",
+            "open Microsoft.Quantum.Arrays","open Microsoft.Quantum.Convert","open Microsoft.Quantum.Diagnostics","EntryPoint"],
 
-            "qasm": [],
+            "qasm": ["include", "qelib1.inc","OPENQASM 2.0"],
             "classic": []
         }
     }    
