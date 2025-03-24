@@ -41,7 +41,7 @@ class HalsteadComplexity:
             print(f"❌ Error loading config file: {e}")
             exit(1)
 
-    def extract_operators_operands(self, code, comment_symbol,operators,constraints_key,arithmatic):
+    def extract_operators_operands(self, code, comment_symbol,operators,constraints_key,arithmatic, directory):
         """
         Extracts operators and operands from the code, ignoring lines with comments.
         
@@ -56,7 +56,13 @@ class HalsteadComplexity:
 
         # Compile regex patterns for operators and operands
         constraints_pattern = re.compile(r'\b(' + '|'.join(map(re.escape, constraints_key)) + r')\b')
-        operators_pattern = re.compile(r'\b(' + '|'.join(map(re.escape, operators)) + r')\b')
+        
+
+        flag = '\\b' if directory != "qapl" else ''
+        operators_pattern = re.compile(r''+flag+'(' + '|'.join(map(re.escape, operators)) + r')'+flag+'')
+        #else:
+        #    operators_pattern = re.compile(r'\b(' + '|'.join(map(re.escape, operators)) + r')\b')
+
         operands_pattern = re.compile(r'\b([a-zA-Z_][a-zA-Z0-9_]*(_[a-zA-Z0-9_]+)*)\b')
         arithmatic_operators=re.compile(r'(' + '|'.join(map(re.escape, arithmatic)) + r')')
         # Remove operators from the filtered code
@@ -101,13 +107,13 @@ class HalsteadComplexity:
         """Calculates the effort of the code."""
         return difficulty * volume
 
-    def calculate_halstead_metrics(self,file_path, comment_symbol,operators,constraints_key,arithmatic):
+    def calculate_halstead_metrics(self,file_path, comment_symbol,operators,constraints_key,arithmatic, directory):
         """Calculates Halstead metrics for a specific file."""
         try:
             with open(file_path, "r", encoding="utf-8") as file:
                 code = file.read()
             
-            operators, operands = self.extract_operators_operands(code, comment_symbol, operators, constraints_key,arithmatic)
+            operators, operands = self.extract_operators_operands(code, comment_symbol, operators, constraints_key,arithmatic, directory)
             
             # Append log to a CSV file
             log_data = {
@@ -172,6 +178,7 @@ class HalsteadComplexity:
                      if file_path.endswith(ext):
                             # Extract operators and constraints_key
                             operators = self.operators.get(directory, [])
+                            
                             constraints_key = self.constraints_key.get(directory, [])
                             arithmatic = self.operators.get("arithmatic", [])
                             first_word = file_path.split('/')[0]
@@ -179,7 +186,7 @@ class HalsteadComplexity:
                                 python_operators = self.operators.get("python", [])
                                 operators = python_operators + operators
                             # Calculate Halstead metrics and append to results
-                            file_metrics = self.calculate_halstead_metrics(file_path, comment_symbol, operators, constraints_key,arithmatic)
+                            file_metrics = self.calculate_halstead_metrics(file_path, comment_symbol, operators, constraints_key,arithmatic,directory)
                             if not file_metrics.empty:
                                 file_metrics["Directory"] = directory
                                 file_metrics["File Name"] = file

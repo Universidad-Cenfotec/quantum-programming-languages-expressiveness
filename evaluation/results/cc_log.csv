@@ -242,76 +242,79 @@
 240,qmod,02-vazirani,repeat,repeat (i: x.len) {
 241,qmod,02-vazirani,if,if ((floor(a / (2 ** i)) % 2) == 1) {
 242,qmod,02-vazirani,or,if ((floor(a / (2 ** i)) % 2) == 1) {
-243,qmod,02-vazirani,else,} else {
-244,qmod,02-vazirani,or,hadamard_transform(x);
-245,qmod,02-vazirani,within,within {
-246,qmod,02-vazirani,apply,} apply {
-247,qmod,02-vazirani,or,hadamard_transform(x);
+243,qmod,02-vazirani,or,hadamard_transform(x);
+244,qmod,02-vazirani,within,within {
+245,qmod,02-vazirani,apply,} apply {
+246,qmod,02-vazirani,or,hadamard_transform(x);
+247,qmod,03-simon,or,hadamard_transform(x);
 248,qmod,03-simon,or,hadamard_transform(x);
-249,qmod,03-simon,or,hadamard_transform(x);
-250,qmod,03-simon,lambda,"simon_qfunc(lambda(x, res) {"
-251,qmod,04-grover,or,"qfunc sat_oracle(x: qbit[], res: qbit) {"
-252,qmod,04-grover,lambda,"grover_search(1, lambda(vars) {"
-253,qmod,04-grover,or,"phase_oracle(sat_oracle, vars);"
-254,q#,01-deutch-jotza,for,for i in 0..n-1 {
-255,q#,01-deutch-jotza,ApplyToEachA,"ApplyToEachA(H, qubits);"
-256,q#,01-deutch-jotza,ApplyToEachA,"ApplyToEachA(H, qubits[0..n-1]);"
+249,qmod,03-simon,lambda,"simon_qfunc(lambda(x, res) {"
+250,qmod,04-grover,or,"qfunc sat_oracle(x: qbit[], res: qbit) {"
+251,qmod,04-grover,lambda,"grover_search(1, lambda(vars) {"
+252,qmod,04-grover,or,"phase_oracle(sat_oracle, vars);"
+253,q#,01-deutch-jotza,for,for i in 0..n-1 {
+254,q#,01-deutch-jotza,ApplyToEachA,"ApplyToEachA(H, qubits);"
+255,q#,01-deutch-jotza,ApplyToEachA,"ApplyToEachA(H, qubits[0..n-1]);"
+256,q#,01-deutch-jotza,MeasureEachZ,let results = MeasureEachZ(qubits[0..n-1]);
 257,q#,01-deutch-jotza,try,@EntryPoint()
 258,q#,02-vazirani,ApplyToEachA,"ApplyToEachA(H, qubits[0..n - 1]);"
 259,q#,02-vazirani,for,for i in 0..n - 1 {
 260,q#,02-vazirani,if,if (s[n - 1 - i]) {
 261,q#,02-vazirani,ApplyToEachA,"ApplyToEachA(H, qubits[0..n - 1]);"
-262,q#,02-vazirani,try,@EntryPoint()
-263,q#,03-simon,for,for i in 0..n - 1 {
-264,q#,03-simon,if,if (s[n - 1 - i]) {
-265,q#,03-simon,ApplyToEachA,"ApplyToEachA(H, qubits[0..n - 1]);"
+262,q#,02-vazirani,MeasureEachZ,let results = MeasureEachZ(qubits[0..n-1]);
+263,q#,02-vazirani,try,@EntryPoint()
+264,q#,03-simon,for,for i in 0..n - 1 {
+265,q#,03-simon,if,if (s[n - 1 - i]) {
 266,q#,03-simon,ApplyToEachA,"ApplyToEachA(H, qubits[0..n - 1]);"
-267,q#,03-simon,try,@EntryPoint()
-268,q#,04-grover,for,for i in 0..n - 1 {
-269,q#,04-grover,if,if (not markedState[n - 1 - i]) {
+267,q#,03-simon,ApplyToEachA,"ApplyToEachA(H, qubits[0..n - 1]);"
+268,q#,03-simon,MeasureEachZ,let results = MeasureEachZ(qubits[0..n - 1]);
+269,q#,03-simon,try,@EntryPoint()
 270,q#,04-grover,for,for i in 0..n - 1 {
 271,q#,04-grover,if,if (not markedState[n - 1 - i]) {
-272,q#,04-grover,if,operation GroverDiffusion(qubits : Qubit[]) : Unit is Adj {
-273,q#,04-grover,ApplyToEachA,"ApplyToEachA(H, qubits);"
-274,q#,04-grover,ApplyToEachA,"ApplyToEachA(X, qubits);"
-275,q#,04-grover,ApplyToEachA,"ApplyToEachA(X, qubits);"
-276,q#,04-grover,ApplyToEachA,"ApplyToEachA(H, qubits);"
-277,q#,04-grover,ApplyToEachA,"ApplyToEachA(H, qubits);"
-278,q#,04-grover,for,for _ in 1..iterations {
-279,q#,04-grover,if,GroverDiffusion(qubits);
-280,q#,04-grover,try,@EntryPoint()
-281,classic,01-deutch-jotza,or,"def is_constant_or_balanced(f, n):"
-282,classic,01-deutch-jotza,for,"all_inputs = [format(i, f'0{n}b') for i in range(2**n)]"
-283,classic,01-deutch-jotza,or,"all_inputs = [format(i, f'0{n}b') for i in range(2**n)]"
-284,classic,01-deutch-jotza,for,outputs = [f(x) for x in all_inputs]
-285,classic,01-deutch-jotza,or,outputs = [f(x) for x in all_inputs]
-286,classic,01-deutch-jotza,if,if all(output == outputs[0] for output in outputs):
-287,classic,01-deutch-jotza,for,if all(output == outputs[0] for output in outputs):
-288,classic,01-deutch-jotza,or,if all(output == outputs[0] for output in outputs):
-289,classic,01-deutch-jotza,or,"result_constant = is_constant_or_balanced(constant_function, n)"
-290,classic,01-deutch-jotza,or,"result_balanced = is_constant_or_balanced(balanced_function, n)"
-291,classic,02-vazirani,for,for i in range(n):
-292,classic,02-vazirani,or,for i in range(n):
-293,classic,02-vazirani,for,s_bits = [int(bit) for bit in hidden_s]
-294,classic,02-vazirani,or,s_bits = [int(bit) for bit in hidden_s]
-295,classic,02-vazirani,for,"x_bits = [int(bit) for bit in format(x, f""0{n}b"")]"
-296,classic,02-vazirani,or,"x_bits = [int(bit) for bit in format(x, f""0{n}b"")]"
-297,classic,02-vazirani,for,"return sum(s_bit * x_bit for s_bit, x_bit in zip(s_bits, x_bits)) % 2"
-298,classic,02-vazirani,or,"return sum(s_bit * x_bit for s_bit, x_bit in zip(s_bits, x_bits)) % 2"
-299,classic,03-simon,for,"inputs = [format(i, f'0{n}b') for i in range(2**n)]"
-300,classic,03-simon,or,"inputs = [format(i, f'0{n}b') for i in range(2**n)]"
-301,classic,03-simon,for,for x in inputs:
-302,classic,03-simon,or,for x in inputs:
-303,classic,03-simon,if,if output in output_map:
-304,classic,03-simon,for,"return format(s, f'0{n}b')"
-305,classic,03-simon,or,"return format(s, f'0{n}b')"
-306,classic,03-simon,if,if x_int < s_int:
-307,classic,03-simon,for,"return format(x_int, f'0{n}b')"
-308,classic,03-simon,or,"return format(x_int, f'0{n}b')"
-309,classic,03-simon,for,"return format(x_int ^ s_int, f'0{n}b')"
-310,classic,03-simon,or,"return format(x_int ^ s_int, f'0{n}b')"
-311,classic,03-simon,if,if recovered_s:
-312,classic,04-grover,for,for _ in range(iterations):
-313,classic,04-grover,or,for _ in range(iterations):
-314,classic,04-grover,for,probabilities = [p / total for p in probabilities]
-315,classic,04-grover,or,probabilities = [p / total for p in probabilities]
+272,q#,04-grover,for,for i in 0..n - 1 {
+273,q#,04-grover,if,if (not markedState[n - 1 - i]) {
+274,q#,04-grover,if,operation GroverDiffusion(qubits : Qubit[]) : Unit is Adj {
+275,q#,04-grover,ApplyToEachA,"ApplyToEachA(H, qubits);"
+276,q#,04-grover,ApplyToEachA,"ApplyToEachA(X, qubits);"
+277,q#,04-grover,ApplyToEachA,"ApplyToEachA(X, qubits);"
+278,q#,04-grover,ApplyToEachA,"ApplyToEachA(H, qubits);"
+279,q#,04-grover,ApplyToEachA,"ApplyToEachA(H, qubits);"
+280,q#,04-grover,for,for _ in 1..iterations {
+281,q#,04-grover,if,GroverDiffusion(qubits);
+282,q#,04-grover,MeasureEachZ,let results = MeasureEachZ(qubits[0..n - 1]);
+283,q#,04-grover,try,@EntryPoint()
+284,classic,01-deutch-jotza,or,"def is_constant_or_balanced(f, n):"
+285,classic,01-deutch-jotza,for,"all_inputs = [format(i, f'0{n}b') for i in range(2**n)]"
+286,classic,01-deutch-jotza,or,"all_inputs = [format(i, f'0{n}b') for i in range(2**n)]"
+287,classic,01-deutch-jotza,for,outputs = [f(x) for x in all_inputs]
+288,classic,01-deutch-jotza,or,outputs = [f(x) for x in all_inputs]
+289,classic,01-deutch-jotza,if,if all(output == outputs[0] for output in outputs):
+290,classic,01-deutch-jotza,for,if all(output == outputs[0] for output in outputs):
+291,classic,01-deutch-jotza,or,if all(output == outputs[0] for output in outputs):
+292,classic,01-deutch-jotza,or,"result_constant = is_constant_or_balanced(constant_function, n)"
+293,classic,01-deutch-jotza,or,"result_balanced = is_constant_or_balanced(balanced_function, n)"
+294,classic,02-vazirani,for,for i in range(n):
+295,classic,02-vazirani,or,for i in range(n):
+296,classic,02-vazirani,for,s_bits = [int(bit) for bit in hidden_s]
+297,classic,02-vazirani,or,s_bits = [int(bit) for bit in hidden_s]
+298,classic,02-vazirani,for,"x_bits = [int(bit) for bit in format(x, f""0{n}b"")]"
+299,classic,02-vazirani,or,"x_bits = [int(bit) for bit in format(x, f""0{n}b"")]"
+300,classic,02-vazirani,for,"return sum(s_bit * x_bit for s_bit, x_bit in zip(s_bits, x_bits)) % 2"
+301,classic,02-vazirani,or,"return sum(s_bit * x_bit for s_bit, x_bit in zip(s_bits, x_bits)) % 2"
+302,classic,03-simon,for,"inputs = [format(i, f'0{n}b') for i in range(2**n)]"
+303,classic,03-simon,or,"inputs = [format(i, f'0{n}b') for i in range(2**n)]"
+304,classic,03-simon,for,for x in inputs:
+305,classic,03-simon,or,for x in inputs:
+306,classic,03-simon,if,if output in output_map:
+307,classic,03-simon,for,"return format(s, f'0{n}b')"
+308,classic,03-simon,or,"return format(s, f'0{n}b')"
+309,classic,03-simon,if,if x_int < s_int:
+310,classic,03-simon,for,"return format(x_int, f'0{n}b')"
+311,classic,03-simon,or,"return format(x_int, f'0{n}b')"
+312,classic,03-simon,for,"return format(x_int ^ s_int, f'0{n}b')"
+313,classic,03-simon,or,"return format(x_int ^ s_int, f'0{n}b')"
+314,classic,03-simon,if,if recovered_s:
+315,classic,04-grover,for,for _ in range(iterations):
+316,classic,04-grover,or,for _ in range(iterations):
+317,classic,04-grover,for,probabilities = [p / total for p in probabilities]
+318,classic,04-grover,or,probabilities = [p / total for p in probabilities]

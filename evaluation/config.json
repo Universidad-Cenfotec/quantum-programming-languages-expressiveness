@@ -113,7 +113,19 @@
                 "Circuit", "X", "H", "measure", "CNOT", ":", ",", "(", "[", ".","Moment","TOFFOLI","Simulator"
             ],
             "qrisp": [ "x","h","cx","measure","len","pass","QuantumCircuit","QuantumVariable","qrisp","mcx","range","to_gate" ],
-            "quapl": [],
+            "qapl": [
+                "+", "-", "×", "÷", "*", "⌈", "⌊", "|",
+                "=", "≠", "<", "≤", ">", "≥", "∧", "∨", "~",
+                "⍴", ",", "⍪", "⌽", "⊖", "↑", "↓", "⍉", "⊂", "⊃", "≡", "≢", "∊", "⍷",
+                "[", "]", "⍋", "⍒", "⍳", "∩", "∪", "⍸",
+                "?", "⍵", "⍺", "⍫", "⋄", "→", "::", "⍎", "⍕",
+                "/", "\\", "⌿", "⍀", "∘", "⍣", "⍤", "⍥", "⍨", "⍞", "⍠",
+                "+/", "-/", "×/", "÷/", "∧/", "∨/", "⌈/", "⌊/", "=/", "≠/", "</", "≤/", ">/", "≥/", "~/",
+                "+\\", "-\\", "×\\", "÷\\", "∧\\", "∨\\", "⌈\\", "⌊\\", "=\\", "≠\\", "<\\", "≤\\", ">\\", "≥\\", "~\\",
+                "⎕", "⋄", "→", ".quapl", ".gates", ".circuit", ".X", ".H", ".I", ".Z",".CNOT", "gCTR", ".measure", ".CX", ".CCX", ".SWAP", 
+                ".CSWAP", ".CCSWAP", ".TOFFOLI", ".CTOFFOLI", ".CCX", ".sng", "q1", "q0", "unthread_vs", ".stage", 
+                ".reg",".lib",".oracles",  "."
+            ],            
             "qmod": ["qnum","qbit","allocate","output","within","apply","qfunc","hadamard_transform","lambda","{","(","[",
             "repeat", "IDENTITY","CX","H","min","|","phase_oracle","len","if","else","floor","int"],
             "q#": [
@@ -127,7 +139,7 @@
             "qiskit": [],           
             "cirq": [],
             "qrisp": [],
-            "quapl": [],
+            "qapl": [],
             "qmod": [],
             "q#": [],
             "qasm": [],
@@ -139,7 +151,7 @@
             "cirq": ["import cirq","import numpy as np","import matplotlib.pyplot as plt",
                     "from scipy.linalg import null_space"],
             "qrisp": ["import qrisp","import numpy as np"],
-            "quapl": [],
+            "qapl": ["Namespace", "EndNamespace"],
             "qmod": [],
             "q#":["namespace vazirani","namespace DeutschJozsa","namespace SimonAlgorithm","namespace GroverAlgorithm",
              "open Microsoft.Quantum.Intrinsic", "open Microsoft.Quantum.Measurement","open Microsoft.Quantum.Canon","open Microsoft.Quantum.Math",
