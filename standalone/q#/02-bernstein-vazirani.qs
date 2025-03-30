@@ -1,4 +1,4 @@
-namespace vazirani {
+namespace bernstein-vazirani {
     open Microsoft.Quantum.Intrinsic;
     open Microsoft.Quantum.Measurement;
 

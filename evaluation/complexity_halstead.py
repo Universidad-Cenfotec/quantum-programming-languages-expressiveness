@@ -58,7 +58,7 @@ class HalsteadComplexity:
         constraints_pattern = re.compile(r'\b(' + '|'.join(map(re.escape, constraints_key)) + r')\b')
         
 
-        flag = '\\b' if directory != "qapl" else ''
+        flag = '\\b' if directory != "quapl" else ''
         operators_pattern = re.compile(r''+flag+'(' + '|'.join(map(re.escape, operators)) + r')'+flag+'')
         #else:
         #    operators_pattern = re.compile(r'\b(' + '|'.join(map(re.escape, operators)) + r')\b')
