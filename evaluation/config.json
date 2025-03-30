@@ -1,9 +1,9 @@
 {
     "loc": {
-        "files": ["01-deutch-jotza", "02-vazirani", "03-simon", "04-grover"],
+        "files": ["01-deutsch-jotza", "02-bernstein-vazirani", "03-simon", "04-grover"],
         "directories": [
             "hosted/cirq", 
-            "hosted/qapl", 
+            "hosted/quapl", 
             "hosted/qiskit", 
             "hosted/qrisp",
             "standalone/qmod",
@@ -25,7 +25,7 @@
         "output": "evaluation/results/loc.csv"
     },
     "cc": {
-        "files": [ "01-deutch-jotza","02-vazirani", "03-simon", "04-grover"],
+        "files": [ "01-deutsch-jotza","02-bernstein-vazirani", "03-simon", "04-grover"],
         "directories": [
         "hosted/cirq",
          "hosted/qiskit",
@@ -45,10 +45,10 @@
     },
 
     "ccc": {
-        "files": [ "01-deutch-jotza","02-vazirani", "03-simon", "04-grover"],
+        "files": [ "01-deutsch-jotza","02-bernstein-vazirani", "03-simon", "04-grover"],
         "directories": [
             "hosted/cirq", 
-            "hosted/qapl", 
+            "hosted/quapl", 
             "hosted/qiskit", 
             "hosted/qrisp",
             "standalone/qmod",
@@ -77,10 +77,10 @@
         }
     },
     "halstead": {
-        "files": ["01-deutch-jotza", "02-vazirani", "03-simon", "04-grover"],
+        "files": ["01-deutsch-jotza", "02-bernstein-vazirani", "03-simon", "04-grover"],
             "directories": [
             "hosted/cirq", 
-            "hosted/qapl", 
+            "hosted/quapl", 
             "hosted/qiskit", 
             "hosted/qrisp",
             "standalone/qmod", 
@@ -113,7 +113,7 @@
                 "Circuit", "X", "H", "measure", "CNOT", ":", ",", "(", "[", ".","Moment","TOFFOLI","Simulator"
             ],
             "qrisp": [ "x","h","cx","measure","len","pass","QuantumCircuit","QuantumVariable","qrisp","mcx","range","to_gate" ],
-            "qapl": [
+            "quapl": [
                 "+", "-", "×", "÷", "*", "⌈", "⌊", "|",
                 "=", "≠", "<", "≤", ">", "≥", "∧", "∨", "~",
                 "⍴", ",", "⍪", "⌽", "⊖", "↑", "↓", "⍉", "⊂", "⊃", "≡", "≢", "∊", "⍷",
@@ -139,7 +139,7 @@
             "qiskit": [],           
             "cirq": [],
             "qrisp": [],
-            "qapl": [],
+            "quapl": [],
             "qmod": [],
             "q#": [],
             "qasm": [],
@@ -151,9 +151,9 @@
             "cirq": ["import cirq","import numpy as np","import matplotlib.pyplot as plt",
                     "from scipy.linalg import null_space"],
             "qrisp": ["import qrisp","import numpy as np"],
-            "qapl": ["Namespace", "EndNamespace"],
+            "quapl": ["Namespace", "EndNamespace"],
             "qmod": [],
-            "q#":["namespace vazirani","namespace DeutschJozsa","namespace SimonAlgorithm","namespace GroverAlgorithm",
+            "q#":["namespace bernstein-vazirani","namespace DeutschJozsa","namespace SimonAlgorithm","namespace GroverAlgorithm",
              "open Microsoft.Quantum.Intrinsic", "open Microsoft.Quantum.Measurement","open Microsoft.Quantum.Canon","open Microsoft.Quantum.Math",
             "open Microsoft.Quantum.Arrays","open Microsoft.Quantum.Convert","open Microsoft.Quantum.Diagnostics","EntryPoint"],
 
