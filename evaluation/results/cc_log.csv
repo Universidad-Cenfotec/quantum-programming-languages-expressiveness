@@ -283,20 +283,38 @@
 281,q#,04-grover,if,GroverDiffusion(qubits);
 282,q#,04-grover,MeasureEachZ,let results = MeasureEachZ(qubits[0..n - 1]);
 283,q#,04-grover,try,@EntryPoint()
-284,classic,03-simon,for,"inputs = [format(i, f'0{n}b') for i in range(2**n)]"
-285,classic,03-simon,or,"inputs = [format(i, f'0{n}b') for i in range(2**n)]"
-286,classic,03-simon,for,for x in inputs:
-287,classic,03-simon,or,for x in inputs:
-288,classic,03-simon,if,if output in output_map:
-289,classic,03-simon,for,"return format(s, f'0{n}b')"
-290,classic,03-simon,or,"return format(s, f'0{n}b')"
-291,classic,03-simon,if,if x_int < s_int:
-292,classic,03-simon,for,"return format(x_int, f'0{n}b')"
-293,classic,03-simon,or,"return format(x_int, f'0{n}b')"
-294,classic,03-simon,for,"return format(x_int ^ s_int, f'0{n}b')"
-295,classic,03-simon,or,"return format(x_int ^ s_int, f'0{n}b')"
-296,classic,03-simon,if,if recovered_s:
-297,classic,04-grover,for,for _ in range(iterations):
-298,classic,04-grover,or,for _ in range(iterations):
-299,classic,04-grover,for,probabilities = [p / total for p in probabilities]
-300,classic,04-grover,or,probabilities = [p / total for p in probabilities]
+284,classic,01-deutsch-jotza,or,"def is_constant_or_balanced(f, n):"
+285,classic,01-deutsch-jotza,for,"all_inputs = [format(i, f'0{n}b') for i in range(2**n)]"
+286,classic,01-deutsch-jotza,or,"all_inputs = [format(i, f'0{n}b') for i in range(2**n)]"
+287,classic,01-deutsch-jotza,for,outputs = [f(x) for x in all_inputs]
+288,classic,01-deutsch-jotza,or,outputs = [f(x) for x in all_inputs]
+289,classic,01-deutsch-jotza,if,if all(output == outputs[0] for output in outputs):
+290,classic,01-deutsch-jotza,for,if all(output == outputs[0] for output in outputs):
+291,classic,01-deutsch-jotza,or,if all(output == outputs[0] for output in outputs):
+292,classic,01-deutsch-jotza,or,"result_constant = is_constant_or_balanced(constant_function, n)"
+293,classic,01-deutsch-jotza,or,"result_balanced = is_constant_or_balanced(balanced_function, n)"
+294,classic,02-bernstein-vazirani,for,for i in range(n):
+295,classic,02-bernstein-vazirani,or,for i in range(n):
+296,classic,02-bernstein-vazirani,for,s_bits = [int(bit) for bit in hidden_s]
+297,classic,02-bernstein-vazirani,or,s_bits = [int(bit) for bit in hidden_s]
+298,classic,02-bernstein-vazirani,for,"x_bits = [int(bit) for bit in format(x, f""0{n}b"")]"
+299,classic,02-bernstein-vazirani,or,"x_bits = [int(bit) for bit in format(x, f""0{n}b"")]"
+300,classic,02-bernstein-vazirani,for,"return sum(s_bit * x_bit for s_bit, x_bit in zip(s_bits, x_bits)) % 2"
+301,classic,02-bernstein-vazirani,or,"return sum(s_bit * x_bit for s_bit, x_bit in zip(s_bits, x_bits)) % 2"
+302,classic,03-simon,for,"inputs = [format(i, f'0{n}b') for i in range(2**n)]"
+303,classic,03-simon,or,"inputs = [format(i, f'0{n}b') for i in range(2**n)]"
+304,classic,03-simon,for,for x in inputs:
+305,classic,03-simon,or,for x in inputs:
+306,classic,03-simon,if,if output in output_map:
+307,classic,03-simon,for,"return format(s, f'0{n}b')"
+308,classic,03-simon,or,"return format(s, f'0{n}b')"
+309,classic,03-simon,if,if x_int < s_int:
+310,classic,03-simon,for,"return format(x_int, f'0{n}b')"
+311,classic,03-simon,or,"return format(x_int, f'0{n}b')"
+312,classic,03-simon,for,"return format(x_int ^ s_int, f'0{n}b')"
+313,classic,03-simon,or,"return format(x_int ^ s_int, f'0{n}b')"
+314,classic,03-simon,if,if recovered_s:
+315,classic,04-grover,for,for _ in range(iterations):
+316,classic,04-grover,or,for _ in range(iterations):
+317,classic,04-grover,for,probabilities = [p / total for p in probabilities]
+318,classic,04-grover,or,probabilities = [p / total for p in probabilities]
