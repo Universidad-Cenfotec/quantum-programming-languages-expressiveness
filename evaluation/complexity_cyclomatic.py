@@ -41,10 +41,13 @@ class CyclomaticComplexityCalculator:
                     #        table_data.append([directory_name, file_name, construct, line.strip()])
                     #        complexity += 1
                     for construct in constructs:
-                        matches = re.findall(re.escape(construct), line)
+                        if language == "aplf":
+                            matches = re.findall(re.escape(construct), line)                            
+                        else:
+                            matches = re.findall(r"\b" + re.escape(construct) + r"\b", line)
                         if matches:
                             table_data.append([directory_name, file_name, construct, line.strip()])
-                            complexity += 1
+                            complexity += len(matches)
 
                     #for construct in constructs:
                     #    if re.search(re.escape(construct), line):  # Quitamos \b

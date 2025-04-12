@@ -1,320 +1,126 @@
 ,Language,Algorithm,Construct,Line
-0,cirq,01-deutsch-jotza,or,import cirq
-1,cirq,01-deutsch-jotza,or,"def deutsch_jozsa(n, oracle):"
-2,cirq,01-deutsch-jotza,for,qubits = [cirq.LineQubit(i) for i in range(n)]
-3,cirq,01-deutsch-jotza,or,qubits = [cirq.LineQubit(i) for i in range(n)]
-4,cirq,01-deutsch-jotza,for,circuit.append(cirq.H(q) for q in qubits + [aux_qubit])
-5,cirq,01-deutsch-jotza,or,circuit.append(cirq.H(q) for q in qubits + [aux_qubit])
-6,cirq,01-deutsch-jotza,or,circuit.append(oracle)
-7,cirq,01-deutsch-jotza,for,circuit.append(cirq.H(q) for q in qubits)
-8,cirq,01-deutsch-jotza,or,circuit.append(cirq.H(q) for q in qubits)
-9,cirq,01-deutsch-jotza,or,def constant_oracle(n):
-10,cirq,01-deutsch-jotza,or,def balanced_oracle(n):
-11,cirq,01-deutsch-jotza,for,qubits = [cirq.LineQubit(i) for i in range(n)]
-12,cirq,01-deutsch-jotza,or,qubits = [cirq.LineQubit(i) for i in range(n)]
-13,cirq,01-deutsch-jotza,or,oracle = cirq.Circuit()
-14,cirq,01-deutsch-jotza,for,for q in qubits:
-15,cirq,01-deutsch-jotza,or,for q in qubits:
-16,cirq,01-deutsch-jotza,or,"oracle.append(cirq.CNOT(q, aux_qubit))"
-17,cirq,01-deutsch-jotza,or,return oracle
-18,cirq,01-deutsch-jotza,or,"print(deutsch_jozsa(n, balanced_oracle(n)))"
-19,cirq,01-deutsch-jotza,or,"print(deutsch_jozsa(n, constant_oracle(n)))"
-20,cirq,02-bernstein-vazirani,or,import cirq
-21,cirq,02-bernstein-vazirani,for,qubits = [cirq.LineQubit(i) for i in range(n + 1)]
-22,cirq,02-bernstein-vazirani,or,qubits = [cirq.LineQubit(i) for i in range(n + 1)]
-23,cirq,02-bernstein-vazirani,for,"for i, bit in enumerate(reversed(s)):"
-24,cirq,02-bernstein-vazirani,or,"for i, bit in enumerate(reversed(s)):"
-25,cirq,02-bernstein-vazirani,if,"if bit == ""1"":"
-26,cirq,03-simon,or,import cirq
-27,cirq,03-simon,or,import numpy as np
-28,cirq,03-simon,or,import matplotlib.pyplot as plt
-29,cirq,03-simon,or,from scipy.linalg import null_space
-30,cirq,03-simon,or,"def simon_oracle_cirq(n, s):"
-31,cirq,03-simon,for,qubits = [cirq.LineQubit(i) for i in range(2 * n)]
-32,cirq,03-simon,or,qubits = [cirq.LineQubit(i) for i in range(2 * n)]
-33,cirq,03-simon,or,oracle = []
-34,cirq,03-simon,for,"for i, bit in enumerate(reversed(s)):"
-35,cirq,03-simon,or,"for i, bit in enumerate(reversed(s)):"
-36,cirq,03-simon,if,if bit == '1':
-37,cirq,03-simon,or,"oracle.append(cirq.CX(qubits[i], qubits[n + i]))"
-38,cirq,03-simon,or,"return oracle, qubits"
-39,cirq,03-simon,or,"def simon_algorithm_cirq(n, s):"
-40,cirq,03-simon,or,"oracle, qubits = simon_oracle_cirq(n, s)"
-41,cirq,03-simon,or,circuit.append(oracle)
-42,cirq,03-simon,or,"circuit = simon_algorithm_cirq(n, s)"
-43,cirq,04-grover,or,import cirq
-44,cirq,04-grover,or,import numpy as np
-45,cirq,04-grover,or,import matplotlib.pyplot as plt
-46,cirq,04-grover,or,"def grover_oracle(qubits, marked_state):"
-47,cirq,04-grover,or,oracle = cirq.Circuit()
-48,cirq,04-grover,for,"for i, bit in enumerate(marked_state):"
-49,cirq,04-grover,or,"for i, bit in enumerate(marked_state):"
-50,cirq,04-grover,if,if bit == '0':
-51,cirq,04-grover,or,oracle.append(cirq.X(qubits[i]))
-52,cirq,04-grover,or,oracle.append(cirq.H(qubits[-1]))
-53,cirq,04-grover,or,"oracle.append(cirq.TOFFOLI(qubits[0], qubits[1], qubits[2]))"
-54,cirq,04-grover,or,oracle.append(cirq.H(qubits[-1]))
-55,cirq,04-grover,for,"for i, bit in enumerate(marked_state):"
-56,cirq,04-grover,or,"for i, bit in enumerate(marked_state):"
-57,cirq,04-grover,if,if bit == '0':
-58,cirq,04-grover,or,oracle.append(cirq.X(qubits[i]))
-59,cirq,04-grover,or,return oracle
-60,cirq,04-grover,if,def grover_diffusion(qubits):
-61,cirq,04-grover,if,diffusion = cirq.Circuit()
-62,cirq,04-grover,if,diffusion.append(cirq.H.on_each(*qubits))
-63,cirq,04-grover,if,diffusion.append(cirq.X.on_each(*qubits))
-64,cirq,04-grover,if,diffusion.append(cirq.H(qubits[-1]))
-65,cirq,04-grover,if,"diffusion.append(cirq.TOFFOLI(qubits[0], qubits[1], qubits[2]))"
-66,cirq,04-grover,if,diffusion.append(cirq.H(qubits[-1]))
-67,cirq,04-grover,if,diffusion.append(cirq.X.on_each(*qubits))
-68,cirq,04-grover,if,diffusion.append(cirq.H.on_each(*qubits))
-69,cirq,04-grover,if,return diffusion
-70,cirq,04-grover,or,"def grover_algorithm(n, marked_state, iterations=1):"
-71,cirq,04-grover,or,"oracle = grover_oracle(qubits, marked_state)"
-72,cirq,04-grover,if,diffusion = grover_diffusion(qubits)
-73,cirq,04-grover,for,for _ in range(iterations):
-74,cirq,04-grover,or,for _ in range(iterations):
-75,cirq,04-grover,or,circuit.append(oracle)
-76,cirq,04-grover,if,circuit.append(diffusion)
-77,cirq,04-grover,or,"circuit = grover_algorithm(n, marked_state, iterations)"
-78,quapl,01-deutsch-jotza,⋄,⍺ {⍵:(((0 ⍺) (⊂SWAP)) stage mid_state) ⋄ mid_state} (⍺≠0)
-79,quapl,01-deutsch-jotza,¨,stg_ctrl ← (((⍳n_qubits)-1) ({H}¨⍳n_qubits))
-80,quapl,02-bernstein-vazirani,¨,"⊃ #.quapl.circuit.stage / (((⍸⍺),¨0){⍺ (⊂⍵)}¨⊂#.quapl.gates.CNOT),⊂⍵"
-81,quapl,02-bernstein-vazirani,",","⊃ #.quapl.circuit.stage / (((⍸⍺),¨0){⍺ (⊂⍵)}¨⊂#.quapl.gates.CNOT),⊂⍵"
-82,quapl,02-bernstein-vazirani,¨,secrets ← 5(↑⍨∘-⍨)¨(2∘⊥⍣¯1)¨⍳1-⍨2*5
-83,quapl,02-bernstein-vazirani,⍣,secrets ← 5(↑⍨∘-⍨)¨(2∘⊥⍣¯1)¨⍳1-⍨2*5
-84,quapl,02-bernstein-vazirani,",","state ← {n ← ⊃⍴⍵ ⋄ (⍪(⍳n)-1),(⍪((#.quapl.sng.q0 (#.quapl.sng.q1))[⍵+1]))}"
-85,quapl,02-bernstein-vazirani,⋄,"state ← {n ← ⊃⍴⍵ ⋄ (⍪(⍳n)-1),(⍪((#.quapl.sng.q0 (#.quapl.sng.q1))[⍵+1]))}"
-86,quapl,02-bernstein-vazirani,¨,"vectors ← #.quapl.circuit.thread_reg¨ state¨ 0,[1]¨secrets"
-87,quapl,02-bernstein-vazirani,",","vectors ← #.quapl.circuit.thread_reg¨ state¨ 0,[1]¨secrets"
-88,quapl,02-bernstein-vazirani,¨,results ← {#.quapl.sng.q1≡⊃⍵[1;2]}¨¨#.quapl.circuit.unthread_vs¨¨results
-89,quapl,03-simon,¨,"ops ← ((⍸⊃⍺) - 1),¨(((2⍟1⌷⍴⍵) ÷ 2) + ((⍸⊃⍺) - 1))"
-90,quapl,03-simon,",","ops ← ((⍸⊃⍺) - 1),¨(((2⍟1⌷⍴⍵) ÷ 2) + ((⍸⊃⍺) - 1))"
-91,quapl,03-simon,¨,mid_state ← ((qubits_index) ({#.quapl.gates.H}¨qubits_index))  #.quapl.circuit.stage (⊃1↑⍵)
-92,quapl,03-simon,¨,((qubits_index) ({#.quapl.gates.H}¨qubits_index))  #.quapl.circuit.stage  mid_state
-93,quapl,04-grover,¨,((qubits_index) ({⍵=0:#.quapl.gates.X ⋄ ⍵=1:#.quapl.gates.I }¨ x )) #.quapl.circuit.stage vs
-94,quapl,04-grover,⋄,((qubits_index) ({⍵=0:#.quapl.gates.X ⋄ ⍵=1:#.quapl.gates.I }¨ x )) #.quapl.circuit.stage vs
-95,quapl,04-grover,¨,stg_ctrl ← (((⍳n_qubits)-1) ({H}¨(⍳n_qubits)))
-96,quapl,04-grover,¨,mid_state ← (((2⊃⍵)-1) ({H}¨(2⊃⍵)))  stage  mid_state
-97,quapl,04-grover,¨,mid_state ← (((2⊃⍵)-1) ({X}¨(2⊃⍵))) stage mid_state
-98,quapl,04-grover,¨,"mid_state ← (((2⊃⍵)-1) (({I}¨( ¯1↓((2⊃⍵)))) , ⊂H ) ) stage mid_state"
-99,quapl,04-grover,",","mid_state ← (((2⊃⍵)-1) (({I}¨( ¯1↓((2⊃⍵)))) , ⊂H ) ) stage mid_state"
-100,quapl,04-grover,¨,"mid_state ← (((2⊃⍵)-1) (({I}¨( ¯1↓((2⊃⍵)))) , ⊂H ) ) stage mid_state"
-101,quapl,04-grover,",","mid_state ← (((2⊃⍵)-1) (({I}¨( ¯1↓((2⊃⍵)))) , ⊂H ) ) stage mid_state"
-102,quapl,04-grover,¨,mid_state ← (((2⊃⍵)-1) ({X}¨(2⊃⍵)))  stage mid_state
-103,quapl,04-grover,¨,mid_state ← (((2⊃⍵)-1) ({H}¨(2⊃⍵))) stage mid_state
-104,qiskit,01-deutsch-jotza,or,"from qiskit import QuantumCircuit, transpile"
-105,qiskit,01-deutsch-jotza,or,from qiskit_aer import Aer
-106,qiskit,01-deutsch-jotza,or,"def deutsch_jozsa(n, oracle):"
-107,qiskit,01-deutsch-jotza,or,"qc.append(oracle, range(n + 1))"
-108,qiskit,01-deutsch-jotza,or,def constant_oracle(n):
-109,qiskit,01-deutsch-jotza,or,oracle = QuantumCircuit(n + 1)
-110,qiskit,01-deutsch-jotza,or,"return oracle.to_gate(label=""Constant Oracle"")"
-111,qiskit,01-deutsch-jotza,or,def balanced_oracle(n):
-112,qiskit,01-deutsch-jotza,or,oracle = QuantumCircuit(n + 1)
-113,qiskit,01-deutsch-jotza,for,for i in range(n):
-114,qiskit,01-deutsch-jotza,or,for i in range(n):
-115,qiskit,01-deutsch-jotza,or,"oracle.cx(i, n)"
-116,qiskit,01-deutsch-jotza,or,"return oracle.to_gate(label=""Balanced Oracle"")"
-117,qiskit,01-deutsch-jotza,or,"qc = deutsch_jozsa(n, constant_oracle(n))"
-118,qiskit,01-deutsch-jotza,or,"qc2 = deutsch_jozsa(n, balanced_oracle(n))"
-119,qiskit,02-bernstein-vazirani,or,from qiskit import QuantumCircuit
-120,qiskit,02-bernstein-vazirani,for,"for i, bit in enumerate(reversed(s)):"
-121,qiskit,02-bernstein-vazirani,or,"for i, bit in enumerate(reversed(s)):"
-122,qiskit,02-bernstein-vazirani,if,"if bit == ""1"":"
-123,qiskit,03-simon,or,"from qiskit import QuantumCircuit, transpile"
-124,qiskit,03-simon,or,from qiskit_aer import Aer
-125,qiskit,03-simon,or,from qiskit.visualization import plot_histogram
-126,qiskit,03-simon,or,import numpy as np
-127,qiskit,03-simon,or,from scipy.linalg import null_space
-128,qiskit,03-simon,or,"def simon_oracle(n, s):"
-129,qiskit,03-simon,for,"for i, bit in enumerate(reversed(s)):"
-130,qiskit,03-simon,or,"for i, bit in enumerate(reversed(s)):"
-131,qiskit,03-simon,if,if bit == '1':
-132,qiskit,03-simon,or,"def simon_algorithm(n, s):"
-133,qiskit,03-simon,or,"oracle = simon_oracle(n, s)"
-134,qiskit,03-simon,or,"qc.append(oracle, range(2 * n))"
-135,qiskit,03-simon,or,"qc = simon_algorithm(n, s)"
-136,qiskit,04-grover,or,"from qiskit import QuantumCircuit, transpile"
-137,qiskit,04-grover,or,from qiskit.visualization import plot_histogram
-138,qiskit,04-grover,or,from qiskit_aer import Aer
-139,qiskit,04-grover,or,import numpy as np
-140,qiskit,04-grover,or,"def grover_oracle(n, marked_state):"
-141,qiskit,04-grover,or,oracle = QuantumCircuit(n)
-142,qiskit,04-grover,for,"for i, bit in enumerate(reversed(marked_state)):"
-143,qiskit,04-grover,or,"for i, bit in enumerate(reversed(marked_state)):"
-144,qiskit,04-grover,if,if bit == '0':
-145,qiskit,04-grover,or,oracle.x(i)
-146,qiskit,04-grover,or,oracle.h(n-1)
-147,qiskit,04-grover,list,"oracle.mcx(list(range(n-1)), n-1)"
-148,qiskit,04-grover,or,"oracle.mcx(list(range(n-1)), n-1)"
-149,qiskit,04-grover,or,oracle.h(n-1)
-150,qiskit,04-grover,for,"for i, bit in enumerate(reversed(marked_state)):"
-151,qiskit,04-grover,or,"for i, bit in enumerate(reversed(marked_state)):"
-152,qiskit,04-grover,if,if bit == '0':
-153,qiskit,04-grover,or,oracle.x(i)
-154,qiskit,04-grover,or,"return oracle.to_gate(label=""Grover Oracle"")"
-155,qiskit,04-grover,if,def grover_diffusion(n):
-156,qiskit,04-grover,if,diffusion = QuantumCircuit(n)
-157,qiskit,04-grover,if,diffusion.h(range(n))
-158,qiskit,04-grover,if,diffusion.x(range(n))
-159,qiskit,04-grover,if,diffusion.h(n-1)
-160,qiskit,04-grover,if,"diffusion.mcx(list(range(n-1)), n-1)"
-161,qiskit,04-grover,list,"diffusion.mcx(list(range(n-1)), n-1)"
-162,qiskit,04-grover,if,diffusion.h(n-1)
-163,qiskit,04-grover,if,diffusion.x(range(n))
-164,qiskit,04-grover,if,diffusion.h(range(n))
-165,qiskit,04-grover,if,"return diffusion.to_gate(label=""Diffusion"")"
-166,qiskit,04-grover,or,"def grover_algorithm(n, marked_state, iterations=1):"
-167,qiskit,04-grover,or,"oracle = grover_oracle(n, marked_state)"
-168,qiskit,04-grover,if,diffusion = grover_diffusion(n)
-169,qiskit,04-grover,for,for _ in range(iterations):
-170,qiskit,04-grover,or,for _ in range(iterations):
-171,qiskit,04-grover,or,"qc.append(oracle, range(n))"
-172,qiskit,04-grover,if,"qc.append(diffusion, range(n))"
-173,qiskit,04-grover,or,"qc = grover_algorithm(n, marked_state, iterations)"
-174,qrisp,01-deutsch-jotza,or,import qrisp
-175,qrisp,01-deutsch-jotza,or,"def deutsch_jozsa(n, oracle):"
-176,qrisp,01-deutsch-jotza,or,"oracle(input_qubits, aux_qubit)"
-177,qrisp,01-deutsch-jotza,or,"def constant_oracle(input_qubits, aux_qubit):"
-178,qrisp,01-deutsch-jotza,or,"def balanced_oracle(input_qubits, aux_qubit):"
-179,qrisp,01-deutsch-jotza,for,for i in range(len(input_qubits)):
-180,qrisp,01-deutsch-jotza,or,for i in range(len(input_qubits)):
-181,qrisp,01-deutsch-jotza,or,"qc=deutsch_jozsa(n, constant_oracle)"
-182,qrisp,01-deutsch-jotza,or,"qc1=deutsch_jozsa(n, balanced_oracle)"
-183,qrisp,02-bernstein-vazirani,or,import qrisp
-184,qrisp,02-bernstein-vazirani,for,"for i, bit in enumerate(reversed(s)):"
-185,qrisp,02-bernstein-vazirani,or,"for i, bit in enumerate(reversed(s)):"
-186,qrisp,02-bernstein-vazirani,if,"if bit == ""1"":"
-187,qrisp,03-simon,or,import qrisp
-188,qrisp,03-simon,or,"def simon_oracle_qrisp(n, s):"
-189,qrisp,03-simon,for,"for i, bit in enumerate(reversed(s)):"
-190,qrisp,03-simon,or,"for i, bit in enumerate(reversed(s)):"
-191,qrisp,03-simon,if,if bit == '1':
-192,qrisp,03-simon,or,"def simon_algorithm_qrisp(n, s):"
-193,qrisp,03-simon,or,"oracle = simon_oracle_qrisp(n, s)"
-194,qrisp,03-simon,or,"qc.append(oracle, range(2 * n))"
-195,qrisp,03-simon,or,"qc = simon_algorithm_qrisp(n, s)"
-196,qrisp,04-grover,or,import qrisp
-197,qrisp,04-grover,or,import numpy as np
-198,qrisp,04-grover,or,"def grover_oracle_qrisp(n, marked_state):"
-199,qrisp,04-grover,or,oracle = qrisp.QuantumCircuit(n)
-200,qrisp,04-grover,for,"for i, bit in enumerate(reversed(marked_state)):"
-201,qrisp,04-grover,or,"for i, bit in enumerate(reversed(marked_state)):"
-202,qrisp,04-grover,if,if bit == '0':
-203,qrisp,04-grover,or,oracle.x(i)
-204,qrisp,04-grover,or,oracle.h(n - 1)
-205,qrisp,04-grover,list,"oracle.mcx(list(range(n - 1)), n - 1)"
-206,qrisp,04-grover,or,"oracle.mcx(list(range(n - 1)), n - 1)"
-207,qrisp,04-grover,or,oracle.h(n - 1)
-208,qrisp,04-grover,for,"for i, bit in enumerate(reversed(marked_state)):"
-209,qrisp,04-grover,or,"for i, bit in enumerate(reversed(marked_state)):"
-210,qrisp,04-grover,if,if bit == '0':
-211,qrisp,04-grover,or,oracle.x(i)
-212,qrisp,04-grover,or,return oracle.to_gate()
-213,qrisp,04-grover,if,def grover_diffusion_qrisp(n):
-214,qrisp,04-grover,if,diffusion = qrisp.QuantumCircuit(n)
-215,qrisp,04-grover,if,diffusion.h(range(n))
-216,qrisp,04-grover,if,diffusion.x(range(n))
-217,qrisp,04-grover,if,diffusion.h(n - 1)
-218,qrisp,04-grover,if,"diffusion.mcx(list(range(n - 1)), n - 1)"
-219,qrisp,04-grover,list,"diffusion.mcx(list(range(n - 1)), n - 1)"
-220,qrisp,04-grover,if,diffusion.h(n - 1)
-221,qrisp,04-grover,if,diffusion.x(range(n))
-222,qrisp,04-grover,if,diffusion.h(range(n))
-223,qrisp,04-grover,if,return diffusion.to_gate()
-224,qrisp,04-grover,or,"def grover_algorithm_qrisp(n, marked_state, iterations=1):"
-225,qrisp,04-grover,or,"oracle = grover_oracle_qrisp(n, marked_state)"
-226,qrisp,04-grover,if,diffusion = grover_diffusion_qrisp(n)
-227,qrisp,04-grover,for,for _ in range(iterations):
-228,qrisp,04-grover,or,for _ in range(iterations):
-229,qrisp,04-grover,or,"qc.append(oracle, range(n))"
-230,qrisp,04-grover,if,"qc.append(diffusion, range(n))"
-231,qrisp,04-grover,or,"qc = grover_algorithm_qrisp(n, marked_state, iterations)"
-232,qmod,01-deutsch-jotza,or,"qfunc my_oracle(predicate: qfunc (qnum, qbit), target: qnum) {"
-233,qmod,01-deutsch-jotza,within,within {
-234,qmod,01-deutsch-jotza,apply,} apply {
-235,qmod,01-deutsch-jotza,or,hadamard_transform(x);
-236,qmod,01-deutsch-jotza,lambda,"my_oracle(lambda(x, y) {"
-237,qmod,01-deutsch-jotza,or,"my_oracle(lambda(x, y) {"
-238,qmod,01-deutsch-jotza,or,hadamard_transform(x);
-239,qmod,01-deutsch-jotza,lambda,"deutsch_jozsa(lambda(x, y) {"
-240,qmod,02-bernstein-vazirani,repeat,repeat (i: x.len) {
-241,qmod,02-bernstein-vazirani,if,if ((floor(a / (2 ** i)) % 2) == 1) {
-242,qmod,02-bernstein-vazirani,or,if ((floor(a / (2 ** i)) % 2) == 1) {
-243,qmod,02-bernstein-vazirani,or,hadamard_transform(x);
-244,qmod,02-bernstein-vazirani,within,within {
-245,qmod,02-bernstein-vazirani,apply,} apply {
-246,qmod,02-bernstein-vazirani,or,hadamard_transform(x);
-247,qmod,03-simon,or,hadamard_transform(x);
-248,qmod,03-simon,or,hadamard_transform(x);
-249,qmod,03-simon,lambda,"simon_qfunc(lambda(x, res) {"
-250,qmod,04-grover,or,"qfunc sat_oracle(x: qbit[], res: qbit) {"
-251,qmod,04-grover,lambda,"grover_search(1, lambda(vars) {"
-252,qmod,04-grover,or,"phase_oracle(sat_oracle, vars);"
-253,q#,01-deutsch-jotza,for,for i in 0..n-1 {
-254,q#,01-deutsch-jotza,ApplyToEachA,"ApplyToEachA(H, qubits);"
-255,q#,01-deutsch-jotza,ApplyToEachA,"ApplyToEachA(H, qubits[0..n-1]);"
-256,q#,01-deutsch-jotza,MeasureEachZ,let results = MeasureEachZ(qubits[0..n-1]);
-257,q#,01-deutsch-jotza,try,@EntryPoint()
-258,q#,02-bernstein-vazirani,ApplyToEachA,"ApplyToEachA(H, qubits[0..n - 1]);"
-259,q#,02-bernstein-vazirani,for,for i in 0..n - 1 {
-260,q#,02-bernstein-vazirani,if,if (s[n - 1 - i]) {
-261,q#,02-bernstein-vazirani,ApplyToEachA,"ApplyToEachA(H, qubits[0..n - 1]);"
-262,q#,02-bernstein-vazirani,MeasureEachZ,let results = MeasureEachZ(qubits[0..n-1]);
-263,q#,02-bernstein-vazirani,try,@EntryPoint()
-264,q#,03-simon,for,for i in 0..n - 1 {
-265,q#,03-simon,if,if (s[n - 1 - i]) {
-266,q#,03-simon,ApplyToEachA,"ApplyToEachA(H, qubits[0..n - 1]);"
-267,q#,03-simon,ApplyToEachA,"ApplyToEachA(H, qubits[0..n - 1]);"
-268,q#,03-simon,MeasureEachZ,let results = MeasureEachZ(qubits[0..n - 1]);
-269,q#,03-simon,try,@EntryPoint()
-270,q#,04-grover,for,for i in 0..n - 1 {
-271,q#,04-grover,if,if (not markedState[n - 1 - i]) {
-272,q#,04-grover,for,for i in 0..n - 1 {
-273,q#,04-grover,if,if (not markedState[n - 1 - i]) {
-274,q#,04-grover,if,operation GroverDiffusion(qubits : Qubit[]) : Unit is Adj {
-275,q#,04-grover,ApplyToEachA,"ApplyToEachA(H, qubits);"
-276,q#,04-grover,ApplyToEachA,"ApplyToEachA(X, qubits);"
-277,q#,04-grover,ApplyToEachA,"ApplyToEachA(X, qubits);"
-278,q#,04-grover,ApplyToEachA,"ApplyToEachA(H, qubits);"
-279,q#,04-grover,ApplyToEachA,"ApplyToEachA(H, qubits);"
-280,q#,04-grover,for,for _ in 1..iterations {
-281,q#,04-grover,if,GroverDiffusion(qubits);
-282,q#,04-grover,MeasureEachZ,let results = MeasureEachZ(qubits[0..n - 1]);
-283,q#,04-grover,try,@EntryPoint()
-284,classic,01-deutsch-jotza,or,"def is_constant_or_balanced(f, n):"
-285,classic,01-deutsch-jotza,for,"all_inputs = [format(i, f'0{n}b') for i in range(2**n)]"
-286,classic,01-deutsch-jotza,or,"all_inputs = [format(i, f'0{n}b') for i in range(2**n)]"
-287,classic,01-deutsch-jotza,for,outputs = [f(x) for x in all_inputs]
-288,classic,01-deutsch-jotza,or,outputs = [f(x) for x in all_inputs]
-289,classic,01-deutsch-jotza,if,if all(output == outputs[0] for output in outputs):
-290,classic,01-deutsch-jotza,for,if all(output == outputs[0] for output in outputs):
-291,classic,01-deutsch-jotza,or,if all(output == outputs[0] for output in outputs):
-292,classic,01-deutsch-jotza,or,"result_constant = is_constant_or_balanced(constant_function, n)"
-293,classic,01-deutsch-jotza,or,"result_balanced = is_constant_or_balanced(balanced_function, n)"
-294,classic,02-bernstein-vazirani,for,for i in range(n):
-295,classic,02-bernstein-vazirani,or,for i in range(n):
-296,classic,02-bernstein-vazirani,for,s_bits = [int(bit) for bit in hidden_s]
-297,classic,02-bernstein-vazirani,or,s_bits = [int(bit) for bit in hidden_s]
-298,classic,02-bernstein-vazirani,for,"x_bits = [int(bit) for bit in format(x, f""0{n}b"")]"
-299,classic,02-bernstein-vazirani,or,"x_bits = [int(bit) for bit in format(x, f""0{n}b"")]"
-300,classic,02-bernstein-vazirani,for,"return sum(s_bit * x_bit for s_bit, x_bit in zip(s_bits, x_bits)) % 2"
-301,classic,02-bernstein-vazirani,or,"return sum(s_bit * x_bit for s_bit, x_bit in zip(s_bits, x_bits)) % 2"
-302,classic,03-simon,for,"inputs = [format(i, f'0{n}b') for i in range(2**n)]"
-303,classic,03-simon,or,"inputs = [format(i, f'0{n}b') for i in range(2**n)]"
-304,classic,03-simon,for,for x in inputs:
-305,classic,03-simon,or,for x in inputs:
-306,classic,03-simon,if,if output in output_map:
-307,classic,03-simon,for,"return format(s, f'0{n}b')"
-308,classic,03-simon,or,"return format(s, f'0{n}b')"
-309,classic,03-simon,if,if x_int < s_int:
-310,classic,03-simon,for,"return format(x_int, f'0{n}b')"
-311,classic,03-simon,or,"return format(x_int, f'0{n}b')"
-312,classic,03-simon,for,"return format(x_int ^ s_int, f'0{n}b')"
-313,classic,03-simon,or,"return format(x_int ^ s_int, f'0{n}b')"
-314,classic,03-simon,if,if recovered_s:
-315,classic,04-grover,for,for _ in range(iterations):
-316,classic,04-grover,or,for _ in range(iterations):
-317,classic,04-grover,for,probabilities = [p / total for p in probabilities]
-318,classic,04-grover,or,probabilities = [p / total for p in probabilities]
+0,cirq,01-deutsch-jotza,for,qubits = [cirq.LineQubit(i) for i in range(n)]
+1,cirq,01-deutsch-jotza,for,circuit.append(cirq.H(q) for q in qubits + [aux_qubit])
+2,cirq,01-deutsch-jotza,for,circuit.append(cirq.H(q) for q in qubits)
+3,cirq,01-deutsch-jotza,for,qubits = [cirq.LineQubit(i) for i in range(n)]
+4,cirq,01-deutsch-jotza,for,for q in qubits:
+5,cirq,02-bernstein-vazirani,for,qubits = [cirq.LineQubit(i) for i in range(n + 1)]
+6,cirq,02-bernstein-vazirani,on_each,circuit += cirq.H.on_each(*qubits)
+7,cirq,02-bernstein-vazirani,for,"for i, bit in enumerate(reversed(s)):"
+8,cirq,02-bernstein-vazirani,if,"if bit == ""1"":"
+9,cirq,02-bernstein-vazirani,on_each,circuit += cirq.H.on_each(*qubits[:-1])
+10,cirq,03-simon,for,qubits = [cirq.LineQubit(i) for i in range(2 * n)]
+11,cirq,03-simon,for,"for i, bit in enumerate(reversed(s)):"
+12,cirq,03-simon,if,if bit == '1':
+13,cirq,03-simon,on_each,circuit.append(cirq.H.on_each(*qubits[:n]))
+14,cirq,03-simon,on_each,circuit.append(cirq.H.on_each(*qubits[:n]))
+15,cirq,04-grover,for,"for i, bit in enumerate(marked_state):"
+16,cirq,04-grover,if,if bit == '0':
+17,cirq,04-grover,for,"for i, bit in enumerate(marked_state):"
+18,cirq,04-grover,if,if bit == '0':
+19,cirq,04-grover,on_each,diffusion.append(cirq.H.on_each(*qubits))
+20,cirq,04-grover,on_each,diffusion.append(cirq.X.on_each(*qubits))
+21,cirq,04-grover,on_each,diffusion.append(cirq.X.on_each(*qubits))
+22,cirq,04-grover,on_each,diffusion.append(cirq.H.on_each(*qubits))
+23,cirq,04-grover,on_each,circuit.append(cirq.H.on_each(*qubits))
+24,cirq,04-grover,for,for _ in range(iterations):
+25,quapl,01-deutsch-jotza,⋄,⍺ {⍵:(((0 ⍺) (⊂SWAP)) stage mid_state) ⋄ mid_state} (⍺≠0)
+26,quapl,01-deutsch-jotza,¨,stg_ctrl ← (((⍳n_qubits)-1) ({H}¨⍳n_qubits))
+27,quapl,02-bernstein-vazirani,¨,"⊃ #.quapl.circuit.stage / (((⍸⍺),¨0){⍺ (⊂⍵)}¨⊂#.quapl.gates.CNOT),⊂⍵"
+28,quapl,02-bernstein-vazirani,",","⊃ #.quapl.circuit.stage / (((⍸⍺),¨0){⍺ (⊂⍵)}¨⊂#.quapl.gates.CNOT),⊂⍵"
+29,quapl,02-bernstein-vazirani,¨,secrets ← 5(↑⍨∘-⍨)¨(2∘⊥⍣¯1)¨⍳1-⍨2*5
+30,quapl,02-bernstein-vazirani,⍣,secrets ← 5(↑⍨∘-⍨)¨(2∘⊥⍣¯1)¨⍳1-⍨2*5
+31,quapl,02-bernstein-vazirani,",","state ← {n ← ⊃⍴⍵ ⋄ (⍪(⍳n)-1),(⍪((#.quapl.sng.q0 (#.quapl.sng.q1))[⍵+1]))}"
+32,quapl,02-bernstein-vazirani,⋄,"state ← {n ← ⊃⍴⍵ ⋄ (⍪(⍳n)-1),(⍪((#.quapl.sng.q0 (#.quapl.sng.q1))[⍵+1]))}"
+33,quapl,02-bernstein-vazirani,¨,"vectors ← #.quapl.circuit.thread_reg¨ state¨ 0,[1]¨secrets"
+34,quapl,02-bernstein-vazirani,",","vectors ← #.quapl.circuit.thread_reg¨ state¨ 0,[1]¨secrets"
+35,quapl,02-bernstein-vazirani,¨,results ← {#.quapl.sng.q1≡⊃⍵[1;2]}¨¨#.quapl.circuit.unthread_vs¨¨results
+36,quapl,03-simon,¨,"ops ← ((⍸⊃⍺) - 1),¨(((2⍟1⌷⍴⍵) ÷ 2) + ((⍸⊃⍺) - 1))"
+37,quapl,03-simon,",","ops ← ((⍸⊃⍺) - 1),¨(((2⍟1⌷⍴⍵) ÷ 2) + ((⍸⊃⍺) - 1))"
+38,quapl,03-simon,¨,mid_state ← ((qubits_index) ({#.quapl.gates.H}¨qubits_index))  #.quapl.circuit.stage (⊃1↑⍵)
+39,quapl,03-simon,¨,((qubits_index) ({#.quapl.gates.H}¨qubits_index))  #.quapl.circuit.stage  mid_state
+40,quapl,04-grover,¨,((qubits_index) ({⍵=0:#.quapl.gates.X ⋄ ⍵=1:#.quapl.gates.I }¨ x )) #.quapl.circuit.stage vs
+41,quapl,04-grover,⋄,((qubits_index) ({⍵=0:#.quapl.gates.X ⋄ ⍵=1:#.quapl.gates.I }¨ x )) #.quapl.circuit.stage vs
+42,quapl,04-grover,¨,stg_ctrl ← (((⍳n_qubits)-1) ({H}¨(⍳n_qubits)))
+43,quapl,04-grover,¨,mid_state ← (((2⊃⍵)-1) ({H}¨(2⊃⍵)))  stage  mid_state
+44,quapl,04-grover,¨,mid_state ← (((2⊃⍵)-1) ({X}¨(2⊃⍵))) stage mid_state
+45,quapl,04-grover,¨,"mid_state ← (((2⊃⍵)-1) (({I}¨( ¯1↓((2⊃⍵)))) , ⊂H ) ) stage mid_state"
+46,quapl,04-grover,",","mid_state ← (((2⊃⍵)-1) (({I}¨( ¯1↓((2⊃⍵)))) , ⊂H ) ) stage mid_state"
+47,quapl,04-grover,¨,"mid_state ← (((2⊃⍵)-1) (({I}¨( ¯1↓((2⊃⍵)))) , ⊂H ) ) stage mid_state"
+48,quapl,04-grover,",","mid_state ← (((2⊃⍵)-1) (({I}¨( ¯1↓((2⊃⍵)))) , ⊂H ) ) stage mid_state"
+49,quapl,04-grover,¨,mid_state ← (((2⊃⍵)-1) ({X}¨(2⊃⍵)))  stage mid_state
+50,quapl,04-grover,¨,mid_state ← (((2⊃⍵)-1) ({H}¨(2⊃⍵))) stage mid_state
+51,qiskit,01-deutsch-jotza,for,for i in range(n):
+52,qiskit,02-bernstein-vazirani,for,"for i, bit in enumerate(reversed(s)):"
+53,qiskit,02-bernstein-vazirani,if,"if bit == ""1"":"
+54,qiskit,03-simon,for,"for i, bit in enumerate(reversed(s)):"
+55,qiskit,03-simon,if,if bit == '1':
+56,qiskit,04-grover,for,"for i, bit in enumerate(reversed(marked_state)):"
+57,qiskit,04-grover,if,if bit == '0':
+58,qiskit,04-grover,list,"oracle.mcx(list(range(n-1)), n-1)"
+59,qiskit,04-grover,for,"for i, bit in enumerate(reversed(marked_state)):"
+60,qiskit,04-grover,if,if bit == '0':
+61,qiskit,04-grover,list,"diffusion.mcx(list(range(n-1)), n-1)"
+62,qiskit,04-grover,for,for _ in range(iterations):
+63,qrisp,01-deutsch-jotza,for,for i in range(len(input_qubits)):
+64,qrisp,02-bernstein-vazirani,for,"for i, bit in enumerate(reversed(s)):"
+65,qrisp,02-bernstein-vazirani,if,"if bit == ""1"":"
+66,qrisp,03-simon,for,"for i, bit in enumerate(reversed(s)):"
+67,qrisp,03-simon,if,if bit == '1':
+68,qrisp,04-grover,for,"for i, bit in enumerate(reversed(marked_state)):"
+69,qrisp,04-grover,if,if bit == '0':
+70,qrisp,04-grover,list,"oracle.mcx(list(range(n - 1)), n - 1)"
+71,qrisp,04-grover,for,"for i, bit in enumerate(reversed(marked_state)):"
+72,qrisp,04-grover,if,if bit == '0':
+73,qrisp,04-grover,list,"diffusion.mcx(list(range(n - 1)), n - 1)"
+74,qrisp,04-grover,for,for _ in range(iterations):
+75,qmod,01-deutsch-jotza,within,within {
+76,qmod,01-deutsch-jotza,apply,} apply {
+77,qmod,01-deutsch-jotza,lambda,"my_oracle(lambda(x, y) {"
+78,qmod,01-deutsch-jotza,lambda,"deutsch_jozsa(lambda(x, y) {"
+79,qmod,02-bernstein-vazirani,repeat,repeat (i: x.len) {
+80,qmod,02-bernstein-vazirani,if,if ((floor(a / (2 ** i)) % 2) == 1) {
+81,qmod,02-bernstein-vazirani,within,within {
+82,qmod,02-bernstein-vazirani,apply,} apply {
+83,qmod,03-simon,lambda,"simon_qfunc(lambda(x, res) {"
+84,qmod,04-grover,lambda,"grover_search(1, lambda(vars) {"
+85,q#,01-deutsch-jotza,for,for i in 0..n-1 {
+86,q#,01-deutsch-jotza,ApplyToEachA,"ApplyToEachA(H, qubits);"
+87,q#,01-deutsch-jotza,ApplyToEachA,"ApplyToEachA(H, qubits[0..n-1]);"
+88,q#,01-deutsch-jotza,MeasureEachZ,let results = MeasureEachZ(qubits[0..n-1]);
+89,q#,02-bernstein-vazirani,ApplyToEachA,"ApplyToEachA(H, qubits[0..n - 1]);"
+90,q#,02-bernstein-vazirani,for,for i in 0..n - 1 {
+91,q#,02-bernstein-vazirani,if,if (s[n - 1 - i]) {
+92,q#,02-bernstein-vazirani,ApplyToEachA,"ApplyToEachA(H, qubits[0..n - 1]);"
+93,q#,02-bernstein-vazirani,MeasureEachZ,let results = MeasureEachZ(qubits[0..n-1]);
+94,q#,03-simon,for,for i in 0..n - 1 {
+95,q#,03-simon,if,if (s[n - 1 - i]) {
+96,q#,03-simon,ApplyToEachA,"ApplyToEachA(H, qubits[0..n - 1]);"
+97,q#,03-simon,ApplyToEachA,"ApplyToEachA(H, qubits[0..n - 1]);"
+98,q#,03-simon,MeasureEachZ,let results = MeasureEachZ(qubits[0..n - 1]);
+99,q#,04-grover,for,for i in 0..n - 1 {
+100,q#,04-grover,if,if (not markedState[n - 1 - i]) {
+101,q#,04-grover,for,for i in 0..n - 1 {
+102,q#,04-grover,if,if (not markedState[n - 1 - i]) {
+103,q#,04-grover,ApplyToEachA,"ApplyToEachA(H, qubits);"
+104,q#,04-grover,ApplyToEachA,"ApplyToEachA(X, qubits);"
+105,q#,04-grover,ApplyToEachA,"ApplyToEachA(X, qubits);"
+106,q#,04-grover,ApplyToEachA,"ApplyToEachA(H, qubits);"
+107,q#,04-grover,ApplyToEachA,"ApplyToEachA(H, qubits);"
+108,q#,04-grover,for,for _ in 1..iterations {
+109,q#,04-grover,MeasureEachZ,let results = MeasureEachZ(qubits[0..n - 1]);
+110,classic,01-deutsch-jotza,for,"all_inputs = [format(i, f'0{n}b') for i in range(2**n)]"
+111,classic,01-deutsch-jotza,for,outputs = [f(x) for x in all_inputs]
+112,classic,01-deutsch-jotza,if,if all(output == outputs[0] for output in outputs):
+113,classic,01-deutsch-jotza,for,if all(output == outputs[0] for output in outputs):
+114,classic,02-bernstein-vazirani,for,for i in range(n):
+115,classic,02-bernstein-vazirani,for,s_bits = [int(bit) for bit in hidden_s]
+116,classic,02-bernstein-vazirani,for,"x_bits = [int(bit) for bit in format(x, f""0{n}b"")]"
+117,classic,02-bernstein-vazirani,for,"return sum(s_bit * x_bit for s_bit, x_bit in zip(s_bits, x_bits)) % 2"
+118,classic,03-simon,for,"inputs = [format(i, f'0{n}b') for i in range(2**n)]"
+119,classic,03-simon,for,for x in inputs:
+120,classic,03-simon,if,if output in output_map:
+121,classic,03-simon,if,if x_int < s_int:
+122,classic,03-simon,if,if recovered_s:
+123,classic,04-grover,for,for _ in range(iterations):
+124,classic,04-grover,for,probabilities = [p / total for p in probabilities]
