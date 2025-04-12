@@ -101,7 +101,7 @@
         },        
         "output": "evaluation/results/halstead.csv",
         "operators": {
-            "arithmatic": ["+", "-", "*", "/", "//", "%", "**","=", "+=", "-=", "*=", "/=", "//=", "%=", "**=","^=","^","&"],
+            "arithmatic": ["(", "[","{", "+", "-", "*", "/", "//", "%", "**","=", "+=", "-=", "*=", "/=", "//=", "%=", "**=","^=","^","&"],
             "python": ["==", "!=", ">", "<", ">=", "<=",
                 "and", "or", "not", "&", "|", "^", "~", "<<", ">>","_",
                 "for","if","else", "int","is", "is not", "in", "not in","np","pi","sqrt","def",
@@ -110,7 +110,7 @@
             "qiskit": ["x","h","cx","to_gate","measure","range","get_backend","transpile","QuantumCircuit","mcx","get_counts","draw","Aer"  ],           
             "cirq":  [
                   "range", "cirq","LineQubit", "CX","on_each",
-                "Circuit", "X", "H", "measure", "CNOT", ":", ",", "(", "[", ".","Moment","TOFFOLI","Simulator"
+                "Circuit", "X", "H", "measure", "CNOT", ":", ",", ".","Moment","TOFFOLI","Simulator"
             ],
             "qrisp": [ "x","h","cx","measure","len","pass","QuantumCircuit","QuantumVariable","qrisp","mcx","range","to_gate" ],
             "quapl": [
