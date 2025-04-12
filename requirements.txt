@@ -11,3 +11,4 @@ flask==2.2.0
 werkzeug==2.3.0
 classiq
 adjustText
+statsmodels
