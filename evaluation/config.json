@@ -69,7 +69,7 @@
         },
         "output": "evaluation/results/cyclomatic_complexity_calculator.csv",
         "constructs": {
-            "py": ["if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or"],           
+            "py": ["if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or","on_each"],           
             "qmod": ["if", "repeat", "within", "apply", "lambda", "and", "or"],
             "qs": ["if", "elif", "for", "ApplyToEachA","MeasureEachZ", "try", "catch", "repeat", "until"],
             "aplf": ["→","¨", "⍣", "⍬", ",", "⍤", "∧", "∨", "∪", "⋄", "⎕SIGNAL", "⎕TRAP", "⎕ASSERT"],
