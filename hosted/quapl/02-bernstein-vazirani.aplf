@@ -1,27 +1,20 @@
-BV ← {
-    ⍝ Bernstein-Vazirani oracle
-    ⍝ Takes the inner product of the secret bit vector ⍺ with the input bit vector ⍵
-    ⍝ The first item in the register should be ancilla qubit (typically in the state |->)    
-    ⊃ #.quapl.circuit.stage / (((⍸⍺),¨0){⍺ (⊂⍵)}¨⊂#.quapl.gates.CNOT),⊂⍵
+ BV ← {
+    reg ← ⍵
+    reg[1;2]←⊂ sng.q1  
+    vs ← circuit.thread_reg reg
+    stg_ctrl ← (((⍳(2⍟1⌷⍴(vs)) )-1) ({#.quapl.gates.H}¨( ⍳(2⍟1⌷⍴(vs)) ))) 
+    vs ← stg_ctrl stage (vs)  
+    stg_ctrl stage (⍺ oracleBV vs)  
 }
-
-test_BV_value_001 ← {
-    ⍝ Generate all possible 5 bit secret vectors
-    secrets ← 5(↑⍨∘-⍨)¨(2∘⊥⍣¯1)¨⍳1-⍨2*5
-    
-    ⍝ From bit vector to qubit state
-    ⍝ For example, takes 0 1 0 1 to |0101>
-    state ← {n ← ⊃⍴⍵ ⋄ (⍪(⍳n)-1),(⍪((#.quapl.sng.q0 (#.quapl.sng.q1))[⍵+1]))}
-
-    ⍝ Generate all possible pure input states up to 6 bits, where the first qubit is in state is |0>
-    vectors ← #.quapl.circuit.thread_reg¨ state¨ 0,[1]¨secrets
-
-    ⍝ All possible applications of secret vectors and input vectors 
-    results ← secrets (∘.(#.quapl.lib.oracles.BV)) vectors
-
-    ⍝ Get ancilla qubits and turn them into bits
-    results ← {#.quapl.sng.q1≡⊃⍵[1;2]}¨¨#.quapl.circuit.unthread_vs¨¨results
-
-    ⍝ Check if result is equivalent to classical bitwise dot product
-    secrets (∘.(≠.×)) secrets
+oracleBV ← {
+    targets ← (⍴((⍸(⍺)) -1)) ⍴ 0
+    ops ← ((⍸(⍺)) -1),¨targets
+    applyCNOT ← {
+        (⍴⍺)=0: ⍵ 
+        new_res ← (⊃⍺) (⊂#.quapl.gates.CNOT) #.quapl.circuit.stage ⍵
+        (1↓⍺) ∇ new_res 
+    }
+    ops applyCNOT ⍵
 }
+reg5←#.quapl.circuit.reg 5
+(0 1 1 0 1) BV reg5
