@@ -4,7 +4,7 @@ import pandas as pd
 import os
 from utils import Utils as utils
 class CyclomaticComplexityCalculator:
-    def __init__(self, scanner, metric_key="cc"):
+    def __init__(self, scanner, metric_key="ccc"):
         """
         Initialize the complexity calculator with a directory scanner.
         
