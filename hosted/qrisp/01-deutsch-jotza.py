@@ -19,7 +19,7 @@ def balanced_oracle(input_qubits, aux_qubit):
         qrisp.cx(input_qubits[i], aux_qubit)
 
 n = 3
-qc=deutsch_jozsa(n, constant_oracle)
-qc1=deutsch_jozsa(n, balanced_oracle)
+qc = deutsch_jozsa(n, constant_oracle)
+qc1 = deutsch_jozsa(n, balanced_oracle)
 print(qc)
 print(qc1)

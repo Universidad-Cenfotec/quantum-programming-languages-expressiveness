@@ -1,20 +1,15 @@
 import qrisp
 
-def simon_oracle_qrisp(n, s):
-    qc = qrisp.QuantumCircuit(2 * n)
-    for i, bit in enumerate(reversed(s)):
-        if bit == '1':
-            qc.cx(i, n + i)
-    return qc.to_gate()  
+def oracle(qv, s):
+    for i in range(len(s)):
+        if s[i] == "1":
+            qrisp.cx(qv[i], qv[n + i])
 
 def simon_algorithm_qrisp(n, s):
-    qc = qrisp.QuantumCircuit(2 * n, n)
-    qc.h(range(n))    
-    oracle = simon_oracle_qrisp(n, s)
-    qc.append(oracle, range(2 * n))
-    qc.h(range(n))
-    qc.measure(range(n), range(n))    
-    return qc
+    qv = qrisp.QuantumVariable(2*n)
+    with qrisp.conjugate(qrisp.h)(qv[:n]):
+        oracle(qv, s)
+    return qv.qs.compile()
 
 n = 3
 s = "101"

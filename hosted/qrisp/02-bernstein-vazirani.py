@@ -1,19 +1,16 @@
 import qrisp
 
 def bernstein_vazirani_qrisp(n, s):
-    qc = qrisp.QuantumCircuit(n + 1, n)
-    qc.x(n)
-    qc.h(range(n + 1))
-    for i, bit in enumerate(reversed(s)):
-        if bit == "1":
-            qc.cx(i, n)    
-    # qc.barrier() 
-    qc.h(range(n))
-    # qc.barrier()
-    qc.measure(range(n), range(n))
-    return qc
+    qv = qrisp.QuantumVariable(n+1)
+    qrisp.x(qv[-1])
+    with qrisp.conjugate(qrisp.h)(qv):
+        for i in range(len(s)):
+            if s[i] == "1":
+                qrisp.cx(qv[i], qv[n])
+    qrisp.measure(qv)
+    return qv.qs.compile()
 
-n = 4 
-s = "1101" 
+n = 4
+s = "1101"
 qc = bernstein_vazirani_qrisp(n, s)
 print(qc)
