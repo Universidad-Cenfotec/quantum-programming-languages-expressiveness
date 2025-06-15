@@ -1,0 +1,11 @@
+,01-deutsch-jotza,02-bernstein-vazirani,03-simon,04-grover,01-vqsvd
+cirq,24,17,26,44,
+quapl,35,20,19,44,
+qiskit,23,15,26,44,
+qrisp,21,14,14,8,
+qmod,29,25,15,9,
+q#,33,27,30,56,
+qasm,14,17,12,30,
+classic,16,14,28,13,
+pennylane,,,,,179
+paddle,,,,,166

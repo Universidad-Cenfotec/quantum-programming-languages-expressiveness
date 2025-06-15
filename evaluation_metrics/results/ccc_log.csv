@@ -1,0 +1,145 @@
+Language,Algorithm,Construct,Line
+cirq,01-deutsch-jotza,for,qubits = [cirq.LineQubit(i) for i in range(n)]
+cirq,01-deutsch-jotza,for,circuit.append(cirq.H(q) for q in qubits + [aux_qubit])
+cirq,01-deutsch-jotza,for,circuit.append(cirq.H(q) for q in qubits)
+cirq,01-deutsch-jotza,for,qubits = [cirq.LineQubit(i) for i in range(n)]
+cirq,01-deutsch-jotza,for,for q in qubits:
+cirq,02-bernstein-vazirani,for,qubits = [cirq.LineQubit(i) for i in range(n + 1)]
+cirq,02-bernstein-vazirani,on_each,circuit += cirq.H.on_each(*qubits)
+cirq,02-bernstein-vazirani,for,"for i, bit in enumerate(reversed(s)):"
+cirq,02-bernstein-vazirani,if,"if bit == ""1"":"
+cirq,02-bernstein-vazirani,on_each,circuit += cirq.H.on_each(*qubits[:-1])
+cirq,03-simon,for,qubits = [cirq.LineQubit(i) for i in range(2 * n)]
+cirq,03-simon,for,"for i, bit in enumerate(reversed(s)):"
+cirq,03-simon,if,if bit == '1':
+cirq,03-simon,on_each,circuit.append(cirq.H.on_each(*qubits[:n]))
+cirq,03-simon,on_each,circuit.append(cirq.H.on_each(*qubits[:n]))
+cirq,04-grover,for,"for i, bit in enumerate(marked_state):"
+cirq,04-grover,if,if bit == '0':
+cirq,04-grover,for,"for i, bit in enumerate(marked_state):"
+cirq,04-grover,if,if bit == '0':
+cirq,04-grover,on_each,diffusion.append(cirq.H.on_each(*qubits))
+cirq,04-grover,on_each,diffusion.append(cirq.X.on_each(*qubits))
+cirq,04-grover,on_each,diffusion.append(cirq.X.on_each(*qubits))
+cirq,04-grover,on_each,diffusion.append(cirq.H.on_each(*qubits))
+cirq,04-grover,on_each,circuit.append(cirq.H.on_each(*qubits))
+cirq,04-grover,for,for _ in range(iterations):
+quapl,01-deutsch-jotza,⋄,⍺ {⍵:(((0 ⍺) (⊂SWAP)) stage mid_state) ⋄ mid_state} (⍺≠0)
+quapl,01-deutsch-jotza,¨,stg_ctrl ← (((⍳n_qubits)-1) ({H}¨⍳n_qubits))
+quapl,02-bernstein-vazirani,¨,stg_ctrl ← (((⍳(2⍟1⌷⍴(vs)) )-1) ({#.quapl.gates.H}¨( ⍳(2⍟1⌷⍴(vs)) )))
+quapl,02-bernstein-vazirani,¨,"ops ← ((⍸(⍺)) -1),¨targets"
+quapl,02-bernstein-vazirani,",","ops ← ((⍸(⍺)) -1),¨targets"
+quapl,03-simon,¨,"ops ← ((⍸⊃⍺) - 1),¨(((2⍟1⌷⍴⍵) ÷ 2) + ((⍸⊃⍺) - 1))"
+quapl,03-simon,",","ops ← ((⍸⊃⍺) - 1),¨(((2⍟1⌷⍴⍵) ÷ 2) + ((⍸⊃⍺) - 1))"
+quapl,03-simon,¨,mid_state ← ((qubits_index) ({#.quapl.gates.H}¨qubits_index))  #.quapl.circuit.stage (⊃1↑⍵)
+quapl,03-simon,¨,((qubits_index) ({#.quapl.gates.H}¨qubits_index))  #.quapl.circuit.stage  mid_state
+quapl,04-grover,¨,((qubits_index) ({⍵=0:#.quapl.gates.X ⋄ ⍵=1:#.quapl.gates.I }¨ x )) #.quapl.circuit.stage vs
+quapl,04-grover,⋄,((qubits_index) ({⍵=0:#.quapl.gates.X ⋄ ⍵=1:#.quapl.gates.I }¨ x )) #.quapl.circuit.stage vs
+quapl,04-grover,¨,stg_ctrl ← (((⍳n_qubits)-1) ({H}¨(⍳n_qubits)))
+quapl,04-grover,¨,mid_state ← (((2⊃⍵)-1) ({H}¨(2⊃⍵)))  stage  mid_state
+quapl,04-grover,¨,mid_state ← (((2⊃⍵)-1) ({X}¨(2⊃⍵))) stage mid_state
+quapl,04-grover,¨,"mid_state ← (((2⊃⍵)-1) (({I}¨( ¯1↓((2⊃⍵)))) , ⊂H ) ) stage mid_state"
+quapl,04-grover,",","mid_state ← (((2⊃⍵)-1) (({I}¨( ¯1↓((2⊃⍵)))) , ⊂H ) ) stage mid_state"
+quapl,04-grover,¨,"mid_state ← (((2⊃⍵)-1) (({I}¨( ¯1↓((2⊃⍵)))) , ⊂H ) ) stage mid_state"
+quapl,04-grover,",","mid_state ← (((2⊃⍵)-1) (({I}¨( ¯1↓((2⊃⍵)))) , ⊂H ) ) stage mid_state"
+quapl,04-grover,¨,mid_state ← (((2⊃⍵)-1) ({X}¨(2⊃⍵)))  stage mid_state
+quapl,04-grover,¨,mid_state ← (((2⊃⍵)-1) ({H}¨(2⊃⍵))) stage mid_state
+qiskit,01-deutsch-jotza,for,for i in range(n):
+qiskit,02-bernstein-vazirani,for,"for i, bit in enumerate(reversed(s)):"
+qiskit,02-bernstein-vazirani,if,"if bit == ""1"":"
+qiskit,03-simon,for,"for i, bit in enumerate(reversed(s)):"
+qiskit,03-simon,if,if bit == '1':
+qiskit,04-grover,for,"for i, bit in enumerate(reversed(marked_state)):"
+qiskit,04-grover,if,if bit == '0':
+qiskit,04-grover,list,"oracle.mcx(list(range(n-1)), n-1)"
+qiskit,04-grover,for,"for i, bit in enumerate(reversed(marked_state)):"
+qiskit,04-grover,if,if bit == '0':
+qiskit,04-grover,list,"diffusion.mcx(list(range(n-1)), n-1)"
+qiskit,04-grover,for,for _ in range(iterations):
+qrisp,01-deutsch-jotza,for,for i in range(len(input_qubits)):
+qrisp,02-bernstein-vazirani,with,with qrisp.conjugate(qrisp.h)(qv):
+qrisp,02-bernstein-vazirani,for,for i in range(len(s)):
+qrisp,02-bernstein-vazirani,if,"if s[i] == ""1"":"
+qrisp,03-simon,for,for i in range(len(s)):
+qrisp,03-simon,if,"if s[i] == ""1"":"
+qrisp,03-simon,with,with qrisp.conjugate(qrisp.h)(qv[:n]):
+qmod,01-deutsch-jotza,within,within {
+qmod,01-deutsch-jotza,apply,} apply {
+qmod,01-deutsch-jotza,lambda,"my_oracle(lambda(x, y) {"
+qmod,01-deutsch-jotza,lambda,"deutsch_jozsa(lambda(x, y) {"
+qmod,02-bernstein-vazirani,repeat,repeat (i: x.len) {
+qmod,02-bernstein-vazirani,if,if ((floor(a / (2 ** i)) % 2) == 1) {
+qmod,02-bernstein-vazirani,within,within {
+qmod,02-bernstein-vazirani,apply,} apply {
+qmod,03-simon,lambda,"simon_qfunc(lambda(x, res) {"
+qmod,04-grover,lambda,"grover_search(1, lambda(vars) {"
+q#,01-deutsch-jotza,for,for i in 0..n-1 {
+q#,01-deutsch-jotza,ApplyToEachA,"ApplyToEachA(H, qubits);"
+q#,01-deutsch-jotza,ApplyToEachA,"ApplyToEachA(H, qubits[0..n-1]);"
+q#,01-deutsch-jotza,MeasureEachZ,let results = MeasureEachZ(qubits[0..n-1]);
+q#,02-bernstein-vazirani,ApplyToEachA,"ApplyToEachA(H, qubits[0..n - 1]);"
+q#,02-bernstein-vazirani,for,for i in 0..n - 1 {
+q#,02-bernstein-vazirani,if,if (s[n - 1 - i]) {
+q#,02-bernstein-vazirani,ApplyToEachA,"ApplyToEachA(H, qubits[0..n - 1]);"
+q#,02-bernstein-vazirani,MeasureEachZ,let results = MeasureEachZ(qubits[0..n-1]);
+q#,03-simon,for,for i in 0..n - 1 {
+q#,03-simon,if,if (s[n - 1 - i]) {
+q#,03-simon,ApplyToEachA,"ApplyToEachA(H, qubits[0..n - 1]);"
+q#,03-simon,ApplyToEachA,"ApplyToEachA(H, qubits[0..n - 1]);"
+q#,03-simon,MeasureEachZ,let results = MeasureEachZ(qubits[0..n - 1]);
+q#,04-grover,for,for i in 0..n - 1 {
+q#,04-grover,if,if (not markedState[n - 1 - i]) {
+q#,04-grover,for,for i in 0..n - 1 {
+q#,04-grover,if,if (not markedState[n - 1 - i]) {
+q#,04-grover,ApplyToEachA,"ApplyToEachA(H, qubits);"
+q#,04-grover,ApplyToEachA,"ApplyToEachA(X, qubits);"
+q#,04-grover,ApplyToEachA,"ApplyToEachA(X, qubits);"
+q#,04-grover,ApplyToEachA,"ApplyToEachA(H, qubits);"
+q#,04-grover,ApplyToEachA,"ApplyToEachA(H, qubits);"
+q#,04-grover,for,for _ in 1..iterations {
+q#,04-grover,MeasureEachZ,let results = MeasureEachZ(qubits[0..n - 1]);
+classic,01-deutsch-jotza,for,"all_inputs = [format(i, f'0{n}b') for i in range(2**n)]"
+classic,01-deutsch-jotza,for,outputs = [f(x) for x in all_inputs]
+classic,01-deutsch-jotza,if,if all(output == outputs[0] for output in outputs):
+classic,01-deutsch-jotza,for,if all(output == outputs[0] for output in outputs):
+classic,02-bernstein-vazirani,for,for i in range(n):
+classic,02-bernstein-vazirani,for,s_bits = [int(bit) for bit in hidden_s]
+classic,02-bernstein-vazirani,for,"x_bits = [int(bit) for bit in format(x, f""0{n}b"")]"
+classic,02-bernstein-vazirani,for,"return sum(s_bit * x_bit for s_bit, x_bit in zip(s_bits, x_bits)) % 2"
+classic,03-simon,for,"inputs = [format(i, f'0{n}b') for i in range(2**n)]"
+classic,03-simon,for,for x in inputs:
+classic,03-simon,if,if output in output_map:
+classic,03-simon,if,if x_int < s_int:
+classic,03-simon,if,if recovered_s:
+classic,04-grover,for,for _ in range(iterations):
+classic,04-grover,for,probabilities = [p / total for p in probabilities]
+pennylane,01-vqsvd,for,for d in range(depth):
+pennylane,01-vqsvd,for,for q in range(num_qubits):
+pennylane,01-vqsvd,for,for q in range(num_qubits - 1):
+pennylane,01-vqsvd,for,"basis_states = [format(i, f""0{num_qubits}b"") for i in range(2**num_qubits)]"
+pennylane,01-vqsvd,for,"for j, bit in enumerate(reversed(state_bin)):"
+pennylane,01-vqsvd,if,"if bit == ""1"":"
+pennylane,01-vqsvd,for,for b in basis_states:
+pennylane,01-vqsvd,for,for i in range(self.rank):
+pennylane,01-vqsvd,for,for itr in range(self.itr):
+pennylane,01-vqsvd,if,if itr % 10 == 0:
+pennylane,01-vqsvd,for,for i in range(RANK):
+pennylane,01-vqsvd,list,"Loss is a list, this function plots loss over iteration"
+pennylane,01-vqsvd,list,"plt.plot(list(range(1, len(loss)+1)), loss)"
+pennylane,01-vqsvd,dict,"def plot_singular_values_comparison(self, params:dict):"
+pennylane,01-vqsvd,list,"ax.plot(list(range(1, RANK+1)), err_subfull, ""o-."","
+pennylane,01-vqsvd,list,"ax.plot(list(range(1, RANK+1)), err_SVD, ""^--"","
+pennylane,01-vqsvd,list,"imgmat = np.array(list(img.getdata(band=0)), float)"
+paddle,01-vqsvd,list,"loss is a list, this function plots loss over iteration"
+paddle,01-vqsvd,list,"plt.plot(list(range(1, len(loss)+1)), loss)"
+paddle,01-vqsvd,for,for _ in range(depth):
+paddle,01-vqsvd,for,for i in range(self.rank):
+paddle,01-vqsvd,for,for itr in range(self.itr):
+paddle,01-vqsvd,if,if itr% 10 == 0:
+paddle,01-vqsvd,for,for i in range(RANK):
+paddle,01-vqsvd,list,"ax.plot(list(range(1, RANK+1)), err_subfull, ""o-."","
+paddle,01-vqsvd,list,"ax.plot(list(range(1, RANK+1)), err_SVD, ""^--"","
+paddle,01-vqsvd,list,"imgmat = np.array(list(img.getdata(band=0)), float)"
+paddle,01-vqsvd,for,"for i in range(5, 16, 5):"
+paddle,01-vqsvd,list,"imgmat = np.array(list(img.getdata(band=0)), float)"
+paddle,01-vqsvd,for,for _ in range(depth):
