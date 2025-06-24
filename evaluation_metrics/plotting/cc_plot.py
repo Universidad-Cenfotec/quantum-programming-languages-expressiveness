@@ -15,7 +15,7 @@ class CCPlot(PlotBase):
 
     def plot(self, algorithms: Optional[List[str]] = None, languages: Optional[List[str]] = None, save_file_name: Optional[str] = None):    
         self.plot_cc_by_algorithm(algorithms, languages, 'cc_by_algorithm.png')
-        self.plot_mean_cc_by_language(algorithms, languages, 'mean_cc_by_algorithm.png')
+        self.plot_mean_cc_by_language(algorithms, languages, 'cc_mean_by_algorithm.png')
 
     def plot_mean_cc_by_language(self, algorithms=None, languages=None, save_file_name=None):
         df_filtered = self.filter_data(algorithms, languages)

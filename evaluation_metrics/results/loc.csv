@@ -1,7 +1,7 @@
-,01-deutsch-jotza,02-bernstein-vazirani,03-simon,04-grover,01-vqsvd
+,01-deutsch-jotza,02-bernstein-vazirani,03-simon,04-grover,05-vqsvd
 cirq,24,17,26,44,
 quapl,35,20,19,44,
-qiskit,23,15,26,44,
+qiskit,23,15,26,44,275
 qrisp,21,14,14,8,
 qmod,29,25,15,9,
 q#,33,27,30,56,

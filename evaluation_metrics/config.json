@@ -4,7 +4,7 @@
     "02-bernstein-vazirani",
     "03-simon",
     "04-grover",
-    "01-vqsvd"
+    "05-vqsvd"
   ],
 
   "directories": [
@@ -32,8 +32,15 @@
     "pennylane",
     "paddle"
   ],
-
   
+  "algorithm_order": [
+    "deutsch-jotza",
+    "bernstein-vazirani",
+    "simon",
+    "grover",
+    "vqsvd"
+  ],
+
   "languages": {
     "python": {
       "extension": ".py",
@@ -56,10 +63,9 @@
       "hosted_in": "python",
       "comment_symbol": "#",
       "constructs": [
-        "QuantumCircuit", "measure_all", "h", "x", "y", "z",
-        "cx", "ccx", "rz", "ry", "rx", "barrier", "swap",
-        "if", "elif", "for", "while", "assert", "and", "or", "on_each"
+        "if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or"
       ],
+
       "operators": [
         "x","h","cx","to_gate","measure","range","get_backend",
         "transpile","QuantumCircuit","mcx","get_counts","draw","Aer"
@@ -89,7 +95,7 @@
       "extension": ".py",
       "hosted_in": "python",
       "comment_symbol": "#",
-      "constructs": ["cirq.Circuit", "cirq.Moment", "cirq.ops"],
+      "constructs": ["if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or","on_each"],
       "operators": [
         "range", "cirq","LineQubit", "CX","on_each", "Circuit", "X", "H",
         "measure", "CNOT", ":", ",", ".","Moment","TOFFOLI","Simulator"
@@ -104,7 +110,7 @@
       "extension": ".py",
       "hosted_in": "python",
       "comment_symbol": "#",
-      "constructs": ["qalloc", "qfor", "qif", "qelse", "qubit", "circuit"],
+      "constructs": ["if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or","qalloc", "qfor", "qif", "qelse", "qubit", "circuit"],
       "operators": [ "x","h","cx","measure","len","pass","QuantumCircuit",
                       "QuantumVariable","qrisp","mcx","range","to_gate" ],
       "constraints":  ["import qrisp","import numpy as np"]
@@ -131,7 +137,7 @@
       "extension": ".aplf",
       "hosted_in": "",
       "comment_symbol": "⍝",
-      "constructs": ["→","¨", "⍣", "⍬", ",", "⍤", "∧", "∨", "∪", "⋄", "⎕SIGNAL", "⎕TRAP", "⎕ASSERT"],
+      "constructs": ["→", "¨", "⍣", "⍬", ",", "⍤", "∧", "∨", "∪", "⋄", "⎕SIGNAL", "⎕TRAP", "⎕ASSERT"],
       "operators": [
                 "+", "-", "×", "÷", "*", "⌈", "⌊", "|",
                 "=", "≠", "<", "≤", ">", "≥", "∧", "∨", "~",

@@ -12,11 +12,11 @@ class LocPlot(PlotBase):
         super().__init__(csv_path)
         self.value_name = "LOC"                 
 
-    def plot(self, algorithms=None, languages=None, save_file_name=None):       
+    def plot(self, algorithms=None, languages=None, save_file_name=None):
         self.plot_loc_by_algorithm(algorithms, languages, 'loc_by_algorithm.png')
         self.plot_mean_loc_by_language(algorithms, languages, 'loc_mean_by_algorithm.png')
 
-    def plot_mean_loc_by_language(self, algorithms=None, languages=None, save_file_name=None):
+    def plot_mean_loc_by_language(self, algorithms=None, languages=None, save_file_name='loc_by_algorithm.png'):
         df_filtered = self.filter_data(algorithms, languages)
         mean_values = df_filtered.groupby("Language")["LOC"].mean().sort_values()
         sem_values = df_filtered.groupby("Language")["LOC"].sem().reindex(mean_values.index)

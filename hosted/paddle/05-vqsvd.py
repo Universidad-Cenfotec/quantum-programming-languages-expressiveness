@@ -1,3 +1,73 @@
+#  [markdown]
+# # Variational Quantum Singular Value Decomposition
+# 
+# <em> Copyright (c) 2021 Institute for Quantum Computing, Baidu Inc. All Rights Reserved. </em>
+
+#  [markdown]
+# > **Disclaimer:**  
+# > This code is based on the original implementation from the Baidu Institute for Quantum Computing's Quantum library.  
+# > It has been **modified for research and comparison purposes**. The core logic and structure are preserved, but some parts have been adapted to fit the requirements of this project.  
+# > All original copyrights and credits remain with the original authors.
+# >
+
+#  [markdown]
+# ## Overview
+# 
+# In this tutorial, we will go through the concept of classical singular value decomposition (SVD) and the quantum neural network (QNN) version of variational quantum singular value decomposition (VQSVD) [1]. The tutorial consists of the following two parts: 
+# - Decompose a randomly generated $8\times8$ complex matrix; 
+# - Apply SVD on image compression.
+
+#  [markdown]
+# ## Background
+# 
+# Singular value decomposition (SVD) has many applications, including principal component analysis (PCA), solving linear equations and recommender systems. The main task is formulated as following:
+# > Given a complex matrix $M \in \mathbb{C}^{m \times n}$, find the decomposition in form $M = UDV^\dagger$, where $U_{m\times m}$ and $V^\dagger_{n\times n}$ are unitary matrices, which satisfy the property $UU^\dagger = VV^\dagger = I$.
+# 
+# - The column vectors $|u_j\rangle$ of the unitary matrix $U$ are called left singular vectors $\{|u_j\rangle\}_{j=1}^{m}$ form an orthonormal basis. These column vectors are the eigenvectors of the matrix $MM^\dagger$.
+# - Similarly, the column vectors $\{|v_j\rangle\}_{j=1}^{n}$ of the unitary matrix $V$ are the eigenvectors of $M^\dagger M$ and form an orthonormal basis.
+# - The diagonal elements of the matrix $D_{m\times n}$ are singular values $d_j$ arranged in a descending order.
+# 
+# For the convenience, we assume that the $M$ appearing below are all square matrices. Let's first look at an example: 
+# 
+# $$
+# M = 2*X\otimes Z + 6*Z\otimes X + 3*I\otimes I = 
+# \begin{bmatrix} 
+# 3 &6 &2 &0 \\
+# 6 &3 &0 &-2 \\
+# 2 &0 &3 &-6 \\
+# 0 &-2 &-6 &3 
+# \end{bmatrix}, \tag{1}
+# $$
+# 
+# Then the singular value decomposition of the matrix can be expressed as:
+# 
+# $$
+# M = UDV^\dagger = 
+# \frac{1}{2}
+# \begin{bmatrix} 
+# -1 &-1 &1 &1 \\
+# -1 &-1 &-1 &-1 \\
+# -1 &1 &-1 &1 \\
+# 1 &-1 &-1 &1 
+# \end{bmatrix}
+# \begin{bmatrix} 
+# 11 &0 &0 &0 \\
+# 0 &7 &0 &0 \\
+# 0 &0 &5 &0 \\
+# 0 &0 &0 &1 
+# \end{bmatrix}
+# \frac{1}{2}
+# \begin{bmatrix} 
+# -1 &-1 &-1 &-1 \\
+# -1 &-1 &1 &1 \\
+# -1 &1 &1 &-1 \\
+# 1 &-1 &1 &-1 
+# \end{bmatrix}. \tag{2}
+# $$
+# 
+# Import packages.
+
+# 
 import numpy as np
 from numpy import pi as PI
 from matplotlib import pyplot as plt
@@ -20,8 +90,13 @@ def loss_plot(loss):
     plt.title('Loss Over Iteration')
     plt.show()
 
+#  [markdown]
+# ## Classical Singular Value Decomposition
+# 
+# With the above mathematical definition, one can realize SVD numerically through NumPy.
 
-
+# 
+# Generate matrix M
 def M_generator():
     I = np.array([[1, 0], [0, 1]])
     Z = np.array([[1, 0], [0, -1]])
@@ -51,7 +126,36 @@ print(V_dagger)
 M_reconst = np.matmul(U, np.matmul(np.diag(D), V_dagger))
 print(M_reconst)
 
+#  [markdown]
+# Surely, we can be restored the original matrix $M$! One can further modify the matrix, see what happens if it is not a square matrix.
+# 
+# ---
 
+#  [markdown]
+# ## Quantum Singular Value Decomposition
+# 
+# Next, let's take a look at what the quantum version of singular value decomposition is all about. In summary, we transform the problem of matrix factorization into an optimization problem with the variational principle of singular values. Specifically, this is achieved through the following four steps:
+# 
+# - Prepare an orthonormal basis $\{|\psi_j\rangle\}$, one can take the computational basis $\{ |000\rangle, |001\rangle,\cdots |111\rangle\}$ (this is in the case of 3 qubits)
+# - Prepare two parameterized quantum neural networks $U(\theta)$ and $V(\phi)$ to learn left/right singular vectors respectively
+# - Use quantum neural network to estimate singular values $m_j = \text{Re}\langle\psi_j|U(\theta)^{\dagger} M V(\phi)|\psi_j\rangle$
+# - Design the loss function $\mathcal{L}(\theta)$ and use PaddlePaddle Deep Learning framework to maximize the following quantity, 
+# 
+# $$
+# L(\theta,\phi) = \sum_{j=1}^T q_j\times \text{Re} \langle\psi_j|U(\theta)^{\dagger} MV(\phi)|\psi_j\rangle. \tag{3}
+# $$
+# 
+# Where $q_1>\cdots>q_T>0$ is the adjustable weights (hyperparameter), and $T$ represents the rank we want to learn or the total number of singular values to be learned.
+# 
+# 
+
+#  [markdown]
+# ### Case 1: Decompose a randomly generated $8\times8$ complex matrix
+# 
+# Then we look at a specific example, which can better explain the overall process.
+
+# 
+# First fix the random seed, in order to reproduce the results at any time
 np.random.seed(42)
 
 # Set the number of qubits, which determines the dimension of the Hilbert space
@@ -92,8 +196,8 @@ print(weight)
 
 # 
 # Set circuit parameters
-num_qubits = 3              # number of qubits
-cir_depth = 20              # circuit depth
+num_qubits = 5              # number of qubits
+cir_depth = 40              # circuit depth
 
 # 
 # Define quantum neural network
@@ -191,6 +295,28 @@ loss_plot(loss_list)
 U_learned = net.get_matrix_U().numpy()
 V_dagger_learned = dagger(net.get_matrix_V()).numpy()
 
+#  [markdown]
+# We now explore the accuracy of the quantum version of singular value decomposition. In the above section, we mentioned that the original matrix can be expressed with less information obtained by decomposition. Specifically, it uses the first $T$ singular values and the first $T$ left and right singular vectors to reconstruct a matrix:
+# 
+# $$
+# M_{re}^{(T)} = UDV^{\dagger}, \tag{4}
+# $$
+# 
+# For matrix $M$ with rank $r$, the error will decreasing dramatically as more and more singular values are used to reconstruct it. The classic singular value algorithm can guarantee:
+# 
+# $$
+# \lim_{T\rightarrow r} ||M-M_{re}^{(T)}||^2_2 = 0, \tag{5}
+# $$
+# 
+# The distance measurement between the matrices is calculated by the Frobenius-norm,
+# 
+# $$
+# ||M||_2 = \sqrt{\sum_{i,j} |M_{ij}|^2}. \tag{6}
+# $$
+# 
+# The current quantum version of singular value decomposition still needs a lot of efforts to be optimized. In theory, it can only guarantee the reduction of accumulated errors.
+
+# 
 singular_value = singular_value_list[-1]
 err_subfull, err_local, err_SVD = [], [], []
 U, D, V_dagger = np.linalg.svd(M, full_matrices=True)
@@ -216,7 +342,15 @@ plt.ylabel('Norm Distance', fontsize = 14)
 leg = plt.legend(frameon=True)
 leg.get_frame().set_edgecolor('k')
 
+#  [markdown]
+# ---
+# ### Case 2: Image compression
+# 
+# In order to fulfill image processing tasks, we first import the necessary package.
+# 
+# 
 
+# 
 # Image processing package PIL
 from PIL import Image
 
@@ -294,12 +428,8 @@ mat = np.matrix(U_learned.real[:, :RANK]) * np.diag(singular_value[:RANK])* np.m
 reconstimg = mat
 plt.imshow(reconstimg, cmap='gray')
 
-
-# IMPORTANT DISCLAIMER:
-# This code is base on the paper "Variational Quantum Singular Value Decomposition" by Wang, Song, and Wang [1].
-# It is intended for educational purposes only and should not be used for commercial applications.
-
-# ## References# 
+#  [markdown]
+# _______
+# 
+# ## References
 # [1] Wang, X., Song, Z., & Wang, Y. Variational Quantum Singular Value Decomposition. [Quantum, 5, 483 (2021).](https://quantum-journal.org/papers/q-2021-06-29-483/)
-
-

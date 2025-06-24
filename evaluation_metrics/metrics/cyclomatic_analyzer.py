@@ -28,22 +28,18 @@ class CyclomaticComplexityAnalyzer(MetricBase):
             with open(file_path, "r", encoding="utf-8") as f:
                 directory_name = Path(file_path).parent.name
                 file_name = Path(file_path).stem
-
                 for line in f:
                     line = line.strip()
                     if comment_symbol and line.startswith(comment_symbol):
                         continue
-
                     for construct in constructs:
                         if language == "aplf":
                             matches = re.findall(re.escape(construct), line)
                         else:
                             matches = re.findall(r"\b" + re.escape(construct) + r"\b", line)
-
                         if matches:
                             table_data.append([directory_name, file_name, construct, line.strip()])
                             complexity += len(matches)
-
         except Exception as e:
             print(f"Error reading {file_path}: {e}")
             return 0, []
@@ -66,18 +62,10 @@ class CyclomaticComplexityAnalyzer(MetricBase):
                     continue
                 complexity, table_data = self.measure_complexity(file_path, language)
                 self.results[directory][file] = complexity
-
                 if table_data:
                     df_new = pd.DataFrame(table_data, columns=["Language", "Algorithm", "Construct", "Line"])
-                    df_log = pd.concat([df_log, df_new], ignore_index=True)
-        
+                    df_log = pd.concat([df_log, df_new], ignore_index=True)        
         df_log.to_csv(self.output_file_log, index=False)
-
-    def _detect_language(self, file_path):
-        for lang_key, lang_conf in self.languages.items():
-            if file_path.endswith(lang_conf["extension"]):
-                return lang_key
-        return None
 
     def save_results(self):
         df = pd.DataFrame.from_dict(self.results, orient="index")

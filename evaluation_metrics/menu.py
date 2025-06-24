@@ -6,9 +6,7 @@ from pathlib import Path
 from evaluation_metrics.constants import  RESULT_LOC_CSV_PATH, RESULT_CC_CSV_PATH, RESULT_HALSTEAD_CSV_PATH
 
 DEFAULT_LANGUAGES = ['qiskit', 'cirq', 'qrisp', 'quapl', 'q#', 'qmod']   # Example: ['qiskit', 'cirq', 'qrisp', 'quapl', 'q#', 'qmod','pennylane', 'paddle']
-DEFAULT_ALGORITHMS = ['01-deutsch-jotza','02-bernstein-vazirani','03-simon','04-grover'] # Example: ['01-deutsch-jotza','02-bernstein-vazirani','03-simon','04-grover','01-vqsvd']
-
-
+DEFAULT_ALGORITHMS = ['01-deutsch-jotza','02-bernstein-vazirani','03-simon','04-grover'] # Example: ['01-deutsch-jotza','02-bernstein-vazirani','03-simon','04-grover','05-vqsvd']
 
 def run_loc_plot():
     path = Path(RESULT_LOC_CSV_PATH)
@@ -27,8 +25,7 @@ def run_halstead_plot():
     halstead_csv_path = Path(RESULT_HALSTEAD_CSV_PATH)
     loc_csv_path  = Path(RESULT_LOC_CSV_PATH)
     cc_csv_path = Path(RESULT_CC_CSV_PATH)
-    plotter = HalsteadPlot(halstead_csv_path,loc_csv_path,cc_csv_path)
-    plotter.load_data()
+    plotter = HalsteadPlot(halstead_csv_path,loc_csv_path,cc_csv_path)    
     plotter.plot(DEFAULT_ALGORITHMS, DEFAULT_LANGUAGES)
 
 def run_all_plots():

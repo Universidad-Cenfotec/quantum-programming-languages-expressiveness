@@ -12,7 +12,6 @@ class HalsteadAnalyzer(MetricBase):
     """
     Analyzer for calculating Halstead complexity metrics.
     """
-
     def __init__(self, config, scanner):
         super().__init__(config, scanner)
         self.output_file = config["metrics"]["halstead"]["output"]
@@ -51,18 +50,12 @@ class HalsteadAnalyzer(MetricBase):
         arith_pattern = re.compile('(' + '|'.join(map(re.escape, self.arithmatic_operators)) + ')')
         arith_counts = Counter(arith_pattern.findall(filtered_code))
         filtered_code = arith_pattern.sub(' ', filtered_code)
-
         op_counts.update(arith_counts)
-
         operand_pattern = re.compile(r'\b([a-zA-Z_][a-zA-Z0-9_]*(_[a-zA-Z0-9_]+)*)\b')
         operands = [m[0] for m in operand_pattern.findall(filtered_code)]
         operand_counts = Counter(
             word for word in operands if word not in constraints_key and word not in operators
         )
-
-        print(f"\n[DEBUG] File: {language}")
-        print("Operators:", dict(op_counts))
-        print("Operands:", dict(operand_counts))
         return op_counts, operand_counts
 
 

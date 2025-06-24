@@ -18,12 +18,6 @@ class LOCAnalyzer(MetricBase):
         self.files = config["files"]
         self.results = {}
 
-    def _detect_language(self, file_path):
-        for lang_key, lang_conf in self.languages.items():
-            if file_path.endswith(lang_conf["extension"]):
-                return lang_key
-        return None
-
     def count_code_lines(self, file_path, comment_symbol):
         try:
             with open(file_path, "r", encoding="utf-8") as f:
@@ -36,21 +30,17 @@ class LOCAnalyzer(MetricBase):
     def run(self):
         print("\n Running LOC analysis...")
         scan_results = self.scanner.scan_directories("loc")
-
         for directory, files in scan_results.items():
             self.results[directory] = {}
-
             for file, file_path in files.items():
                 if not file_path:
                     self.results[directory][file] = 0
                     continue
-
                 language = self._detect_language(file_path)
                 if not language:
                     print(f"Warning Skipping unknown extension: {file_path}")
                     self.results[directory][file] = 0
                     continue
-
                 comment_symbol = self.languages[language].get("comment_symbol", "#")
                 self.results[directory][file] = self.count_code_lines(file_path, comment_symbol)
 

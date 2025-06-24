@@ -195,7 +195,7 @@ num_qubits = 5      # Number of qubits
 
 # Hyper-parameters
 RANK = 8           # Set the number of rank you want to learn
-ITR = 200           # Number of iterations
+ITR = 100           # Number of iterations
 LR = 0.02           # Learning rate
 SEED = 14           # Random number seed
 
