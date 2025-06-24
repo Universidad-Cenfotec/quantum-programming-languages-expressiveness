@@ -1,0 +1,215 @@
+{
+  "files": [
+    "01-deutsch-jotza",
+    "02-bernstein-vazirani",
+    "03-simon",
+    "04-grover",
+    "05-vqsvd"
+  ],
+
+  "directories": [
+    "hosted/cirq",
+    "hosted/quapl",
+    "hosted/qiskit",
+    "hosted/qrisp",
+    "standalone/qmod",
+    "standalone/q#",
+    "standalone/qasm",
+    "classic",
+    "hosted/pennylane",
+    "hosted/paddle"
+  ],
+
+  "language_order": [
+    "cirq",
+    "quapl",
+    "qiskit",
+    "qrisp",
+    "qmod",    
+    "q#",  
+    "qasm",
+    "classic",
+    "pennylane",
+    "paddle"
+  ],
+  
+  "algorithm_order": [
+    "deutsch-jotza",
+    "bernstein-vazirani",
+    "simon",
+    "grover",
+    "vqsvd"
+  ],
+
+  "languages": {
+    "python": {
+      "extension": ".py",
+      "hosted_in": "",
+      "comment_symbol": "#",
+      "constructs": ["if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or","on_each"],
+      "operators": [
+        "==", "!=", ">", "<", ">=", "<=",
+        "and", "or", "not", "&", "|", "^", "~", "<<", ">>", "_",
+        "for", "if", "else", "int", "is", "is not", "in", "not in", "np", "pi", "sqrt", "def",
+        "enumerate", "append", "print", "return", "list", "format", "all", "len"
+      ],
+      "constraints": [
+        "import numpy as np"
+      ]
+    },
+
+    "qiskit": {
+      "extension": ".py",
+      "hosted_in": "python",
+      "comment_symbol": "#",
+      "constructs": [
+        "if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or"
+      ],
+
+      "operators": [
+        "x","h","cx","to_gate","measure","range","get_backend",
+        "transpile","QuantumCircuit","mcx","get_counts","draw","Aer"
+      ],
+      "constraints": [
+        "from qiskit import QuantumCircuit","from qiskit import QuantumCircuit, transpile","from qiskit_aer import Aer","from qiskit.visualization import plot_histogram",
+        "import numpy as np","from scipy.linalg import null_space"
+      ]
+    },
+
+    "pennylane": {
+      "extension": ".py",
+      "hosted_in": "python",
+      "comment_symbol": "#",
+      "constructs": ["qml.qnode", "qml.device", "qml.expval", "qml.var", "qml.probs"],
+      "operators": [
+        "qml.RX", "qml.RY", "qml.RZ", "qml.CNOT", "qml.Toffoli",
+        "qml.PauliX", "qml.PauliY", "qml.PauliZ", "qml.Hadamard",
+        "qml.ctrl", "qml.U3", "qml.CRZ", "qml.template", "qml.Rot"
+      ],
+      "constraints": [
+        "import pennylane as qml"
+      ]
+    },
+
+    "cirq": {
+      "extension": ".py",
+      "hosted_in": "python",
+      "comment_symbol": "#",
+      "constructs": ["if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or","on_each"],
+      "operators": [
+        "range", "cirq","LineQubit", "CX","on_each", "Circuit", "X", "H",
+        "measure", "CNOT", ":", ",", ".","Moment","TOFFOLI","Simulator"
+      ],
+      "constraints": [
+        "import cirq","import numpy as np","import matplotlib.pyplot as plt",
+        "from scipy.linalg import null_space"
+      ]
+    },
+
+    "qrisp": {
+      "extension": ".py",
+      "hosted_in": "python",
+      "comment_symbol": "#",
+      "constructs": ["if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or","qalloc", "qfor", "qif", "qelse", "qubit", "circuit"],
+      "operators": [ "x","h","cx","measure","len","pass","QuantumCircuit",
+                      "QuantumVariable","qrisp","mcx","range","to_gate" ],
+      "constraints":  ["import qrisp","import numpy as np"]
+    },
+
+    "qsharp": {
+      "extension": ".qs",
+      "hosted_in": "",
+      "comment_symbol": "//",
+      "constructs":  ["if", "elif", "for", "ApplyToEachA","MeasureEachZ", "try", "catch", "repeat", "until"],
+      "operators": [
+          "operation", "use", "let", "return", "for", "if", "else","Bool", "Result","[","{","(" ,"Unit",
+          "Adj", "Ctl", "@EntryPoint()",  "..","Message","Controlled X","ApplyToEachA","ResetAll","MeasureEachZ","X","H","CNOT", "Length","Int",
+          "Most","Qubit","in","mutable","Sqrt","Round","PI","IntAsDouble", "is","not"
+      ] ,
+      "constraints": [
+        "namespace bernstein-vazirani","namespace DeutschJozsa","namespace SimonAlgorithm","namespace GroverAlgorithm",
+        "open Microsoft.Quantum.Intrinsic", "open Microsoft.Quantum.Measurement","open Microsoft.Quantum.Canon","open Microsoft.Quantum.Math",
+        "open Microsoft.Quantum.Arrays","open Microsoft.Quantum.Convert","open Microsoft.Quantum.Diagnostics","EntryPoint"
+      ]
+    },
+
+    "aplf": {
+      "extension": ".aplf",
+      "hosted_in": "",
+      "comment_symbol": "⍝",
+      "constructs": ["→", "¨", "⍣", "⍬", ",", "⍤", "∧", "∨", "∪", "⋄", "⎕SIGNAL", "⎕TRAP", "⎕ASSERT"],
+      "operators": [
+                "+", "-", "×", "÷", "*", "⌈", "⌊", "|",
+                "=", "≠", "<", "≤", ">", "≥", "∧", "∨", "~",
+                "⍴", ",", "⍪", "⌽", "⊖", "↑", "↓", "⍉", "⊂", "⊃", "≡", "≢", "∊", "⍷",
+                "[", "]", "⍋", "⍒", "⍳", "∩", "∪", "⍸",
+                "?", "⍵", "⍺", "⍫", "⋄", "→", "::", "⍎", "⍕",
+                "/", "\\", "⌿", "⍀", "∘", "⍣", "⍤", "⍥", "⍨", "⍞", "⍠",
+                "+/", "-/", "×/", "÷/", "∧/", "∨/", "⌈/", "⌊/", "=/", "≠/", "</", "≤/", ">/", "≥/", "~/",
+                "+\\", "-\\", "×\\", "÷\\", "∧\\", "∨\\", "⌈\\", "⌊\\", "=\\", "≠\\", "<\\", "≤\\", ">\\", "≥\\", "~\\",
+                "⎕", "⋄", "→", ".quapl", ".gates", ".circuit", ".X", ".H", ".I", ".Z",".CNOT", "gCTR", ".measure", ".CX", ".CCX", ".SWAP", 
+                ".CSWAP", ".CCSWAP", ".TOFFOLI", ".CTOFFOLI", ".CCX", ".sng", "q1", "q0", "unthread_vs", ".stage", 
+                ".reg",".lib",".oracles",  "."
+            ],  
+      "constraints": [
+        "Namespace", "EndNamespace"
+      ]
+    },
+
+    "qasm": {
+      "extension": ".qasm",
+      "hosted_in": "",
+      "comment_symbol": "//",
+      "constructs":  ["if"],
+      "operators": ["qreg","creg","h","cx","[","->","ccx","measure"],
+      "constraints": ["include", "qelib1.inc","OPENQASM 2.0"]
+    },
+
+    "qmod": {
+      "extension": ".qmod",
+      "hosted_in": "",
+      "comment_symbol": "//",
+      "constructs": ["if", "repeat", "within", "apply", "lambda", "and", "or"],
+      "operators": [
+        "qnum","qbit","allocate","output","within","apply","qfunc","hadamard_transform","lambda","{","(","[",
+        "repeat", "IDENTITY","CX","H","min","|","phase_oracle","len","if","else","floor","int"
+      ],
+      "constraints": []
+    },
+
+    "classic": {
+      "extension": ".py",
+      "hosted_in": "python",
+      "comment_symbol": "#",
+      "operators": ["zip","str","range","sum"] ,
+      "constraints": []
+    }
+
+  },
+
+  "operators": {
+    "arithmatic": [
+      "(", "[", "{", "+", "-", "*", "/", "//", "%", "**",
+      "=", "+=", "-=", "*=", "/=", "//=", "%=", "**=", "^=", "^", "&"
+    ]
+  },
+
+  "metrics": {
+    "loc": {
+      "output": "evaluation_metrics/results/loc.csv",
+      "output_log": "evaluation_metrics/results/loc_log.csv"
+    },
+    "ccc": {
+      "output": "evaluation_metrics/results/cyclomatic_complexity_calculator.csv",
+      "output_log": "evaluation_metrics/results/ccc_log.csv"
+    },
+    "halstead": {
+      "output": "evaluation_metrics/results/halstead.csv",
+      "output_log": "evaluation_metrics/results/halstead_log.csv"
+    }
+  }
+}
+
+
+
+
