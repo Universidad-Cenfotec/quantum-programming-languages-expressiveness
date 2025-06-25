@@ -42,9 +42,6 @@ class PlotStyleManager:
                 color_map[cat] = "#cccccc"
         return color_map
 
-
-
-
     def apply(self, figsize=(12, 6)):
         plt.figure(figsize=figsize)        
         plt.grid(axis='y', linestyle='--', alpha=0.7)
@@ -62,11 +59,12 @@ class PlotStyleManager:
     def style_ticks(self, ax, x_rotation=45, y_rotation=0):
         ax.tick_params(axis='x', rotation=x_rotation)
         ax.tick_params(axis='y', rotation=y_rotation)
+        
 
-    def style_axes(self, ax, title: str, xlabel: str, ylabel: str, legend_title: str = "Programming Languages"):
-        ax.set_title(title)
-        ax.set_xlabel(xlabel)
-        ax.set_ylabel(ylabel)
+    def style_axes(self, ax, title: str, xlabel: str, ylabel: str, legend_title: str = "Programming Languages", title_fontsize=20, label_fontsize=16):
+        ax.set_title(title, fontsize=title_fontsize)
+        ax.set_xlabel(xlabel, fontsize=label_fontsize)
+        ax.set_ylabel(ylabel, fontsize=label_fontsize)
         self.style_ticks(ax)
         ax.grid(axis='y', linestyle='--', alpha=0.7)
         ax.legend(

@@ -99,7 +99,7 @@ class HalsteadPlot(PlotBase):
             ax.plot(angles, values, label=row["Language"], linewidth=2, color=color)
             ax.fill(angles, values, alpha=0.1, color=color)
 
-        ax.set_title("Halstead Radar Chart", size=18, y=1.1)
+        ax.set_title("Complexity Metrics for Quantum Programming Languages", size=18, y=1.1)
         ax.set_theta_offset(np.pi / 2)
         ax.set_theta_direction(-1)
         ax.set_thetagrids(np.degrees(angles[:-1]), labels)

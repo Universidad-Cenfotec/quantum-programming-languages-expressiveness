@@ -156,13 +156,12 @@ This will build the Docker image and start the container in detached mode (-d).
 ## 📊 Running the Metrics
 To generate the metrics (McCabe CC, LOC and Halstead), navigate to the evaluation directory and run the following command on your terminal:
 ```
-cd evaluation
-python main.py
+python -m evaluation_metrics.main
 ```
 
 This will produce CSV files with the calculated metrics, ready for analysis. Then you can go to:
 ```
-evaluation/metrics_analysis.ipynb
+python -m evaluation_metrics.menu
 ```
 And run these to generate some informative graphics.
 
