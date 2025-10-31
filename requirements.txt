@@ -12,3 +12,5 @@ werkzeug==2.3.0
 classiq
 adjustText
 statsmodels
+pennylane
+qiskit-qasm3-import

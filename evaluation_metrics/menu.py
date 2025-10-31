@@ -5,8 +5,12 @@ from .plotting.halstead_plot import HalsteadPlot
 from pathlib import Path
 from evaluation_metrics.constants import  RESULT_LOC_CSV_PATH, RESULT_CC_CSV_PATH, RESULT_HALSTEAD_CSV_PATH
 
-DEFAULT_LANGUAGES = ['qiskit', 'cirq', 'qrisp', 'quapl', 'q#', 'qmod']   # Example: ['qiskit', 'cirq', 'qrisp', 'quapl', 'q#', 'qmod','pennylane', 'paddle']
-DEFAULT_ALGORITHMS = ['01-deutsch-jotza','02-bernstein-vazirani','03-simon','04-grover'] # Example: ['01-deutsch-jotza','02-bernstein-vazirani','03-simon','04-grover','05-vqsvd']
+DEFAULT_LANGUAGES = ['qiskit', 'cirq', 'qrisp', 'quapl', 'q#', 'qmod', 'pennylane', 'qasm', 'silq']   # Example: ['qiskit', 'cirq', 'qrisp', 'quapl', 'q#', 'qmod','pennylane', 'paddle']
+DEFAULT_ALGORITHMS = ['01-deutsch-jozsa','02-bernstein-vazirani','03-simon','04-grover', '06-qft', '07-qpe'] # Example: ['01-deutsch-jozsa','02-bernstein-vazirani','03-simon','04-grover','05-vqsvd']
+
+#DEFAULT_LANGUAGES =  ['qiskit','pennylane']
+#DEFAULT_ALGORITHMS = ['05-vqsvd']
+
 
 def run_loc_plot():
     path = Path(RESULT_LOC_CSV_PATH)
