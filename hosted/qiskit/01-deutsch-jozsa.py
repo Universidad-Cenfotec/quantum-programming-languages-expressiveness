@@ -1,8 +1,8 @@
-from qiskit import QuantumCircuit, transpile
-from qiskit_aer import Aer
+# Deutsch-Jozsa algorithm in Qiskit
+from qiskit import QuantumCircuit
 
 def deutsch_jozsa(n, oracle):
-    qc = QuantumCircuit(n + 1, n)      
+    qc = QuantumCircuit(n+1, n)
     qc.x(n)  
     qc.h(range(n + 1))
     qc.append(oracle, range(n + 1))

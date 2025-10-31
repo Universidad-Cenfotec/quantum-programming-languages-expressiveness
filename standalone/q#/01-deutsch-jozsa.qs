@@ -1,5 +1,5 @@
+// Deutsch-Jozsa Algorithm in Q#
 namespace DeutschJozsa {
-
     open Microsoft.Quantum.Intrinsic;
     open Microsoft.Quantum.Measurement;
     open Microsoft.Quantum.Arrays;
@@ -17,7 +17,7 @@ namespace DeutschJozsa {
     }
 
 
-    operation DeutschJozsaAlgorithm(n : Int, oracle : (Qubit[] => Unit is Adj + Ctl)) : Result[] {
+    operation DeutschJozsaAlgorithm() : Unit {
         use qubits = Qubit[n + 1];
         X(qubits[n]);
         ApplyToEachA(H, qubits);

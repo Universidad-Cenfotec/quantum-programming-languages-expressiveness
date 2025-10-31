@@ -1,10 +1,12 @@
 {
   "files": [
-    "01-deutsch-jotza",
+    "01-deutsch-jozsa",
     "02-bernstein-vazirani",
     "03-simon",
     "04-grover",
-    "05-vqsvd"
+    "05-vqsvd",
+    "06-qft",
+    "07-qpe"
   ],
 
   "directories": [
@@ -15,6 +17,7 @@
     "standalone/qmod",
     "standalone/q#",
     "standalone/qasm",
+    "standalone/silq",
     "classic",
     "hosted/pennylane",
     "hosted/paddle"
@@ -30,15 +33,18 @@
     "qasm",
     "classic",
     "pennylane",
-    "paddle"
+    "paddle",
+    "silq"
   ],
   
   "algorithm_order": [
-    "deutsch-jotza",
+    "deutsch-jozsa",
     "bernstein-vazirani",
     "simon",
     "grover",
-    "vqsvd"
+    "vqsvd",
+    "qft",
+    "qpe"
   ],
 
   "languages": {
@@ -63,7 +69,7 @@
       "hosted_in": "python",
       "comment_symbol": "#",
       "constructs": [
-        "if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or"
+        "if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or","lambda"
       ],
 
       "operators": [
@@ -80,11 +86,26 @@
       "extension": ".py",
       "hosted_in": "python",
       "comment_symbol": "#",
-      "constructs": ["qml.qnode", "qml.device", "qml.expval", "qml.var", "qml.probs"],
+      "constructs": [
+        "if", "for", "lambda", "class", "def", "return", "with",  "enumerate", "range",  "try"        
+      ],
       "operators": [
         "qml.RX", "qml.RY", "qml.RZ", "qml.CNOT", "qml.Toffoli",
         "qml.PauliX", "qml.PauliY", "qml.PauliZ", "qml.Hadamard",
-        "qml.ctrl", "qml.U3", "qml.CRZ", "qml.template", "qml.Rot"
+        "qml.ctrl", "qml.U3", "qml.CRZ", "qml.template", "qml.Rot",
+        "from", "import", "as", "class", "def", "return", "self",
+        "range", "for", "if", "in", "lambda", "with",
+        "pnp.random.uniform", "pnp.array", "pnp.real", "pnp.conj", "pnp.diag",
+        "pnp.random.seed", "pnp.arange",
+        "qml.device", "qml.qnode", "qml.state", "qml.AdamOptimizer",
+        "qml.RY", "qml.RZ", "qml.CNOT", "qml.PauliX",
+        "np.linalg.svd", "np.copy", "np.random.randint", "np.matrix",
+        "plt.plot", "plt.xlabel", "plt.ylabel", "plt.title", "plt.grid", "plt.savefig", "plt.show", "plt.close",
+        "plt.imshow", "plt.colorbar", "plt.subplots",
+        "Image.open", "img.getdata", "img.size", "imgmat.shape", "imgmat.astype",
+        "get", "get_frame", "set_edgecolor",
+        "astype", "conj", "T", "copy", "shape", "size", "dtype", "type", "with", "as",
+        "qml.MultiControlledX", "qml.sample", "qml.draw"
       ],
       "constraints": [
         "import pennylane as qml"
@@ -95,7 +116,7 @@
       "extension": ".py",
       "hosted_in": "python",
       "comment_symbol": "#",
-      "constructs": ["if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or","on_each"],
+      "constructs": ["if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or","on_each","lambda"],
       "operators": [
         "range", "cirq","LineQubit", "CX","on_each", "Circuit", "X", "H",
         "measure", "CNOT", ":", ",", ".","Moment","TOFFOLI","Simulator"
@@ -110,7 +131,7 @@
       "extension": ".py",
       "hosted_in": "python",
       "comment_symbol": "#",
-      "constructs": ["if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or","qalloc", "qfor", "qif", "qelse", "qubit", "circuit"],
+      "constructs": ["if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or","qalloc", "qfor", "qif", "qelse", "qubit", "circuit", "lambda"],
       "operators": [ "x","h","cx","measure","len","pass","QuantumCircuit",
                       "QuantumVariable","qrisp","mcx","range","to_gate" ],
       "constraints":  ["import qrisp","import numpy as np"]
@@ -120,7 +141,7 @@
       "extension": ".qs",
       "hosted_in": "",
       "comment_symbol": "//",
-      "constructs":  ["if", "elif", "for", "ApplyToEachA","MeasureEachZ", "try", "catch", "repeat", "until"],
+      "constructs":  ["if", "elif", "for", "ApplyToEachA","MeasureEachZ", "try", "catch", "repeat", "until","lambda"],
       "operators": [
           "operation", "use", "let", "return", "for", "if", "else","Bool", "Result","[","{","(" ,"Unit",
           "Adj", "Ctl", "@EntryPoint()",  "..","Message","Controlled X","ApplyToEachA","ResetAll","MeasureEachZ","X","H","CNOT", "Length","Int",
@@ -175,6 +196,23 @@
         "repeat", "IDENTITY","CX","H","min","|","phase_oracle","len","if","else","floor","int"
       ],
       "constraints": []
+    },
+
+    "silq": {
+      "extension": ".silq",
+      "hosted_in": "",
+      "comment_symbol": "//",
+      "constructs": [
+        "if", "else", "for", "return", "const", "measure", "main", "repeat", "function", "fn"
+      ],
+      "operators": [
+        "H", "measure", "zero", "one", "xor_n", "^", "&", "|", "==", "=", "[", "]", "<", ">", "+", "-", "*", "/", "%",
+        "print", "true", "false", "int", "bool", "float", "sum"
+      ],
+      "constraints": [
+        "//", "// ...", "// comment",
+        "main()"
+      ]
     },
 
     "classic": {

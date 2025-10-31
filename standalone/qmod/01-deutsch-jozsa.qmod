@@ -1,0 +1,8 @@
+// Quantum Deutsch-Jozsa Algorithm in Qmod
+operation deutsch_jozsa(n, oracle) {
+    // Implementació básica en qmod
+}
+main() {
+    n = 3;
+    // Llama a balanced/constant oracle según desees...
+}

@@ -1,7 +1,7 @@
 OPENQASM 2.0;
 include "qelib1.inc";
 
-qreg q[3];
+qreg q[4];
 creg c[3];
 
 // Step 1: Apply Hadamard gates to all qubits
