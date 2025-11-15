@@ -48,7 +48,9 @@ class DirectoryScanner:
                 for ext in extensions:
                     pattern = os.path.join(directory, "**", f"{file_name}*{ext}")
                     file_paths = glob.glob(pattern, recursive=True)
+                    
                     if file_paths:
+                        print(file_paths[0])
                         results[parent_dir][file_name] = file_paths[0]
                         file_found = True
                         break

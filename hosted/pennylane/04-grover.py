@@ -1,13 +1,19 @@
 import pennylane as qml
 from pennylane import numpy as np
 
+def applyHadamard(n):
+    for i in n:
+        qml.Hadamard(wires=i)
+
+def applyPauliX(n):
+    for i in n:
+        qml.PauliX(wires=i)
+
 def grover_oracle(wires, marked_state):
     def _oracle():
         for i, bit in enumerate(marked_state):
             if bit == '0':
                 qml.PauliX(wires=wires[i])
-        # control_values: list of ints/booleans indicating which control qubits should be 1
-        # For n qubits, we need n-1 controls all set to 1
         control_values = [1] * (len(wires) - 1)
         qml.MultiControlledX(wires=wires, control_values=control_values)
         for i, bit in enumerate(marked_state):
@@ -17,16 +23,12 @@ def grover_oracle(wires, marked_state):
 
 def grover_diffusion(wires):
     def _diffusion():
-        for i in wires:
-            qml.Hadamard(wires=i)
-        for i in wires:
-            qml.PauliX(wires=i)
+        applyHadamard(wires)
+        applyPauliX(wires)
         control_values = [1] * (len(wires) - 1)
         qml.MultiControlledX(wires=wires, control_values=control_values)
-        for i in wires:
-            qml.PauliX(wires=i)
-        for i in wires:
-            qml.Hadamard(wires=i)
+        applyPauliX(wires)
+        applyHadamard(wires)
     return _diffusion
 
 def grover_algorithm(n, marked_state, iterations=1):
@@ -36,8 +38,7 @@ def grover_algorithm(n, marked_state, iterations=1):
     diffusion = grover_diffusion(wires)
     @qml.qnode(dev)
     def circuit():
-        for i in wires:
-            qml.Hadamard(wires=i)
+        applyHadamard(wires)
         for _ in range(iterations):
             oracle()
             diffusion()

@@ -25,6 +25,6 @@ for int i in [0:2] {
 for int i in [0:2] {
     h q[i];
 }
-for int i in [0:2] {
-    c[i] = measure q[i];
-}
+//for int i in [0:2] {
+//    c[i] = measure q[i];
+//}

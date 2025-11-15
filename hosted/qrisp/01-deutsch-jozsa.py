@@ -1,32 +1,25 @@
-# Deutsch-Jozsa Algorithm in Qrisp
-import qrisp as q
+import qrisp
 
 def deutsch_jozsa(n, oracle):
-    input_qubits = q.QuantumVariable(n)
-    aux_qubit = q.QuantumVariable(1)
-    qc = q.Circuit([input_qubits, aux_qubit])
-    for i in range(n):
-        pass
-    aux_qubit.h()
-    for qubit in input_qubits:
-        qubit.h()
-    oracle()
-    for qubit in input_qubits:
-        qubit.h()
-    qc.measure()
-    return qc
+    input_qubits = qrisp.QuantumVariable(n, name="input")
+    aux_qubit = qrisp.QuantumVariable(1, name="aux")
+    qrisp.x(aux_qubit)
+    qrisp.h(input_qubits)
+    qrisp.h(aux_qubit)
+    oracle(input_qubits, aux_qubit)
+    qrisp.h(input_qubits)
+    qrisp.measure(input_qubits)
+    return input_qubits.qs
 
-def constant_oracle():
-    def oracle():
-        pass
-    return oracle
+def constant_oracle(input_qubits, aux_qubit):
+    pass
 
-def balanced_oracle(n):
-    def oracle():
-        pass  # Implement the balanced logic as necessary for qrisp
-    return oracle
+def balanced_oracle(input_qubits, aux_qubit):
+    for i in range(len(input_qubits)):
+        qrisp.cx(input_qubits[i], aux_qubit)
 
-if __name__ == "__main__":
-    n = 3
-    oracle_bal = balanced_oracle(n)
-    print(deutsch_jozsa(n, oracle_bal))
+n = 3
+qc = deutsch_jozsa(n, constant_oracle)
+qc1 = deutsch_jozsa(n, balanced_oracle)
+print(qc)
+print(qc1)

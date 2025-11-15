@@ -1,19 +1,21 @@
 import pennylane as qml
 from pennylane import numpy as np
 
+def applyHadamard(n):
+    for i in range(n):
+        qml.Hadamard(wires=i)
+
 def bernstein_vazirani(n, s):
     dev = qml.device('default.qubit', wires=n+1)
 
     @qml.qnode(dev)
     def circuit():
         qml.PauliX(wires=n)
-        for i in range(n+1):
-            qml.Hadamard(wires=i)
+        applyHadamard(n+1)
         for i, bit in enumerate(reversed(s)):
             if bit == "1":
                 qml.CNOT(wires=[i, n])
-        for i in range(n):
-            qml.Hadamard(wires=i)
+        applyHadamard(n)
         return qml.sample(wires=range(n))
     return circuit
 

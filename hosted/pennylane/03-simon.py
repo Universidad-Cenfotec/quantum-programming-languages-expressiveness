@@ -1,5 +1,9 @@
 import pennylane as qml
 
+def applyHadamard(n):
+    for i in range(n):
+        qml.Hadamard(wires=i)
+
 def simon_oracle(n, s):
     def _oracle():
         for i, bit in enumerate(reversed(s)):
@@ -12,11 +16,9 @@ def simon_algorithm(n, s):
     oracle = simon_oracle(n, s)
     @qml.qnode(dev)
     def circuit():
-        for i in range(n):
-            qml.Hadamard(wires=i)
+        applyHadamard(n)
         oracle()
-        for i in range(n):
-            qml.Hadamard(wires=i)
+        applyHadamard(n)
         return qml.sample(wires=range(n))
     return circuit
 

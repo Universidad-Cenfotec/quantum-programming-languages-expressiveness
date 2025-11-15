@@ -1,4 +1,4 @@
-from qiskit import QuantumCircuit, transpile
+from qiskit import QuantumCircuit
 #from qiskit.visualization import plot_histogram
 from qiskit_aer import Aer
 import numpy as np

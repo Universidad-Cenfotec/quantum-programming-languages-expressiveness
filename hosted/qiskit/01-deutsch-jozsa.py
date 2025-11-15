@@ -23,6 +23,5 @@ def balanced_oracle(n):
 n = 3
 qc = deutsch_jozsa(n, constant_oracle(n))
 qc2 = deutsch_jozsa(n, balanced_oracle(n))
-
 print(qc.draw("text"))
 print(qc2.draw("text"))

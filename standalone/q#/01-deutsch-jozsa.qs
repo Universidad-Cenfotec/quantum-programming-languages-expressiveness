@@ -16,8 +16,7 @@ namespace DeutschJozsa {
         }
     }
 
-
-    operation DeutschJozsaAlgorithm() : Unit {
+    operation DeutschJozsaAlgorithm(n : Int, oracle : (Qubit[] => Unit is Adj + Ctl)) : Result[] {
         use qubits = Qubit[n + 1];
         X(qubits[n]);
         ApplyToEachA(H, qubits);
@@ -28,7 +27,7 @@ namespace DeutschJozsa {
         return results;
     }
 
-     @EntryPoint()
+    @EntryPoint()
     operation Main() : Unit {
         let n = 3;
         let constantResults = DeutschJozsaAlgorithm(n, ConstantOracle);

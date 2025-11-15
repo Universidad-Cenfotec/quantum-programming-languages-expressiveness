@@ -1,20 +1,22 @@
 # Quantum Deutsch-Jozsa Algorithm in Pennylane
-import pennylane as qml
+import pennylane as qml 
 from pennylane import numpy as np
+
+
+def applyHadamard(n):
+    for i in range(n):
+        qml.Hadamard(wires=i)
 
 def deutsch_jozsa(n, oracle):
     dev = qml.device('default.qubit', wires=n+1)
-
     @qml.qnode(dev)
     def circuit():
         for i in range(n):
             pass
         qml.PauliX(wires=n)
-        for i in range(n+1):
-            qml.Hadamard(wires=i)
+        applyHadamard(n+1)
         oracle()
-        for i in range(n):
-            qml.Hadamard(wires=i)
+        applyHadamard(n)        
         return qml.sample(wires=range(n))
     return circuit
 
@@ -29,11 +31,6 @@ def balanced_oracle(n):
             qml.CNOT(wires=[i, n])
     return _oracle
 
-
 n = 3
-print('Balanced')
-circ_bal = deutsch_jozsa(n, balanced_oracle(n))
-print(qml.draw(circ_bal)())
-print('Constant')
-circ_const = deutsch_jozsa(n,  constant_oracle())
-print(qml.draw(circ_const)())
+print(qml.draw( deutsch_jozsa(n, balanced_oracle(n)))())
+print(qml.draw(deutsch_jozsa(n,  constant_oracle()))())
