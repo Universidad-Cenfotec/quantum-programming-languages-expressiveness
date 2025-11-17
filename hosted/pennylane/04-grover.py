@@ -9,16 +9,17 @@ def applyPauliX(n):
     for i in n:
         qml.PauliX(wires=i)
 
+def flag_controlled(wires, marked_state):
+    for i, bit in enumerate(marked_state):
+        if bit == '0':
+            qml.PauliX(wires=wires[i])
+
 def grover_oracle(wires, marked_state):
     def _oracle():
-        for i, bit in enumerate(marked_state):
-            if bit == '0':
-                qml.PauliX(wires=wires[i])
+        flag_controlled(wires, marked_state)
         control_values = [1] * (len(wires) - 1)
         qml.MultiControlledX(wires=wires, control_values=control_values)
-        for i, bit in enumerate(marked_state):
-            if bit == '0':
-                qml.PauliX(wires=wires[i])
+        flag_controlled(wires, marked_state)
     return _oracle
 
 def grover_diffusion(wires):

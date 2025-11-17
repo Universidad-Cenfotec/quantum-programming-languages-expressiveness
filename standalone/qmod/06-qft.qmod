@@ -5,6 +5,5 @@ def main(x: Output[QArray[QBit]]):
     allocate(6, x)
     qft(x)
 
-
 qmod = create_model(main, out_file="qft")
 qprog = synthesize(qmod)

@@ -1,4 +1,3 @@
-# Deutsch-Jozsa Algorithm in Cirq
 import cirq
 
 def deutsch_jozsa(n, oracle):

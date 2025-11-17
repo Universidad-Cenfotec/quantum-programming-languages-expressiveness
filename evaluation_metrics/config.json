@@ -110,7 +110,7 @@
 
       ]
     },
-
+    
     "cirq": {
       "extension": ".py",
       "hosted_in": "python",
@@ -157,7 +157,8 @@
       "extension": ".aplf",
       "hosted_in": "",
       "comment_symbol": "⍝",
-      "constructs": ["→", "¨", "⍣", "⍬", ",", "⍤", "∧", "∨", "∪", "⋄", "⎕SIGNAL", "⎕TRAP", "⎕ASSERT"],
+      "constructs_old": ["→", "¨", "⍣", "⍬", ",", "⍤", "∧", "∨", "∪", "⋄", "⎕SIGNAL", "⎕TRAP", "⎕ASSERT"],
+      "constructs": [":", "∧", "∨", "SIGNAL", "⎕TRAP", "⎕ASSERT"],
       "operators": [
                 "+", "-", "×", "÷", "*", "⌈", "⌊", "|",
                 "=", "≠", "<", "≤", ">", "≥", "∧", "∨", "~",
@@ -244,6 +245,16 @@
     "halstead": {
       "output": "evaluation_metrics/results/halstead.csv",
       "output_log": "evaluation_metrics/results/halstead_log.csv"
+    },
+    "cc_loc_ratio": {
+      "output": "evaluation_metrics/results/cc_loc_ratio.csv",
+      "ccc_input": "evaluation_metrics/results/cyclomatic_complexity_calculator.csv",
+      "loc_input": "evaluation_metrics/results/loc.csv"
+    },
+    "effort_loc_ratio": {
+      "output": "evaluation_metrics/results/effort_loc_ratio.csv",
+      "halstead_input": "evaluation_metrics/results/halstead.csv",
+      "loc_input": "evaluation_metrics/results/loc.csv"
     }
   }
 }

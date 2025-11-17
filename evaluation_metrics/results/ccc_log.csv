@@ -19,44 +19,21 @@ cirq,06-qft,for,qubits = [cirq.LineQubit(i) for i in range(n)]
 cirq,06-qft,for,for i in range(n):
 cirq,06-qft,for,"for j in range(i+1, n):"
 cirq,06-qft,for,for i in range(n//2):
-cirq,07-qpe,for,ancillas = [cirq.LineQubit(i) for i in range(n_count)]
-cirq,07-qpe,for,target = [cirq.LineQubit(i + n_count) for i in range(n_target)]
-cirq,07-qpe,for,for i in range(n_count):
-cirq,07-qpe,if,"if __name__ == ""__main__"":"
-quapl,02-bernstein-vazirani,¨,stg_ctrl ← (((⍳(2⍟1⌷⍴(vs)) )-1) ({#.quapl.gates.H}¨( ⍳(2⍟1⌷⍴(vs)) )))
-quapl,02-bernstein-vazirani,¨,"ops ← ((⍸(⍺)) -1),¨targets"
-quapl,02-bernstein-vazirani,",","ops ← ((⍸(⍺)) -1),¨targets"
-quapl,03-simon,¨,"ops ← ((⍸⊃⍺) - 1),¨(((2⍟1⌷⍴⍵) ÷ 2) + ((⍸⊃⍺) - 1))"
-quapl,03-simon,",","ops ← ((⍸⊃⍺) - 1),¨(((2⍟1⌷⍴⍵) ÷ 2) + ((⍸⊃⍺) - 1))"
-quapl,03-simon,¨,mid_state ← ((qubits_index) ({#.quapl.gates.H}¨qubits_index))  #.quapl.circuit.stage (⊃1↑⍵)
-quapl,03-simon,¨,((qubits_index) ({#.quapl.gates.H}¨qubits_index))  #.quapl.circuit.stage  mid_state
-quapl,04-grover,¨,((qubits_index) ({⍵=0:#.quapl.gates.X ⋄ ⍵=1:#.quapl.gates.I }¨ x )) #.quapl.circuit.stage vs
-quapl,04-grover,⋄,((qubits_index) ({⍵=0:#.quapl.gates.X ⋄ ⍵=1:#.quapl.gates.I }¨ x )) #.quapl.circuit.stage vs
-quapl,04-grover,¨,stg_ctrl ← (((⍳n_qubits)-1) ({H}¨(⍳n_qubits)))
-quapl,04-grover,¨,mid_state ← (((2⊃⍵)-1) ({H}¨(2⊃⍵)))  stage  mid_state
-quapl,04-grover,¨,mid_state ← (((2⊃⍵)-1) ({X}¨(2⊃⍵))) stage mid_state
-quapl,04-grover,¨,"mid_state ← (((2⊃⍵)-1) (({I}¨( ¯1↓((2⊃⍵)))) , ⊂H ) ) stage mid_state"
-quapl,04-grover,",","mid_state ← (((2⊃⍵)-1) (({I}¨( ¯1↓((2⊃⍵)))) , ⊂H ) ) stage mid_state"
-quapl,04-grover,¨,"mid_state ← (((2⊃⍵)-1) (({I}¨( ¯1↓((2⊃⍵)))) , ⊂H ) ) stage mid_state"
-quapl,04-grover,",","mid_state ← (((2⊃⍵)-1) (({I}¨( ¯1↓((2⊃⍵)))) , ⊂H ) ) stage mid_state"
-quapl,04-grover,¨,mid_state ← (((2⊃⍵)-1) ({X}¨(2⊃⍵)))  stage mid_state
-quapl,04-grover,¨,mid_state ← (((2⊃⍵)-1) ({H}¨(2⊃⍵))) stage mid_state
-quapl,06-qft,¨,"lane ← {((⍵-1),((⍵-1)+⍳n_qubits-⍵),¨(⍵-1))(⊂¨(⊂H),CRzn¨1+⍳n_qubits-⍵)}"
-quapl,06-qft,",","lane ← {((⍵-1),((⍵-1)+⍳n_qubits-⍵),¨(⍵-1))(⊂¨(⊂H),CRzn¨1+⍳n_qubits-⍵)}"
-quapl,06-qft,",","stage_all ← {⊃stage/(⌽match ⍺),⊂⍵}"
-quapl,06-qft,¨,"intermediate ← ⊃stage_all/(⌽lane¨(⍳n_qubits)),⊂⍵"
-quapl,06-qft,",","intermediate ← ⊃stage_all/(⌽lane¨(⍳n_qubits)),⊂⍵"
-quapl,06-qft,¨,"swap_circuit ← (1-⍨(⌊n_qubits÷2)↑(⌽⍳n_qubits),¨⍳n_qubits) (⊂¨{SWAP}¨⍳⌊n_qubits÷2)"
-quapl,06-qft,",","swap_circuit ← (1-⍨(⌊n_qubits÷2)↑(⌽⍳n_qubits),¨⍳n_qubits) (⊂¨{SWAP}¨⍳⌊n_qubits÷2)"
-quapl,06-qft,¨,"input ← {{((⍴⍵),1)⍴⍵}¨↓↑1,⍨¨0/⍨¨1-⍨⍳⍵}¨2*⍳6"
-quapl,06-qft,",","input ← {{((⍴⍵),1)⍴⍵}¨↓↑1,⍨¨0/⍨¨1-⍨⍳⍵}¨2*⍳6"
-quapl,06-qft,¨,"result ← #.quapl._r_¨¨ ,¨¨ #.quapl.lib._QFT_¨¨ input"
-quapl,06-qft,",","result ← #.quapl._r_¨¨ ,¨¨ #.quapl.lib._QFT_¨¨ input"
-quapl,06-qft,¨,correct_function ← {(2*(-⍺÷2))×*(0J1×2×(⍵-1)×○⍤⊢)¨(2*⍺)÷⍨1-⍨⍳(2*⍺)}
-quapl,06-qft,⍤,correct_function ← {(2*(-⍺÷2))×*(0J1×2×(⍵-1)×○⍤⊢)¨(2*⍺)÷⍨1-⍨⍳(2*⍺)}
-quapl,06-qft,¨,correct_result ← #.quapl._r_¨¨ (⍳6)correct_function¨¨(⍳¨2*⍳6)
-quapl,06-qft,¨,'Quantum Fourier Transform of basis state |j> is (2*(-n_qubits÷2))×*(0J1)×⍵×j'⊢ (⊃∪#.quapl._r_¨¨∊correct_result-result) Assert 0:
-quapl,06-qft,∪,'Quantum Fourier Transform of basis state |j> is (2*(-n_qubits÷2))×*(0J1)×⍵×j'⊢ (⊃∪#.quapl._r_¨¨∊correct_result-result) Assert 0:
+quapl,01-deutsch-jozsa,:,:Namespace DJ
+quapl,01-deutsch-jozsa,:,(⍴a)=0: ret
+quapl,01-deutsch-jozsa,:,:EndNamespace
+quapl,01-deutsch-jozsa,:,⍺ {⍵:(((0 ⍺) (⊂SWAP)) stage mid_state) ⋄ mid_state} (⍺≠0)
+quapl,02-bernstein-vazirani,:,(⍴⍺)=0: ⍵
+quapl,03-simon,:,:Namespace SIMON
+quapl,03-simon,:,(⍴⍺)=0: ⍵
+quapl,03-simon,:,:EndNamespace
+quapl,04-grover,:,:Namespace GROVER
+quapl,04-grover,:,((qubits_index) ({⍵=0:#.quapl.gates.X ⋄ ⍵=1:#.quapl.gates.I }¨ x )) #.quapl.circuit.stage vs
+quapl,04-grover,:,(⍴(1↓⍺))=0: res
+quapl,04-grover,:,:EndNamespace
+quapl,04-grover,:,0 = 3⊃⍵: 1⊃⍵
+quapl,06-qft,:,(0=⍴1⌷↑swap_circuit):intermediate
+quapl,06-qft,:,'Quantum Fourier Transform of basis state |j> is (2*(-n_qubits÷2))×*(0J1)×⍵×j'⊢ (⊃∪#.quapl._r_¨¨∊correct_result-result) Assert 0:
 qiskit,01-deutsch-jozsa,for,for i in range(n):
 qiskit,02-bernstein-vazirani,for,"for i, bit in enumerate(reversed(s)):"
 qiskit,02-bernstein-vazirani,if,"if bit == ""1"":"
@@ -91,16 +68,7 @@ qiskit,05-vqsvd,while,"print(""Starting training… (this may take a while)"")"
 qiskit,06-qft,if,if n == 0:
 qiskit,06-qft,for,for qubit in range(n):
 qiskit,06-qft,for,for qubit in range(n//2):
-qiskit,07-qpe,if,if target_state is not None:
-qiskit,07-qpe,for,for i in range(n_count):
-qiskit,07-qpe,for,for qubit in range(n//2):
-qiskit,07-qpe,for,for i in range(n):
-qiskit,07-qpe,for,for j in range(i):
-qiskit,07-qpe,if,"if __name__ == ""__main__"":"
-qrisp,01-deutsch-jozsa,for,for i in range(n):
-qrisp,01-deutsch-jozsa,for,for qubit in input_qubits:
-qrisp,01-deutsch-jozsa,for,for qubit in input_qubits:
-qrisp,01-deutsch-jozsa,for,pass  # Implement the balanced logic as necessary for qrisp
+qrisp,01-deutsch-jozsa,for,for i in range(len(input_qubits)):
 qrisp,02-bernstein-vazirani,for,for i in range(len(s)):
 qrisp,02-bernstein-vazirani,if,"if s[i] == ""1"":"
 qrisp,03-simon,for,for i in range(len(s)):
@@ -108,8 +76,6 @@ qrisp,03-simon,if,"if s[i] == ""1"":"
 qrisp,06-qft,for,for i in range(n):
 qrisp,06-qft,for,"for j in range(i+1, n):"
 qrisp,06-qft,for,for i in range(n//2):
-qrisp,07-qpe,for,for i in range(n_count):
-qrisp,07-qpe,for,for i in range(n_count):
 qmod,02-bernstein-vazirani,repeat,repeat (i: x.len) {
 qmod,02-bernstein-vazirani,if,if ((floor(a / (2 ** i)) % 2) == 1) {
 q#,01-deutsch-jozsa,for,for i in 0..n-1 {
@@ -137,8 +103,6 @@ qasm3,04-grover,for,for int i in [0:2] {
 qasm3,04-grover,for,for int i in [0:2] {
 qasm3,04-grover,for,for int i in [0:2] {
 qasm3,04-grover,for,for int i in [0:2] {
-qasm3,07-qpe,for,for int i in [0:2] {
-qasm3,07-qpe,for,for int i in [0:2] {
 pennylane,01-deutsch-jozsa,for,for i in range(n):
 pennylane,01-deutsch-jozsa,for,for i in range(n):
 pennylane,01-deutsch-jozsa,for,for i in range(n):
@@ -150,8 +114,6 @@ pennylane,03-simon,for,"for i, bit in enumerate(reversed(s)):"
 pennylane,03-simon,if,if bit == '1':
 pennylane,04-grover,for,for i in n:
 pennylane,04-grover,for,for i in n:
-pennylane,04-grover,for,"for i, bit in enumerate(marked_state):"
-pennylane,04-grover,if,if bit == '0':
 pennylane,04-grover,for,"for i, bit in enumerate(marked_state):"
 pennylane,04-grover,if,if bit == '0':
 pennylane,04-grover,for,for _ in range(iterations):
@@ -169,9 +131,6 @@ pennylane,05-vqsvd,for,for i in range(RANK):
 pennylane,06-qft,for,for i in range(n):
 pennylane,06-qft,for,"for j in range(i + 1, n):"
 pennylane,06-qft,for,for i in range(n // 2):
-pennylane,07-qpe,for,for w in wires_ancilla:
-pennylane,07-qpe,for,"for i, w in enumerate(wires_ancilla):"
-pennylane,07-qpe,if,"if __name__ == ""__main__"":"
 paddle,05-vqsvd,for,for _ in range(depth):
 paddle,05-vqsvd,for,for i in range(self.rank):
 paddle,05-vqsvd,for,for itr in range(self.itr):
