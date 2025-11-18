@@ -90,7 +90,6 @@ class RatioPlot(PlotBase):
             palette=color_map,
             s=220,
             ax=ax,
-            edgecolor="black",
             legend=False
         )
         for i in range(df_mean.shape[0]):
@@ -114,5 +113,6 @@ class RatioPlot(PlotBase):
         if save_file_name:
             full_path = GRAPHICS_PATH + save_file_name
             plt.savefig(full_path)
-            print(f"✅ Scatter plot saved to {full_path}")        
+            plt.savefig(full_path.replace('.png', '.eps'), format='eps')
+            print(f"✅ Scatter plot saved to {full_path} y {full_path.replace('.png', '.eps')}")
         plt.show()
