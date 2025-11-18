@@ -33,7 +33,9 @@ class LocPlot(PlotBase):
             ax,
             title="Mean LOC by Algorithm Across Quantum Programming Languages",
             xlabel="Quantum Programming Languages",
-            ylabel="Mean LOC")
+            ylabel="Mean LOC",
+            show_legend=False
+        )
         plt.tight_layout()
         if save_file_name:
             plt.savefig(GRAPHICS_PATH + save_file_name)

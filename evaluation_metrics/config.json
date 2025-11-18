@@ -1,10 +1,12 @@
 {
   "files": [
-    "01-deutsch-jotza",
+    "01-deutsch-jozsa",
     "02-bernstein-vazirani",
     "03-simon",
     "04-grover",
-    "05-vqsvd"
+    "05-vqsvd",
+    "06-qft",
+    "07-qpe"
   ],
 
   "directories": [
@@ -15,9 +17,11 @@
     "standalone/qmod",
     "standalone/q#",
     "standalone/qasm",
-    "classic",
+    "standalone/qasm3",
+    "standalone/silq",    
     "hosted/pennylane",
-    "hosted/paddle"
+    "hosted/paddle",
+    "classic"
   ],
 
   "language_order": [
@@ -27,18 +31,22 @@
     "qrisp",
     "qmod",    
     "q#",  
-    "qasm",
-    "classic",
+    "qasm",    
+    "qasm3",
     "pennylane",
-    "paddle"
+    "paddle",
+    "silq",
+    "classic"
   ],
   
   "algorithm_order": [
-    "deutsch-jotza",
+    "deutsch-jozsa",
     "bernstein-vazirani",
     "simon",
     "grover",
-    "vqsvd"
+    "vqsvd",
+    "qft",
+    "qpe"
   ],
 
   "languages": {
@@ -46,7 +54,7 @@
       "extension": ".py",
       "hosted_in": "",
       "comment_symbol": "#",
-      "constructs": ["if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or","on_each"],
+      "constructs": ["if", "elif", "for", "while", "except", "assert",  "and", "or"],
       "operators": [
         "==", "!=", ">", "<", ">=", "<=",
         "and", "or", "not", "&", "|", "^", "~", "<<", ">>", "_",
@@ -62,10 +70,7 @@
       "extension": ".py",
       "hosted_in": "python",
       "comment_symbol": "#",
-      "constructs": [
-        "if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or"
-      ],
-
+      "constructs": ["if", "elif", "for", "while", "except", "assert",  "and", "or"],
       "operators": [
         "x","h","cx","to_gate","measure","range","get_backend",
         "transpile","QuantumCircuit","mcx","get_counts","draw","Aer"
@@ -80,25 +85,40 @@
       "extension": ".py",
       "hosted_in": "python",
       "comment_symbol": "#",
-      "constructs": ["qml.qnode", "qml.device", "qml.expval", "qml.var", "qml.probs"],
+      "constructs":["if", "elif", "for", "while", "except", "assert",  "and", "or"],  
       "operators": [
-        "qml.RX", "qml.RY", "qml.RZ", "qml.CNOT", "qml.Toffoli",
-        "qml.PauliX", "qml.PauliY", "qml.PauliZ", "qml.Hadamard",
-        "qml.ctrl", "qml.U3", "qml.CRZ", "qml.template", "qml.Rot"
+        "def", "for", "in", "return", "pass", "(", ")", ":", ",", ".", "=", "+", "[", "]", "@",
+        "'default","qubit'",  "qml", "device", "qnode", "sample", "draw", 
+        "print","RX", "RY", "RZ", "CNOT", "Toffoli",
+        "PauliY", "PauliZ", "PauliX", "Hadamard",
+        "ctrl", "U3", "CRZ", "template", "Rot",
+        "from", "import", "as", "class", "self",
+        "range", "if", "lambda", "with", "reversed",
+        "pnp","uniform", "array", "real", "conj", "diag",
+        "random","seed","arange",
+        "qml.state", "AdamOptimizer",
+        "linalg","svd", "np", "randint", "matrix",
+        "plt","plot", "xlabel", "ylabel", "title", "grid", "savefig", "show", "close",
+        "plt.imshow", "plt.colorbar", "plt.subplots",
+        "Image.open", "img.getdata", "im", "imgmat",
+        "get", "get_frame", "set_edgecolor",
+        "astype", "T", "copy", "shape", "size", "dtype", "type",
+        "MultiControlledX"
       ],
       "constraints": [
-        "import pennylane as qml"
+        "import pennylane as qml", "pennylane", "import", "numpy" 
+
       ]
     },
-
+    
     "cirq": {
       "extension": ".py",
       "hosted_in": "python",
       "comment_symbol": "#",
-      "constructs": ["if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or","on_each"],
+      "constructs": ["if", "elif", "for", "while", "except", "assert",  "and", "or"],
       "operators": [
         "range", "cirq","LineQubit", "CX","on_each", "Circuit", "X", "H",
-        "measure", "CNOT", ":", ",", ".","Moment","TOFFOLI","Simulator"
+        "measure", "CNOT", ":", ",", ".","Moment","TOFFOLI","Simulator","lambda"
       ],
       "constraints": [
         "import cirq","import numpy as np","import matplotlib.pyplot as plt",
@@ -110,9 +130,9 @@
       "extension": ".py",
       "hosted_in": "python",
       "comment_symbol": "#",
-      "constructs": ["if", "elif", "for", "while", "except", "with", "assert", "list", "set", "dict", "and", "or","qalloc", "qfor", "qif", "qelse", "qubit", "circuit"],
+      "constructs": ["if", "elif", "for", "while", "except", "assert", "and", "or"],
       "operators": [ "x","h","cx","measure","len","pass","QuantumCircuit",
-                      "QuantumVariable","qrisp","mcx","range","to_gate" ],
+                      "QuantumVariable","qrisp","mcx","range","to_gate", "lambda" ],
       "constraints":  ["import qrisp","import numpy as np"]
     },
 
@@ -120,11 +140,11 @@
       "extension": ".qs",
       "hosted_in": "",
       "comment_symbol": "//",
-      "constructs":  ["if", "elif", "for", "ApplyToEachA","MeasureEachZ", "try", "catch", "repeat", "until"],
+      "constructs":  ["if", "elif", "for", "while", "catch", "repeat", "until", "and", "or"],
       "operators": [
           "operation", "use", "let", "return", "for", "if", "else","Bool", "Result","[","{","(" ,"Unit",
           "Adj", "Ctl", "@EntryPoint()",  "..","Message","Controlled X","ApplyToEachA","ResetAll","MeasureEachZ","X","H","CNOT", "Length","Int",
-          "Most","Qubit","in","mutable","Sqrt","Round","PI","IntAsDouble", "is","not"
+          "Most","Qubit","in","mutable","Sqrt","Round","PI","IntAsDouble", "is","not", "lambda"
       ] ,
       "constraints": [
         "namespace bernstein-vazirani","namespace DeutschJozsa","namespace SimonAlgorithm","namespace GroverAlgorithm",
@@ -137,7 +157,8 @@
       "extension": ".aplf",
       "hosted_in": "",
       "comment_symbol": "⍝",
-      "constructs": ["→", "¨", "⍣", "⍬", ",", "⍤", "∧", "∨", "∪", "⋄", "⎕SIGNAL", "⎕TRAP", "⎕ASSERT"],
+      "constructs_old": ["→", "¨", "⍣", "⍬", ",", "⍤", "∧", "∨", "∪", "⋄", "⎕SIGNAL", "⎕TRAP", "⎕ASSERT"],
+      "constructs": [":", "∧", "∨", "SIGNAL", "⎕TRAP", "⎕ASSERT"],
       "operators": [
                 "+", "-", "×", "÷", "*", "⌈", "⌊", "|",
                 "=", "≠", "<", "≤", ">", "≥", "∧", "∨", "~",
@@ -156,24 +177,42 @@
       ]
     },
 
+    "qasm3": {
+      "extension": ".qasm",
+      "hosted_in": "",
+      "comment_symbol": "//",
+      "constructs":  ["if", "for"],
+      "operators": ["qreg","creg", "qubit", "bit","h","cx", "x","[", "]","->","ccx","measure", "for","int", "in", "{", "}", ";", "," ],
+      "constraints": ["include", "stdgates","qelib1.inc",  "inc", "qelib1","OPENQASM 3.0", "OPENQASM", "3.0"]
+    },
+
     "qasm": {
       "extension": ".qasm",
       "hosted_in": "",
       "comment_symbol": "//",
       "constructs":  ["if"],
-      "operators": ["qreg","creg","h","cx","[","->","ccx","measure"],
-      "constraints": ["include", "qelib1.inc","OPENQASM 2.0"]
-    },
+      "operators": ["qreg","creg","h","cx","x","[", "]", "->","ccx","measure",";", ","],
+      "constraints": ["include", "qelib1.inc;", "qelib1", "inc","OPENQASM 2.0;", "OPENQASM", "2.0"]
+    },    
 
     "qmod": {
       "extension": ".qmod",
       "hosted_in": "",
       "comment_symbol": "//",
-      "constructs": ["if", "repeat", "within", "apply", "lambda", "and", "or"],
+      "constructs": ["if", "repeat", "and", "or"],
       "operators": [
         "qnum","qbit","allocate","output","within","apply","qfunc","hadamard_transform","lambda","{","(","[",
         "repeat", "IDENTITY","CX","H","min","|","phase_oracle","len","if","else","floor","int"
       ],
+      "constraints": []
+    },
+
+    "silq": {
+      "extension": ".silq",
+      "hosted_in": "",
+      "comment_symbol": "//",
+      "constructs": [],
+      "operators": [],
       "constraints": []
     },
 
@@ -206,6 +245,16 @@
     "halstead": {
       "output": "evaluation_metrics/results/halstead.csv",
       "output_log": "evaluation_metrics/results/halstead_log.csv"
+    },
+    "cc_loc_ratio": {
+      "output": "evaluation_metrics/results/cc_loc_ratio.csv",
+      "ccc_input": "evaluation_metrics/results/cyclomatic_complexity_calculator.csv",
+      "loc_input": "evaluation_metrics/results/loc.csv"
+    },
+    "effort_loc_ratio": {
+      "output": "evaluation_metrics/results/effort_loc_ratio.csv",
+      "halstead_input": "evaluation_metrics/results/halstead.csv",
+      "loc_input": "evaluation_metrics/results/loc.csv"
     }
   }
 }

@@ -23,6 +23,5 @@ def balanced_oracle(n):
     return oracle
 
 n = 3
-print("Deutsch-Jozsa Circuit:")
 print(deutsch_jozsa(n, balanced_oracle(n)))
 print(deutsch_jozsa(n, constant_oracle(n)))

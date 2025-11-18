@@ -1,8 +1,8 @@
-namespace bernstein-vazirani {
+namespace bernstein_vazirani {
     open Microsoft.Quantum.Intrinsic;
     open Microsoft.Quantum.Measurement;
 
-    operation  bernstein_vazirani(n : Int, s : Bool[]) : Result[] {
+    operation bernstein_vazirani(n : Int, s : Bool[]) : Result[] {
         use qubits = Qubit[n + 1];
         ApplyToEachA(H, qubits[0..n - 1]);
         X(qubits[n]);

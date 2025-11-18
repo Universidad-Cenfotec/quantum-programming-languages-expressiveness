@@ -20,10 +20,7 @@ class DevNull:
         pass
     def flush(self):
         pass
-
 sys.stderr = DevNull()
-
-
 
 class VQSVDQiskit:
     def __init__(self,

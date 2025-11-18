@@ -47,13 +47,16 @@ These languages are extensions or embedded Domain-Specific Languaages (eDSL) bui
 - **[Cirq](https://quantumai.google/cirq)** (Python-based)
 - **[quAPL](https://github.com/nunezco2/quAPL)** (Quantum Array Programming Language)
 - **[Qrisp](https://qrisp.eu/index.html)** (Python-based)
+- **[PennyLane](https://pennylane.ai/)** (Python-based) - A cross-platform library for quantum machine learning, automatic differentiation, and optimization of hybrid quantum-classical computations.
 
 ### 🏆 Standalone Languages
 
 These languages were created specifically for quantum programming, offering unique syntax and constructs to handle quantum concepts directly:
 
-- **[Q#](https://learn.microsoft.com/en-us/azure/quantum/)** (Microsoft’s quantum programming language)
-- **[Qmod](https://docs.classiq.io/latest/qmod-reference/language-reference/)** (Classiq’s quantum programming language)
+- **[Q#](https://learn.microsoft.com/en-us/azure/quantum/)** (Microsoft's quantum programming language)
+- **[Qmod](https://docs.classiq.io/latest/qmod-reference/language-reference/)** (Classiq's quantum programming language)
+- **[QASM](https://openqasm.com/language/classical.html)** (OpenQASM) - A low-level quantum assembly language for describing quantum circuits
+- **[QASM3](https://openqasm.com/language/classical.html)** (OpenQASM 3.0) - The latest version of OpenQASM with enhanced classical control flow and improved modularity
 
 ---
 
@@ -110,7 +113,15 @@ This will create a local copy of the project on your machine. After cloning, nav
 cd https://github.com/Universidad-Cenfotec/quantum-programming-languages-expressiveness.git
 ```
 
-2. **Installation Options** 
+2. **Required Extensions**
+For running Q# and QASM programs, you'll need to install the Azure Quantum Development Kit (QDK) extension for Visual Studio Code:
+1. Open VS Code
+2. Go to the Extensions view (Ctrl+Shift+X)
+3. Search for "Azure Quantum Development Kit (QDK)"
+4. Click Install
+For more information about the QDK extension, visit the [official QDK repository](https://github.com/microsoft/qdk).
+
+3. **Installation Options** 
 There are two ways to set up the environment for this project: using a virtual environment or using Docker. Choose one of the following methods:
 
 
@@ -154,7 +165,7 @@ After ensuring Docker is installed, navigate to the project directory (if you're
 This will build the Docker image and start the container in detached mode (-d).
 
 ## 📊 Running the Metrics
-To generate the metrics (McCabe CC, LOC and Halstead), navigate to the evaluation directory and run the following command on your terminal:
+To generate the metrics (McCabe CC, LOC and Halstead), navigate to the evaluation directory and run the following command on your terminal (Remember to have the virtual environment open):
 ```
 python -m evaluation_metrics.main
 ```

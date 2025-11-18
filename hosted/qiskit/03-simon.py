@@ -1,8 +1,8 @@
 from qiskit import QuantumCircuit, transpile
 from qiskit_aer import Aer
-from qiskit.visualization import plot_histogram
-import numpy as np
-from scipy.linalg import null_space
+#from qiskit.visualization import plot_histogram
+#import numpy as np
+#from scipy.linalg import null_space
 
 def simon_oracle(n, s):
     qc = QuantumCircuit(2 * n)
@@ -17,11 +17,10 @@ def simon_algorithm(n, s):
     oracle = simon_oracle(n, s)
     qc.append(oracle, range(2 * n))
     qc.h(range(n))
-    qc.measure(range(n), range(n))
+    #qc.measure(range(n), range(n))
     return qc
 
-def solve_simon(n, s, shots=1024):
-    qc = simon_algorithm(n, s)
+#def solve_simon(n, s, shots=1024):    
     #backend = Aer.get_backend('aer_simulator')
     #transpiled_qc = transpile(qc, backend)
     #result = backend.run(transpiled_qc, shots=shots).result()
@@ -30,9 +29,10 @@ def solve_simon(n, s, shots=1024):
     #s_solution = null_space(equations % 2).T[0] % 2
     #s_str = ''.join(str(int(bit)) for bit in s_solution)
     #return counts, s_str, qc
-    return qc
+#    return simon_algorithm(n, s)
+
 
 n = 3
 s = "101" 
-qc = solve_simon(n, s)
+qc = simon_algorithm(n, s)
 print(qc.draw("text"))

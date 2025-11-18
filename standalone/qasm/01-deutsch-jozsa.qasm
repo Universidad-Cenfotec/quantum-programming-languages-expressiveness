@@ -1,8 +1,11 @@
+// Deutsch-Jozsa Algorithm in QASM
 OPENQASM 2.0;
 include "qelib1.inc";
-
 qreg q[4];
 creg c[3];
+
+// Initialize the auxiliary qubit to |1>
+x q[3];
 
 // Apply H gates on the first three qubits and the auxiliary qubit
 h q[0];
