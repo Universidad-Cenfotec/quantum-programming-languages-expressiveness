@@ -40,7 +40,9 @@ class CCPlot(PlotBase):
         )
         plt.tight_layout()
         if save_file_name:
-            plt.savefig(GRAPHICS_PATH + save_file_name)
+            full_path = GRAPHICS_PATH + save_file_name
+            plt.savefig(full_path)
+            plt.savefig(full_path.replace('.png', '.eps'), format='eps')
         plt.show()
 
     def plot_cc_by_algorithm(self, algorithms=None, languages=None, save_file_name=None):
@@ -57,5 +59,7 @@ class CCPlot(PlotBase):
         )        
         plt.tight_layout()
         if save_file_name:
-            plt.savefig(GRAPHICS_PATH + save_file_name)        
+            full_path = GRAPHICS_PATH + save_file_name
+            plt.savefig(full_path)
+            plt.savefig(full_path.replace('.png', '.eps'), format='eps')
         plt.show()

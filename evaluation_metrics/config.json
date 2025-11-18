@@ -59,7 +59,9 @@
         "==", "!=", ">", "<", ">=", "<=",
         "and", "or", "not", "&", "|", "^", "~", "<<", ">>", "_",
         "for", "if", "else", "int", "is", "is not", "in", "not in", "np", "pi", "sqrt", "def",
-        "enumerate", "append", "print", "return", "list", "format", "all", "len"
+        "enumerate", "append", "print", "return", "list", "format", "all", "len",
+        "(", ")", "[", "]", "{", "}", ":", ",", ".", ";",
+        "import", "from", "as", "class", "self"
       ],
       "constraints": [
         "import numpy as np"
@@ -73,7 +75,9 @@
       "constructs": ["if", "elif", "for", "while", "except", "assert",  "and", "or"],
       "operators": [
         "x","h","cx","to_gate","measure","range","get_backend",
-        "transpile","QuantumCircuit","mcx","get_counts","draw","Aer"
+        "transpile","QuantumCircuit","mcx","get_counts","draw","Aer",
+        "(", ")", "[", "]", "{", "}", ":", ",", ".", ";",
+        "import", "from", "as", "class", "self"
       ],
       "constraints": [
         "from qiskit import QuantumCircuit","from qiskit import QuantumCircuit, transpile","from qiskit_aer import Aer","from qiskit.visualization import plot_histogram",
@@ -103,7 +107,7 @@
         "Image.open", "img.getdata", "im", "imgmat",
         "get", "get_frame", "set_edgecolor",
         "astype", "T", "copy", "shape", "size", "dtype", "type",
-        "MultiControlledX"
+        "MultiControlledX",";", "{", "}"
       ],
       "constraints": [
         "import pennylane as qml", "pennylane", "import", "numpy" 
@@ -118,7 +122,9 @@
       "constructs": ["if", "elif", "for", "while", "except", "assert",  "and", "or"],
       "operators": [
         "range", "cirq","LineQubit", "CX","on_each", "Circuit", "X", "H",
-        "measure", "CNOT", ":", ",", ".","Moment","TOFFOLI","Simulator","lambda"
+        "measure", "CNOT", ":", ",", ".","Moment","TOFFOLI","Simulator","lambda",
+        "(", ")", "[", "]", "{", "}", ";",
+        "import", "from", "as", "class", "self"
       ],
       "constraints": [
         "import cirq","import numpy as np","import matplotlib.pyplot as plt",
@@ -132,7 +138,10 @@
       "comment_symbol": "#",
       "constructs": ["if", "elif", "for", "while", "except", "assert", "and", "or"],
       "operators": [ "x","h","cx","measure","len","pass","QuantumCircuit",
-                      "QuantumVariable","qrisp","mcx","range","to_gate", "lambda" ],
+                      "QuantumVariable","qrisp","mcx","range","to_gate", "lambda",
+                      "(", ")", "[", "]", "{", "}", ":", ",", ".", ";",
+                      "import", "from", "as", "class", "self"
+      ],
       "constraints":  ["import qrisp","import numpy as np"]
     },
 
@@ -144,7 +153,8 @@
       "operators": [
           "operation", "use", "let", "return", "for", "if", "else","Bool", "Result","[","{","(" ,"Unit",
           "Adj", "Ctl", "@EntryPoint()",  "..","Message","Controlled X","ApplyToEachA","ResetAll","MeasureEachZ","X","H","CNOT", "Length","Int",
-          "Most","Qubit","in","mutable","Sqrt","Round","PI","IntAsDouble", "is","not", "lambda"
+          "Most","Qubit","in","mutable","Sqrt","Round","PI","IntAsDouble", "is","not", "lambda",
+          ")", "]", "}", ":", ",", ";", "."
       ] ,
       "constraints": [
         "namespace bernstein-vazirani","namespace DeutschJozsa","namespace SimonAlgorithm","namespace GroverAlgorithm",
@@ -163,14 +173,15 @@
                 "+", "-", "×", "÷", "*", "⌈", "⌊", "|",
                 "=", "≠", "<", "≤", ">", "≥", "∧", "∨", "~",
                 "⍴", ",", "⍪", "⌽", "⊖", "↑", "↓", "⍉", "⊂", "⊃", "≡", "≢", "∊", "⍷",
-                "[", "]", "⍋", "⍒", "⍳", "∩", "∪", "⍸",
+                "[", "⍋", "⍒", "⍳", "∩", "∪", "⍸",
                 "?", "⍵", "⍺", "⍫", "⋄", "→", "::", "⍎", "⍕",
                 "/", "\\", "⌿", "⍀", "∘", "⍣", "⍤", "⍥", "⍨", "⍞", "⍠",
                 "+/", "-/", "×/", "÷/", "∧/", "∨/", "⌈/", "⌊/", "=/", "≠/", "</", "≤/", ">/", "≥/", "~/",
                 "+\\", "-\\", "×\\", "÷\\", "∧\\", "∨\\", "⌈\\", "⌊\\", "=\\", "≠\\", "<\\", "≤\\", ">\\", "≥\\", "~\\",
                 "⎕", "⋄", "→", ".quapl", ".gates", ".circuit", ".X", ".H", ".I", ".Z",".CNOT", "gCTR", ".measure", ".CX", ".CCX", ".SWAP", 
                 ".CSWAP", ".CCSWAP", ".TOFFOLI", ".CTOFFOLI", ".CCX", ".sng", "q1", "q0", "unthread_vs", ".stage", 
-                ".reg",".lib",".oracles",  "."
+                ".reg",".lib",".oracles",  ".", ";",
+                "Namespace", "EndNamespace"
             ],  
       "constraints": [
         "Namespace", "EndNamespace"
@@ -182,7 +193,7 @@
       "hosted_in": "",
       "comment_symbol": "//",
       "constructs":  ["if", "for"],
-      "operators": ["qreg","creg", "qubit", "bit","h","cx", "x","[", "]","->","ccx","measure", "for","int", "in", "{", "}", ";", "," ],
+      "operators": ["qreg","creg", "qubit", "bit","h","cx", "x","[", "]","->","ccx","measure", "for","int", "in", "{", "}", ";", ",", "(", ")", "." ],
       "constraints": ["include", "stdgates","qelib1.inc",  "inc", "qelib1","OPENQASM 3.0", "OPENQASM", "3.0"]
     },
 
@@ -191,7 +202,7 @@
       "hosted_in": "",
       "comment_symbol": "//",
       "constructs":  ["if"],
-      "operators": ["qreg","creg","h","cx","x","[", "]", "->","ccx","measure",";", ","],
+      "operators": ["qreg","creg","h","cx","x","[", "]", "->","ccx","measure",";", ",", "(", ")", "{", "}", "."],
       "constraints": ["include", "qelib1.inc;", "qelib1", "inc","OPENQASM 2.0;", "OPENQASM", "2.0"]
     },    
 
@@ -201,8 +212,11 @@
       "comment_symbol": "//",
       "constructs": ["if", "repeat", "and", "or"],
       "operators": [
-        "qnum","qbit","allocate","output","within","apply","qfunc","hadamard_transform","lambda","{","(","[",
-        "repeat", "IDENTITY","CX","H","min","|","phase_oracle","len","if","else","floor","int"
+        "qnum","qbit","allocate","output","within","apply","qfunc","hadamard_transform","lambda",
+        "repeat", "IDENTITY","CX","H","min","phase_oracle","len","if","else","floor","int",
+        "(", ")", "[", "]", "{", "}",
+        "=", "==", "!=", "<", ">", "<=", ">=", "+", "-", "*", "/", "%", "^", "&", "|", "~",
+        ":", ",", ".", ";"
       ],
       "constraints": []
     },
