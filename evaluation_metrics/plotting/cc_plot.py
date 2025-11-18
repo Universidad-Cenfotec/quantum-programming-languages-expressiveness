@@ -35,7 +35,8 @@ class CCPlot(PlotBase):
             ax,
             title="Mean CC by Algorithm Across Quantum Programming Languages",
             xlabel="Quantum Programming Languages",
-            ylabel="Mean CC"
+            ylabel="Mean CC",
+            show_legend=False
         )
         plt.tight_layout()
         if save_file_name:

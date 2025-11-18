@@ -1,11 +1,11 @@
 // Quantum Fourier Transform (QFT) in OpenQASM 2.0 for 6 qubits
 OPENQASM 2.0;
 include "qelib1.inc";
+
 qreg q[6];
 creg c[6];
 
-// QFT implementation
-// Ensure SWAP gate is defined (some qelib1.inc versions may not include it)
+
 gate swap a,b {
 	cx a,b;
 	cx b,a;

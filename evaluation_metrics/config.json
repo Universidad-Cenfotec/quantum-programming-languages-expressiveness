@@ -130,7 +130,7 @@
       "extension": ".py",
       "hosted_in": "python",
       "comment_symbol": "#",
-      "constructs": ["if", "elif", "for", "while", "except", "assert", "and", "or", "qfor", "qif", "qelse"],
+      "constructs": ["if", "elif", "for", "while", "except", "assert", "and", "or"],
       "operators": [ "x","h","cx","measure","len","pass","QuantumCircuit",
                       "QuantumVariable","qrisp","mcx","range","to_gate", "lambda" ],
       "constraints":  ["import qrisp","import numpy as np"]

@@ -90,16 +90,15 @@ class RatioPlot(PlotBase):
             palette=color_map,
             s=150,
             ax=ax,
-            style="Language",
-            markers=True,
-            edgecolor="black"
+            edgecolor="black",
+            legend=False
         )
         for i in range(df_mean.shape[0]):
             plt.text(
                 x=df_mean["CC_LOC_Ratio"][i] * 1.01,
                 y=df_mean["Effort_LOC_Ratio"][i],
                 s=df_mean["Language"][i],
-                fontdict=dict(color='black', size=10)
+                fontdict=dict(color='black', size=15)
             )
         # Estilizar los ejes
         self.style_manager.style_axes(
@@ -107,11 +106,12 @@ class RatioPlot(PlotBase):
             title="Control Flow Density vs. Cognitive Load per Line",
             xlabel="Control Flow Density (CC / LOC)",
             ylabel="Cognitive Load per Line (Effort / LOC)",
-            legend_title="Programming Languages"
+            show_legend=False
+            
         )        
         # Move the legend outside the plot
-        ax.legend(title="Programming Languages", loc='upper left', bbox_to_anchor=(1.02, 1), borderaxespad=0)
-        plt.tight_layout(rect=[0, 0, 0.85, 1])
+        #ax.legend(title="Programming Languages", loc='upper left')
+        plt.tight_layout()
         if save_file_name:
             full_path = GRAPHICS_PATH + save_file_name
             plt.savefig(full_path)

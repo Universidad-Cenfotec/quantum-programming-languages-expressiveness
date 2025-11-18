@@ -143,7 +143,8 @@ class HalsteadPlot(PlotBase):
                 hue="Language",
                 s=100,
                 ax=ax,
-                palette=self.style_manager.get_color_map(df_grouped["Language"].unique())
+                palette=self.style_manager.get_color_map(df_grouped["Language"].unique()),
+                legend=False
             )
             for j in range(df_grouped.shape[0]):
                 ax.text(df_grouped[x].iloc[j] + 0.5, df_grouped[y].iloc[j], str(df_grouped["Language"].iloc[j]), fontsize=10)

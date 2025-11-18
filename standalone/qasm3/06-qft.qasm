@@ -43,4 +43,4 @@ bit[6] c;
 qft(q);
 
 // Measure all qubits
-c = measure q;
+//c = measure q;
