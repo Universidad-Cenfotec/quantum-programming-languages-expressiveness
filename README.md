@@ -1,119 +1,133 @@
-# Quantum Programming Languages Expressiveness
+# Is Productivity in Quantum Programming Equivalent to Expressiveness?
 
 ![Quantum Computing](https://img.shields.io/badge/Quantum-Computing-blue.svg) ![Metrics](https://img.shields.io/badge/Metrics-LOC%20%7C%20CC%20%7C%20Halstead-orange.svg) ![Python](https://img.shields.io/badge/Python-3.12-blue) ![License](https://img.shields.io/badge/License-Apache%202.0-blue)
 
 
-This repository evaluates the expressiveness of various quantum programming languages, both hosted (based on existing classical languages) and standalone. By implementing well-known quantum algorithms, we aim to analyze their strengths, limitations, and overall utility through metrics such as Cyclomatic Complexity (McCabe), Lines of Code (LOC), and Halstead Complexity. This approach provides insights into how effectively these languages enable the construction of correct and efficient quantum algorithms.
+This repository contains the source code, experimental data, and analysis tools for the research paper **"Is Productivity in Quantum Programming Equ⌈ivalent to Expressiveness?"**.
+
+We present a comparative analysis of **Hosted** and **Standalone** quantum programming languages. By implementing a diverse set of quantum algorithms—ranging from fundamental oracles to the Quantum Fourier Transform (QFT)—we quantitatively evaluate their expressiveness and potential for developer productivity using software engineering metrics.
 
 ---
 
 ## 📖 Table of Contents
-1. [🔍 Project Overview](#project-overview)
-2. [🚀 Quantum Programming Languages](#quantum-programming-languages)
-   - [Hosted Languages](#hosted-languages)
-   - [Standalone Languages](#standalone-languages)
-3. [📏 Expressiveness Metrics](#expressiveness-metrics)
-4. [📚 Analyzed Quantum Algorithms](#analyzed-quantum-algorithms)
-5. [⚙️ Setup and Installation](#setup-and-installation)
-   - [🖥️ Local Environment](#local-environment)
-   - [📦 Docker Environment](#docker-environment)
-6. [📊 Running the Metrics](#running-the-metrics)
-7. [🤝 Contributions](#contributions)
-8. [📜 License](#license)
+1. [Abstract](#-abstract)
+2. [Scope of the Study](#-scope-of-the-study)
+   - [Languages Analyzed](#languages-analyzed)
+   - [Algorithms Implemented](#algorithms-implemented)
+3. [Methodology & Metrics](#-methodology--metrics)
+4. [Repository Structure](#-repository-structure)
+3. [Setup & Reproducibility](#-setup--reproducibility)
+6. [Running the Analysis](#-running-the-analysis)
+7. [Contributions](#-contributions)
+7. [LICENSE](#-license)
+
+---
+
+## 📄 Abstract
+
+The expressiveness of quantum programming languages plays a crucial role in the efficient and comprehensible representation of quantum algorithms. Unlike classical languages with mature abstraction mechanisms, quantum languages must integrate cognitively challenging concepts such as superposition, interference, and entanglement while maintaining clarity.
+
+This project investigates the landscape of expressiveness through a comparative analysis of **9 quantum programming languages**. We evaluate how these languages support the implementation of core quantum algorithms using **Lines of Code (LOC)**, **Cyclomatic Complexity (CC)**, and **Halstead Complexity (HC)** metrics. Our findings suggest that distinct trade-offs exist between expressiveness (abstraction) and productivity (cognitive load and implementation effort).
+
+---
+
+## 🔭 Scope of the Study
+
+### Languages Analyzed
+We categorize the languages into two paradigms, highlighting the evolution of assembly languages and modern high-level frameworks.
+
+#### Hosted Languages (eDSLs)
+Extensions or libraries built on top of classical languages (primarily Python and APL):
+- **[PennyLane](https://pennylane.ai/)** (Xanadu) - A leading library for differentiable programming of quantum computers.
+- **[Qiskit](https://qiskit.org/)** (IBM) - A comprehensive framework for gate-based quantum computing.
+- **[Cirq](https://quantumai.google/cirq)** (Google) - Focused on NISQ algorithms and hardware control.
+- **[Qrisp](https://qrisp.eu/)** - A high-level framework for structured quantum programming.
+- **[quAPL](https://github.com/nunezco2/quAPL)** - An array-based quantum programming language embedded in APL.
+
+
+#### Standalone & Assembly Languages
+Languages designed specifically for the quantum domain, from low-level description to high-level synthesis:
+- **[OpenQASM 2.0](https://openqasm.com/)** - The standard intermediate representation for quantum circuits.
+- **[OpenQASM 3.0](https://openqasm.com/)** - A significant evolution introducing classical control flow and pulse-level control.
+- **[Q#](https://learn.microsoft.com/en-us/azure/quantum/)** (Microsoft) - A high-level, domain-specific language for scalable quantum computing.
+- **[Qmod](https://www.classiq.io/)** (Classiq) - A high-level language for quantum logic synthesis.
+
+
+### Algorithms Implemented
+
+The benchmarks selected cover fundamental primitives, oracle-based speedups, and basis transformations:
+1. **Deutsch-Jozsa**
+2. **Bernstein-Vazirani**
+3. **Simon’s Algorithm**
+4. **Grover’s Search**
+5. **Quantum Fourier Transform (QFT)** - A key subroutine in many advanced quantum algorithms (e.g., Shor's, QPE).
 
 
 ---
 
-## 🔍 Project Overview
+## 📏 Methodology & Metrics
 
-Programming languages form the foundation for software development. They define syntax, semantics, and paradigms that directly impact how algorithms are conceptualized and implemented. While classical languages have matured over time, quantum programming introduces unique challenges that require new abstractions and frameworks. Quantum languages must handle phenomena such as superposition, entanglement, and interference—concepts that have no direct analogs in classical programming.
+We utilize a custom Python-based analysis engine to parse and evaluate the source code based on:
 
-This project explores the following questions:
-- How does the expressiveness of quantum programming languages compare across hosted and standalone paradigms?
-- What makes a quantum language "expressive," and how do we quantify that expressiveness?
-- Can metrics like McCabe’s Cyclomatic Complexity, Lines of Code (LOC)  and Halstead metrics provide meaningful insights into the utility and efficiency of these languages?
+1. **Syntactic Verbosity:**
+   - **Lines of Code (LOC):** Measures conciseness by counting non-empty, non-comment lines.
 
-By comparing five hosted quantum programming languages and two standalone quantum languages, this repository sheds light on their expressiveness and productivity.
+2. **Control Flow Complexity:**
+   - **Cyclomatic Complexity (CC):** Measures the number of linearly independent paths (branching logic) required to define the circuit or algorithm.
 
----
+3. **Cognitive & Lexical Complexity (Halstead Metrics):**
+   - **Volume (V):** Information content based on operators/operands.
+   - **Difficulty (D):** Error-proneness and implementation difficulty.
+   - **Effort (E):** Mental effort required to write the program ($E = D \times V$).
 
-## 🚀 Quantum Programming Languages
-
-### 🏗️ Hosted Languages
-
-These languages are extensions or embedded Domain-Specific Languaages (eDSL) built on top of classical programming languages, allowing developers to leverage existing ecosystems and tools:
-
-- **[Qiskit](https://qiskit.org/)** (Python-based)
-- **[Cirq](https://quantumai.google/cirq)** (Python-based)
-- **[quAPL](https://github.com/nunezco2/quAPL)** (Quantum Array Programming Language)
-- **[Qrisp](https://qrisp.eu/index.html)** (Python-based)
-- **[PennyLane](https://pennylane.ai/)** (Python-based) - A cross-platform library for quantum machine learning, automatic differentiation, and optimization of hybrid quantum-classical computations.
-
-### 🏆 Standalone Languages
-
-These languages were created specifically for quantum programming, offering unique syntax and constructs to handle quantum concepts directly:
-
-- **[Q#](https://learn.microsoft.com/en-us/azure/quantum/)** (Microsoft's quantum programming language)
-- **[Qmod](https://docs.classiq.io/latest/qmod-reference/language-reference/)** (Classiq's quantum programming language)
-- **[QASM](https://openqasm.com/language/classical.html)** (OpenQASM) - A low-level quantum assembly language for describing quantum circuits
-- **[QASM3](https://openqasm.com/language/classical.html)** (OpenQASM 3.0) - The latest version of OpenQASM with enhanced classical control flow and improved modularity
+4. **Derived Ratios:**
+   - **Control Flow Density:** $CC / LOC$
+   - **Cognitive Load per Line:** $Effort / LOC$
 
 ---
 
-## 📏 Expressiveness Metrics
+## 📂 Repository Structure
 
-Three core metrics are used to evaluate the expressiveness of quantum programming languages:
+```bash
+.
+├── classic/                 # Classical baseline implementations (Python)
+├── evaluation_metrics/      # Core analysis engine (Python)
+│   ├── core/                # Scanners and analyzer logic
+│   ├── metrics/             # Individual metric implementations (CC, LOC, Halstead)
+│   ├── plotting/            # Visualization scripts (Scatter plots, Radar charts)
+│   └── results/             # Generated CSVs and Plots
+├── hosted/                  # Source code for hosted languages
+│   ├── cirq/
+│   ├── pennylane/           # PennyLane implementations
+│   ├── qiskit/
+│   ├── qrisp/
+│   └── quapl/
+├── standalone/              # Source code for standalone languages
+│   ├── q#/
+│   ├── qasm/                # OpenQASM 2.0
+│   ├── qasm3/               # OpenQASM 3.0
+│   └── qmod/
+├── requirements.txt         # Python dependencies
+├── Dockerfile               # Container configuration
+└── docker-compose.yml       # Orchestration
 
-1. **🧩 Cyclomatic Complexity (McCabe’s Complexity):**  
-   This metric measures the complexity of a program’s control flow, quantifying the number of linearly independent paths in the code.
-
-2. **📏 Lines of Code (LOC):**  
-   LOC provides a simple count of the number of lines of source code, excluding comments and empty lines. A lower LOC for the same algorithm suggests higher expressiveness.
-
-3. **🧠 Halstead Metrics – Lexical Complexity:**
-Developed by Maurice Halstead, these metrics measure the lexical complexity of a program based on its operators and operands. From these values, Halstead defines several derived metrics:
-
-
-   - **Program Vocabulary:** The total number of unique symbols (operators and operands): n = n1 + n2
-
-   - **Program Length:** The total number of lexical tokens: N = N1 + N2
-
-   - **Volume (V):** Represents the size of the implementation in terms of information content: V = N · log2 (n). A higher volume indicates more information is encoded in the program, which may imply greater effort to comprehend or maintain it.
-
-   - **Difficulty (D):** Estimates the cognitive difficulty of understanding or writing the program:
-D = n1 / 2 · N2 / n2. This metric increases with more complex or less reusable code elements.
-
-   - **Effort (E):** Measures the total mental effort required to develop or understand the code: E = D · V. Effort correlates with development time and is often used as an indicator of programming complexity.
-
-
-
+```
 ---
 
-## 📚 Analyzed Quantum Algorithms
+## 🔧 Setup & Reproducibility
 
-To evaluate expressiveness, we implement and analyze the following quantum algorithms:
-
-- **🔎 Deutsch-Jozsa Algorithm**
-- **🔍 Simon’s Algorithm**
-- **📡 Bernstein-Vazirani Algorithm**
-- **🔑 Grover’s Search Algorithm**
-
-These algorithms serve as benchmarks to compare how different quantum languages handle quantum computation primitives and abstractions.
-
----
-
-## ⚙️ Setup and Installations
-1. **Clone the repository** 
+### 1. Clone the repository 
 To begin, clone the repository to your local machine using the following command:
 ```bash
 git clone https://github.com/Universidad-Cenfotec/quantum-programming-languages-expressiveness.git
 ```
 This will create a local copy of the project on your machine. After cloning, navigate to the project directory:
+
 ```
 cd https://github.com/Universidad-Cenfotec/quantum-programming-languages-expressiveness.git
 ```
 
-2. **Required Extensions**
+### 2. Required Extensions
 For running Q# and QASM programs, you'll need to install the Azure Quantum Development Kit (QDK) extension for Visual Studio Code:
 1. Open VS Code
 2. Go to the Extensions view (Ctrl+Shift+X)
@@ -121,11 +135,11 @@ For running Q# and QASM programs, you'll need to install the Azure Quantum Devel
 4. Click Install
 For more information about the QDK extension, visit the [official QDK repository](https://github.com/microsoft/qdk).
 
-3. **Installation Options** 
+### 3. Installation Options 
 There are two ways to set up the environment for this project: using a virtual environment or using Docker. Choose one of the following methods:
 
 
-### 🖥️ Local Environment
+#### 3.1 Local Environment
 Using a virtual environment ensures that the project dependencies do not interfere with other Python projects on your machine.
 1. **Install Python:**
  Ensure Python 3.12.8 (or later) is installed.
@@ -148,24 +162,24 @@ In case that you prefer running locally, is recommended to create a virtual envi
    ```
    pip install -r requirements.txt
    ```
-###  📦 Docker Environment
+#### 3.2 Docker Environment
 Docker allows you to run the project in a containerized environment, ensuring consistency across different machines.
 
-**1. Install Docker:**
+1. **Install Docker:**
 Ensure that Docker and Docker Compose are installed on your machine. If you don't have Docker, you can download and install it from here. [Docker](https://www.docker.com/products/docker-desktop/)
 
-**2. Build and run the Docker container:**
-
+2. **Build and run the Docker container:**
 After ensuring Docker is installed, navigate to the project directory (if you're not already there) and run the following commands:
-
    ```
    docker compose build
    docker compose up -d
    ```
-This will build the Docker image and start the container in detached mode (-d).
+   This will build the Docker image and start the container in detached mode (-d).
 
-## 📊 Running the Metrics
-To generate the metrics (McCabe CC, LOC and Halstead), navigate to the evaluation directory and run the following command on your terminal (Remember to have the virtual environment open):
+---
+
+## 📊 Running the Analysis
+Our analysis pipeline is automated. You can generate the raw data (CSVs) and the visualizations used in the paper. To generate the metrics (McCabe CC, LOC and Halstead), navigate to the evaluation directory and run the following command on your terminal (Remember to have the virtual environment active):
 ```
 python -m evaluation_metrics.main
 ```
@@ -174,13 +188,17 @@ This will produce CSV files with the calculated metrics, ready for analysis. The
 ```
 python -m evaluation_metrics.menu
 ```
-And run these to generate some informative graphics.
+And run these to generate some informative graphics. 
+Output: Plots will be saved in evaluation_metrics/results/graphics/.
+
+---
 
 ## 🤝 Contributions
 Contributions are welcome! Please fork the repository, create a feature branch, and submit a pull request. Ensure your code adheres to the existing style and includes appropriate tests.
 
+---
 
 ## 📜 License
-This project is licensed under the Apache License 2.0. You may freely use, modify, and distribute this software under the terms of the Apache 2.0 License. See the ./LICENSE file for full details.
+This project is licensed under the Apache License 2.0. See the LICENSE file for details.
 
 
