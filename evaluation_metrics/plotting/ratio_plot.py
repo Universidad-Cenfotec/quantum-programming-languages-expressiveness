@@ -88,7 +88,7 @@ class RatioPlot(PlotBase):
             y="Effort_LOC_Ratio",
             hue="Language",
             palette=color_map,
-            s=150,
+            s=220,
             ax=ax,
             edgecolor="black",
             legend=False
@@ -100,7 +100,6 @@ class RatioPlot(PlotBase):
                 s=df_mean["Language"][i],
                 fontdict=dict(color='black', size=15)
             )
-        # Estilizar los ejes
         self.style_manager.style_axes(
             ax,
             title="Control Flow Density vs. Cognitive Load per Line",
