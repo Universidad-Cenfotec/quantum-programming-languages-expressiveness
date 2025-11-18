@@ -109,7 +109,8 @@ class HalsteadPlot(PlotBase):
 
         full_path = GRAPHICS_PATH + save_file_name
         plt.savefig(full_path)
-        print(f"✅ Radar chart saved to {full_path}")
+        plt.savefig(full_path.replace('.png', '.eps'), format='eps')
+        print(f"✅ Radar chart saved to {full_path} y {full_path.replace('.png', '.eps')}")
         plt.show()
 
 
@@ -158,4 +159,5 @@ class HalsteadPlot(PlotBase):
         plt.tight_layout()
         full_path = GRAPHICS_PATH + save_file_name
         plt.savefig(full_path)
+        plt.savefig(full_path.replace('.png', '.eps'), format='eps')
         plt.show()
